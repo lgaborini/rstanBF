@@ -1,3 +1,5 @@
 ^rstanBF\.Rproj$
 ^\.Rproj\.user$
 ^\.travis\.yml$
+^rstanBF\.sublime-project$
+^rstanBF\.sublime-workspace$

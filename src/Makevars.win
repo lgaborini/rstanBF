@@ -7,14 +7,17 @@ OBJECTS = $(SOURCES:.stan=.o) init.o
 
 all: $(SHLIB)
 
+# Never clean compiled Stan models, to speed up
+#clean:
+#		RM -rf stan_files/*.o
+#		RM -rf *.so *.o
+#		RM -rf stan_files/*.cc
+#		RM -rf stan_files/*.hpp
+
 clean:
-		RM -rf stan_files/*.o
-		RM -rf *.so *.o
-		RM -rf stan_files/*.cc
-		RM -rf stan_files/*.hpp
 
 %.cc: %.stan
 				"$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" $<
 
-				
+
 .phony: clean

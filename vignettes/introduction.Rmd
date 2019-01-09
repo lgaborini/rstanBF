@@ -61,20 +61,21 @@ list_samples_same <- list_pop$df_pop %>% rsamplestudy::make_dataset_splits(k_ref
 list_samples_H <- list(H1 = list_samples_same, H2 = list_samples_diff)
 ```
 
-These need to be converted to a friendly format (matrices and lists):
+These need to be converted to a friendly format (matrices and lists) from `rsamplestudy` output:
+
 ```{r}
-
-mtx_samples <- list_pop$df_pop %>% select(-source) %>% as.matrix
-
-list_data_diff <- list(mtx = mtx_samples, idx.ref = list_samples_diff$idx_reference, idx.quest = list_samples_diff$idx_questioned)
-list_data_same <- list(mtx = mtx_samples, idx.ref = list_samples_same$idx_reference, idx.quest = list_samples_same$idx_questioned)
+list_data_diff <- rstanBF::stanBF_prepare_rsamplestudy_data(list_pop, list_samples_diff)
+list_data_same <- rstanBF::stanBF_prepare_rsamplestudy_data(list_pop, list_samples_same)
 ```
-
-
 
 ## Hyperparameter elicitation
 
 We choose the Dirichlet-Dirichlet model.   
+
+```{r}
+model <- 'DirDir'
+```
+
 The only hyperparameter which must be provided is $\alpha$, the Dirichlet parameter at the hyperprior level.
 
 It is known since the data has been generated: let's use it, for now.
@@ -83,14 +84,24 @@ It is known since the data has been generated: let's use it, for now.
 list_hyperpriors <- list(alpha = list_pop$alpha)
 ```
 
+### Using functions
+
+If one wants to elicit a value for the hyperparameter(s) required by the model, the package supplies the function `stan_BF_elicit_hyperpriors`:
+
+```{r}
+list_hyperpriors_ML <- rstanBF::stan_BF_elicit_hyperpriors(list_samples_same$df_background, model, mode_hyperparameter = 'ML')
+```
+
+
 ## Sampling
 
 We need to set up the HMC parameters, first:
 ```{r}
 n.iter <- 1000
 n.burnin <- 100
-n.iter <- 10000
-n.burnin <- 1000
+# n.iter <- 10000
+# n.burnin <- 1000
+
 n.chains <- 3
 n.cores <- 3
 ```
@@ -98,8 +109,8 @@ n.cores <- 3
 Now we are ready! Let's sample:
 
 ```{r}
-stanBF_obj_same <- rstanBF::compute_BF_Stan(list_data_same, 'DirDir', list_hyperpriors, data_other = NULL, n.iter, n.burnin, n.chains, n.cores)
-stanBF_obj_diff <- rstanBF::compute_BF_Stan(list_data_diff, 'DirDir', list_hyperpriors, data_other = NULL, n.iter, n.burnin, n.chains, n.cores)
+stanBF_obj_same <- rstanBF::compute_BF_Stan(list_data_same, model, list_hyperpriors, data_other = NULL, n.iter, n.burnin, n.chains, n.cores)
+stanBF_obj_diff <- rstanBF::compute_BF_Stan(list_data_diff, model, list_hyperpriors, data_other = NULL, n.iter, n.burnin, n.chains, n.cores)
 ```
 
 ```{r}

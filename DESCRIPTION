@@ -18,7 +18,8 @@ Imports:
     bridgesampling,
     assertthat,
     Compositional,
-    tibble
+    tibble,
+    stringr
 LinkingTo: 
     BH (>= 1.69.0-1),
     Rcpp (>= 1.0.0),

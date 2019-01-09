@@ -12,6 +12,9 @@
 #' @return a dataframe with the Dirichlet parameter named columns
 #' @export
 fun_Dirichlet_MLE_from_single_source <- function(df, name_param = 'theta', use = 'MLE') {
+
+   if (!any(use %in% c('MLE', 'naive'))) stop("use must be either 'MLE' or 'naive'")
+
    mtx <- df %>% as.matrix()
 
    # Choose between MLE or sample mean
@@ -34,7 +37,7 @@ fun_Dirichlet_MLE_from_single_source <- function(df, name_param = 'theta', use =
 
 # Compute MLE in each source
 #' Estimate MLE parameters from a dataframe of Dirichlet samples from different sources
-#' 
+#'
 #' Obtain estimates for each source.
 #'
 #' @param df_samples dataframe of Dirichlet samples

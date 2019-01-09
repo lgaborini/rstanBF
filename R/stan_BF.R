@@ -9,9 +9,9 @@
 #' Two-sample model:
 #'
 #' - samples are stored as matrix `mtx`
-#' - reference items are indexed by `idx.ref`
-#' - questioned items are indexed by `idx.quest`
-#' - other items, non indexed, are discarded.
+#' - reference items are indexed in `mtx` by `idx.ref`
+#' - questioned items are indexed in `mtx` by `idx.quest`
+#' - other items, non indexed, are **discarded**.
 #'
 #' Hypotheses:
 #'
@@ -224,9 +224,9 @@ samples <- function(x, ...) {
 
 #' Exctract theta posterior samples for a turn-like object
 #'
-#' `stanBF_turn` objects share the Dirichlet likelihood, with $\theta$ as prior parameter.   
-#' 
-#' This function extract posterior samples for $\theta$.   
+#' `stanBF_turn` objects share the Dirichlet likelihood, with $\theta$ as prior parameter.
+#'
+#' This function extract posterior samples for $\theta$.
 #' Also returns the normalized version of them ($\rho$).
 #'
 #' @param stanBF

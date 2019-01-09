@@ -34,9 +34,9 @@ Sample and compute BF for various models using Stan.
 Two-sample model:
 \itemize{
 \item samples are stored as matrix \code{mtx}
-\item reference items are indexed by \code{idx.ref}
-\item questioned items are indexed by \code{idx.quest}
-\item other items, non indexed, are discarded.
+\item reference items are indexed in \code{mtx} by \code{idx.ref}
+\item questioned items are indexed in \code{mtx} by \code{idx.quest}
+\item other items, non indexed, are \strong{discarded}.
 }
 
 Hypotheses:

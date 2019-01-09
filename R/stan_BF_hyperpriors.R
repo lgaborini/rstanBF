@@ -1,25 +1,22 @@
 #' Elicit hyperpriors to use for Stan BF
 #'
-#' @param list_samples a list containing the samples as returned by [rsamplestudy::make_dataset_splits()]
+#' @param df_background the dataframe containing background data, as returned by [rsamplestudy::make_dataset_splits()]
 #' @param model the model short name
 #' @param mode_hyperparameter how the parameters are estimated
-#' @importFrom purrr pluck map
-#' @importFrom dplyr select mutate
 #' @return a list of hyperprior parameters
 #' @export
 #' @md
-stan_BF_elicit_hyperpriors <- function(list_samples, model, mode_hyperparameter, ...) {
+stan_BF_elicit_hyperpriors <- function(df_background, model, mode_hyperparameter, ...) {
 
-   stopifnot(any(str_detect(mode_hyperparameter, c('ML', 'vague'))))
-
-   stopifnot(any(model %in% env_stanBF$stanBF_model_shortnames))
+   stopifnot(any(stringr::str_detect(mode_hyperparameter, c('ML', 'vague'))))
+   stopifnot(any(stringr::str_detect(model, rstanBF:::env_stanBF$stanBF_model_shortnames)))
 
    # Use only the background data
-   df_background <- pluck(list_samples, 'df_background')
+   # df_background <- purrr:::pluck(df_background, 'df_background')
 
    if (model == 'DirDir') {
 
-      fun_estimate_hyper <- function(df_background, ...) {
+      fun_estimate_hyper <- function(df_background, mode_hyperparameter, ...) {
          if (mode_hyperparameter == 'ML') {
             alpha <- fun_estimate_Dirichlet_hyperparameter(df_background, 'MLE', ...)
          } else {
@@ -28,12 +25,12 @@ stan_BF_elicit_hyperpriors <- function(list_samples, model, mode_hyperparameter,
          list(alpha = alpha)
       }
 
-      list_hyper <- fun_estimate_hyper(df_background, ...)
+      list_hyper <- fun_estimate_hyper(df_background, mode_hyperparameter, ...)
    }
 
    if (model == 'DirFNorm') {
 
-      fun_estimate_hyper <- function(list_samples, ...) {
+      fun_estimate_hyper <- function(df_background, mode_hyperparameter, ...) {
          if (mode_hyperparameter == 'ML') {
             stop('Not implemented.')
          } else {
@@ -43,12 +40,12 @@ stan_BF_elicit_hyperpriors <- function(list_samples, model, mode_hyperparameter,
          list(sigma = sigma, mu = mu)
       }
 
-      list_hyper <- fun_estimate_hyper(df_background, ...)
+      list_hyper <- fun_estimate_hyper(df_background, mode_hyperparameter, ...)
    }
 
    if (model == 'DirDirGamma') {
 
-      fun_estimate_hyper <- function(list_samples, ...) {
+      fun_estimate_hyper <- function(df_background, mode_hyperparameter, ...) {
          if (mode_hyperparameter == 'ML') {
             stop('Not implemented.')
          } else {
@@ -61,17 +58,17 @@ stan_BF_elicit_hyperpriors <- function(list_samples, model, mode_hyperparameter,
    }
 
    # Estimate the hyperparameters
-   list_hyper <- fun_estimate_hyper(df_background, ...)
+   list_hyper <- fun_estimate_hyper(df_background, mode_hyperparameter, ...)
    list_hyper
 }
 
 
 
 
-#' Compute Dirichlet hyperparameter, using 'MLE' or 'naive'
-#' 
+#' Compute Dirichlet hyperparameters, using 'MLE' or 'naive'
+#'
 #' Returns a numeric vector
-#' @param df_background
+#' @param df_background dataframe with background data
 #' @param method 'MLE' or 'naive'
 fun_estimate_Dirichlet_hyperparameter <- function(df_background, method) {
 

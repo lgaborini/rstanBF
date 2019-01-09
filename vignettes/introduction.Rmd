@@ -1,0 +1,135 @@
+---
+title: "Introduction"
+author: "LG"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This vignette introduces the package. 
+
+## Data generation
+
+Let's first create some data.    
+We will use the package `rsamplestudy` to generate a population and to extract the reference/questioned samples.
+
+```{r}
+requireNamespace('rstanBF')
+library(dplyr)
+library(rsamplestudy)
+
+
+set.seed(123)
+p <- 5
+n <- 100
+m <- 10
+alpha <- rep(p, p)
+
+list_pop <- rsamplestudy::fun_rdirichlet_population(n, m, p, alpha = alpha)
+list_pop
+
+```
+
+### Sampling
+
+Sample extraction: we generate two sets of splits
+
+- H1: the questioned items come from the reference source
+- H2: the questioned items come from other different sources
+
+```{r}
+k_ref <- 10
+k_quest <- 10
+
+# We sample from all sources
+sources <- unique(list_pop$df_pop$source)
+list_samples_diff <- list_pop$df_pop %>% rsamplestudy::make_dataset_splits(k_ref, k_quest)
+
+source_same <- unique(list_samples_diff$df_reference$source)
+list_samples_same <- list_pop$df_pop %>% rsamplestudy::make_dataset_splits(k_ref, k_quest, source_ref = source_same, source_quest = source_same)
+
+list_samples_H <- list(H1 = list_samples_same, H2 = list_samples_diff)
+```
+
+These need to be converted to a friendly format (matrices and lists):
+```{r}
+
+mtx_samples <- list_pop$df_pop %>% select(-source) %>% as.matrix
+
+list_data_diff <- list(mtx = mtx_samples, idx.ref = list_samples_diff$idx_reference, idx.quest = list_samples_diff$idx_questioned)
+list_data_same <- list(mtx = mtx_samples, idx.ref = list_samples_same$idx_reference, idx.quest = list_samples_same$idx_questioned)
+```
+
+
+
+## Hyperparameter elicitation
+
+We choose the Dirichlet-Dirichlet model.   
+The only hyperparameter which must be provided is $\alpha$, the Dirichlet parameter at the hyperprior level.
+
+It is known since the data has been generated: let's use it, for now.
+
+```{r}
+list_hyperpriors <- list(alpha = list_pop$alpha)
+```
+
+## Sampling
+
+We need to set up the HMC parameters, first:
+```{r}
+n.iter <- 1000
+n.burnin <- 100
+n.iter <- 10000
+n.burnin <- 1000
+n.chains <- 3
+n.cores <- 3
+```
+
+Now we are ready! Let's sample:
+
+```{r}
+stanBF_obj_same <- rstanBF::compute_BF_Stan(list_data_same, 'DirDir', list_hyperpriors, data_other = NULL, n.iter, n.burnin, n.chains, n.cores)
+stanBF_obj_diff <- rstanBF::compute_BF_Stan(list_data_diff, 'DirDir', list_hyperpriors, data_other = NULL, n.iter, n.burnin, n.chains, n.cores)
+```
+
+```{r}
+stanBF_obj_same
+stanBF_obj_diff
+```
+
+
+## Bayes Factor
+
+The objects contain the Bayes Factors:
+
+```{r}
+stanBF_obj_same$BF
+stanBF_obj_diff$BF
+```
+
+## Posteriors
+
+Returned objects often implement a `samples` method:
+
+```{r}
+head(rstanBF::samples(stanBF_obj_same))
+head(rstanBF::samples(stanBF_obj_diff))
+```
+
+## Plots
+
+```{r}
+rstanBF::plot_posteriors(stanBF_obj_same, 'theta')
+rstanBF::plot_posteriors(stanBF_obj_diff, 'theta')
+```
+

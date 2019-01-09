@@ -83,7 +83,7 @@ compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter = 
   required_data <- c('mtx', 'idx.ref', 'idx.quest')
   assertthat::assert_that(is.list(data))
   assertthat::assert_that(all(required_data %in% names(data)),
-                          msg = paste0('one of data variables is missing, must have all of: "', paste0_vec(required_data), '"\n have: "', paste_vec(names(data)), '"')
+                          msg = paste0('one of data variables is missing, must have all of: "', paste_vec(required_data), '"\n have: "', paste_vec(names(data)), '"')
   )
 
   # Validate hyperprior requirements

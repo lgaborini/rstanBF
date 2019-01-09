@@ -29,3 +29,16 @@ env_stanBF$stanBF_default_hyperpriors[['DirDir']] <- c('alpha')
 env_stanBF$stanBF_default_hyperpriors[['DirFNorm']] <- c('mu', 'sigma')
 env_stanBF$stanBF_default_hyperpriors[['DirDirGamma']] <- c('alpha', 'alpha_0', 'beta_0')
 # env_stanBF$stanBF_default_hyperpriors[['logNormNHN']] <- c('mu_0', 'sigma_0', 'sigma_s')
+
+
+
+# Export functions --------------------------------------------------------
+
+#' Get available models in rstanBF
+#'
+#' Get available models in rstanBF, as short names.
+#' @return character vector of models
+#' @export
+available_models <- function(){
+   env_stanBF$stanBF_model_shortnames
+}

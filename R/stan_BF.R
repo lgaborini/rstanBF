@@ -50,20 +50,6 @@ compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter, n
   stanBF_obj <- list(model_name=NULL, stanmodel=NULL, stanfit=NULL, df_samples=NULL, stanbridge=NULL, BF=NULL)
   class(stanBF_obj) <- 'stanBF'
 
-  # List of Stan modules in each hypothesis
-  # The name of each module is the name of the Stan file without extension
-  default_modules <- list()
-  default_modules[['DirDir']] <- list(H1='stan_DirDir_H1', H2='stan_DirDir_H2')
-  default_modules[['DirFNorm']] <- list(H1='stan_DirFNorm_H1', H2='stan_DirFNorm_H2')
-  default_modules[['DirDirGamma']] <- list(H1='stan_DirDirGamma_H1', H2='stan_DirDirGamma_H2')
-  # default_modules[['logNormNHN']] <- list(H1='stan_logNorm_H1', H2='stan_logNorm_H2')
-
-  # Full names for the model
-  model_names <- list()
-  model_names[['DirDir']] <- 'Dirichlet-Dirichlet'
-  model_names[['DirFNorm']] <- 'Dirichlet-FoldedNormal'
-  model_names[['DirDirGamma']] <- 'Dirichlet-DirichletGamma'
-  # model_names[['logNormNHN']] <- 'logNormal-NormalFNormal'
 
   # S3 inheritance children classes
   child_class <- list()
@@ -72,7 +58,7 @@ compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter, n
   child_class[['DirDirGamma']] <- 'stanBF_turn'
   # child_class[['logNormNHN']] <- NA
 
-  implemented_models <- names(default_modules)
+  implemented_models <- rstanBF:::env_stanBF$stanBF_model_shortnames
 
   # Parameter validation ------------
 
@@ -81,10 +67,12 @@ compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter, n
 
   # Validate model names
   assertthat::assert_that(is.character(model))
-  assertthat::assert_that(model %in% names(default_modules),
-                          msg = paste0('model "', model, '" has not been implemented, must be one of: ', paste_vec(implemented_models)))
-  module_file <- default_modules[[model]]
-  stanBF_obj$model_name <- model_names[[model]]
+  assertthat::assert_that(model %in% implemented_models,
+    msg = paste0('model "', model, '" has not been implemented, must be one of: ', paste_vec(implemented_models)))
+
+  # Load Stan compiled modules
+  module_file <- rstanBF:::env_stanBF$stanBF_modules[[model]]
+  stanBF_obj$model_name <- rstanBF:::env_stanBF$stanBF_model_names[[model]]
 
   # Assign inheritance if available
   if (!is.null(child_class[[model]])){
@@ -100,14 +88,9 @@ compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter, n
 
   # Validate hyperprior requirements
   assertthat::assert_that(is.list(hyperpriors))
-  default_hyperpriors <- list()
-  default_hyperpriors[['DirDir']] <- c('alpha')
-  default_hyperpriors[['DirFNorm']] <- c('mu', 'sigma')
-  default_hyperpriors[['DirDirGamma']] <- c('alpha', 'alpha_0', 'beta_0')
-  # default_hyperpriors[['logNormNHN']] <- c('mu_0', 'sigma_0', 'sigma_s')
-
-  assertthat::assert_that(all(default_hyperpriors[[model]] %in% names(hyperpriors)),
-                          msg = paste0('one of the hyperparameters is missing: have: "', paste_vec(names(hyperpriors)), '", required: "', paste_vec(default_hyperpriors[[model]]), '"'))
+  default_hyperpriors <- rstanBF:::env_stanBF$stanBF_default_hyperpriors[[model]]
+  assertthat::assert_that(all(default_hyperpriors %in% names(hyperpriors)),
+                          msg = paste0('one of the hyperparameters is missing: have: "', paste_vec(names(hyperpriors)), '", required: "', paste_vec(default_hyperpriors), '"'))
 
   # Process data ---------------------
 
@@ -146,7 +129,7 @@ compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter, n
 
 
 
-  # Begin code
+  # Begin computation code -----------------------------------------------------------------
 
   stanmodel_h1 <- stanmodels[[module_file$H1]]
   stanmodel_h2 <- stanmodels[[module_file$H2]]
@@ -229,7 +212,7 @@ samples <- function(x, ...) {
 #' This function extract posterior samples for $\theta$.
 #' Also returns the normalized version of them ($\rho$).
 #'
-#' @param stanBF
+#' @param stanBF a `stanBF_turn` object
 #' @export
 samples.stanBF_turn <- function(stanBF) {
    make_theta_df <- function(x.samples, ...) {
@@ -312,5 +295,5 @@ plot_posteriors.stanBF_turn <- function(obj_turn, variable=NULL, type='boxplots'
     geom_boxplot(aes(x = Variable, y = Value, fill = Grouping) ) +
     ggtitle(bquote(paste(.(obj_turn$model_name), ' model for delays: posterior samples for ', .(variable))),
            subtitle = bquote(paste(.(n.chains), ' chains, ', .(n.iter), ' HMC iterations')) ) +
-    labs(x = NULL, y = variable) + scale_y_continuous(limits = c(0,NA))
+    labs(x = NULL, y = variable) + scale_y_continuous(limits = c(0,NA), expand = expand_scale(mult = c(0, .1)))
 }

@@ -8,18 +8,16 @@ fun_Dirichlet_MLE_from_single_source(df, name_param = "theta",
   use = "MLE")
 }
 \arguments{
-\item{df}{the dataframe containing only samples}
+\item{df}{the dataframe, must contain only the samples}
 
-\item{name_param}{name of output matrix columns}
+\item{name_param}{name of output parameter (default: \code{'theta'})}
 
-\item{use}{if 'MLE', use MLE estimator, else the sample mean (unbiased for alpha)}
+\item{use}{if \code{'MLE'}, use MLE estimator, else the sample mean (unbiased for \eqn{\theta})}
 }
 \value{
-a dataframe with the Dirichlet parameter named columns
+a dataframe (tibble) with the Dirichlet parameter named columns
 }
 \description{
-Assume that data is ~ Dir(alpha).
-}
-\details{
-This function returns a matrix containing the estimate for alpha.
+Assume that data is \eqn{X ~ Dir(\theta)} iid.
+This function estimates \eqn{\theta}.
 }

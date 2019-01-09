@@ -6,6 +6,9 @@
 \usage{
 \method{samples}{stanBF_turn}(stanBF)
 }
+\arguments{
+\item{stanBF}{a \code{stanBF_turn} object}
+}
 \description{
 \code{stanBF_turn} objects share the Dirichlet likelihood, with $\theta$ as prior parameter.
 }

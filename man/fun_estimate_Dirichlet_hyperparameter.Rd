@@ -2,7 +2,7 @@
 % Please edit documentation in R/stan_BF_hyperpriors.R
 \name{fun_estimate_Dirichlet_hyperparameter}
 \alias{fun_estimate_Dirichlet_hyperparameter}
-\title{Compute Dirichlet hyperparameter, using 'MLE' or 'naive'}
+\title{Compute Dirichlet hyperparameters, using 'MLE' or 'naive'}
 \usage{
 fun_estimate_Dirichlet_hyperparameter(df_background, method)
 }

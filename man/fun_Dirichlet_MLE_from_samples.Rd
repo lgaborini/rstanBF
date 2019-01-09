@@ -2,18 +2,29 @@
 % Please edit documentation in R/fun_dirichlet_MLE.R
 \name{fun_Dirichlet_MLE_from_samples}
 \alias{fun_Dirichlet_MLE_from_samples}
-\title{Estimate MLE parameters from a dataframe of Dirichlet samples from different sources}
+\title{Compute Dirichlet parameter MLE for samples from multiple sources}
 \usage{
-fun_Dirichlet_MLE_from_samples(df_samples, col_source = source, ...)
+fun_Dirichlet_MLE_from_samples(df, col_source = source, ...)
 }
 \arguments{
-\item{df_samples}{dataframe of Dirichlet samples}
-
 \item{col_source}{the column name, unquoted, containing the source column}
+
+\item{...}{Arguments passed on to \code{fun_Dirichlet_MLE_from_single_source}
+\describe{
+  \item{name_param}{name of output parameter (default: \code{'theta'})}
+  \item{use}{if \code{'MLE'}, use MLE estimator, else the sample mean (unbiased for \eqn{\theta})}
+}}
+
+\item{df_samples}{dataframe of Dirichlet samples with a source column}
 }
 \value{
 a dataframe containing the Dirichlet parameter estimates for each source
 }
 \description{
-Obtain estimates for each source.
+Estimate MLE parameters from a dataframe of Dirichlet samples from different sources.
+The sources must be known.
+}
+\details{
+Suppose that rows in source i are $X ~ Dir(\theta_i)$ iid.
+This function estimates $\theta_i$.
 }

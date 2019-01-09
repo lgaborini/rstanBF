@@ -4,10 +4,10 @@
 \alias{stan_BF_elicit_hyperpriors}
 \title{Elicit hyperpriors to use for Stan BF}
 \usage{
-stan_BF_elicit_hyperpriors(list_samples, model, mode_hyperparameter, ...)
+stan_BF_elicit_hyperpriors(df_background, model, mode_hyperparameter, ...)
 }
 \arguments{
-\item{list_samples}{a list containing the samples as returned by \code{\link[rsamplestudy:make_dataset_splits]{rsamplestudy::make_dataset_splits()}}}
+\item{df_background}{the dataframe containing background data, as returned by \code{\link[rsamplestudy:make_dataset_splits]{rsamplestudy::make_dataset_splits()}}}
 
 \item{model}{the model short name}
 

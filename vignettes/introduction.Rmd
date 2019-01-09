@@ -29,7 +29,7 @@ library(dplyr)
 library(rsamplestudy)
 
 
-set.seed(123)
+# set.seed(123)
 p <- 5
 n <- 100
 m <- 10
@@ -44,8 +44,8 @@ list_pop
 
 Sample extraction: we generate two sets of splits
 
-- H1: the questioned items come from the reference source
-- H2: the questioned items come from other different sources
+- $H_1$: the questioned items come from the reference source
+- $H_2$: the questioned items come from other different sources
 
 ```{r}
 k_ref <- 10
@@ -89,7 +89,7 @@ list_hyperpriors <- list(alpha = list_pop$alpha)
 If one wants to elicit a value for the hyperparameter(s) required by the model, the package supplies the function `stan_BF_elicit_hyperpriors`:
 
 ```{r}
-list_hyperpriors_ML <- rstanBF::stan_BF_elicit_hyperpriors(list_samples_same$df_background, model, mode_hyperparameter = 'ML')
+rstanBF::stan_BF_elicit_hyperpriors(list_samples_same$df_background, model, mode_hyperparameter = 'ML')
 ```
 
 
@@ -138,6 +138,8 @@ head(rstanBF::samples(stanBF_obj_diff))
 ```
 
 ## Plots
+
+Returned objects often implement a `plot_posteriors` method:
 
 ```{r}
 rstanBF::plot_posteriors(stanBF_obj_same, 'theta')

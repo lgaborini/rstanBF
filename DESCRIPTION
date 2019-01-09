@@ -30,3 +30,7 @@ LazyData: true
 NeedsCompilation: yes
 SystemRequirements: GNU make
 RoxygenNote: 6.1.1
+Roxygen: list(markdown = TRUE)
+Suggests: 
+    knitr,
+    rsamplestudy

@@ -3,6 +3,7 @@
 S3method(plot_posteriors,stanBF_turn)
 S3method(print,stanBF)
 S3method(samples,stanBF_turn)
+export(available_models)
 export(compute_BF_Stan)
 export(fun_Dirichlet_MLE_from_samples)
 export(fun_Dirichlet_MLE_from_single_source)

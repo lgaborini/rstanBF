@@ -35,14 +35,14 @@
 #' @param model the model shortname (e.g. `'DirDir'`, `'DirFNorm'`)
 #' @param hyperpriors a list containing hyperparameter definitions
 #' @param data_other a list containing additional data for $H_1$ and $H_2$ models (default: `NULL`)
-#' @param n.iter number of HMC iterations
-#' @param n.burnin number of HMC burn-in iterations
-#' @param n.chains number of HMC chains
-#' @param n.cores number of cores to use for HMC and bridgesampling
+#' @param n.iter number of HMC iterations (default: 1000)
+#' @param n.burnin number of HMC burn-in iterations (default: 100)
+#' @param n.chains number of HMC chains (default: 1)
+#' @param n.cores number of cores to use for HMC and bridgesampling (default: 1)
 #' @return a `stanBF` object
 #' @export
 #' @md
-compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter, n.burnin, n.chains, n.cores) {
+compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter = 1000, n.burnin = 100, n.chains = 1, n.cores = 1) {
 
   # Setup returned fields --------------
 

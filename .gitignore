@@ -28,6 +28,7 @@ vignettes/*.pdf
 
 
 /src/*.dll
+/src/*.o
 /src/stan_files/*.cc
 /src/stan_files/*.hpp
 /src/stan_files/*.o

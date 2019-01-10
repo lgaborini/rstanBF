@@ -18,11 +18,15 @@ rstanBF computes the Bayes Factor for data in specified two-level hierarchical m
 
 ## Installation
 
-rstanBF is not yet available on CRAN.   
+rstanBF is not yet available on CRAN.    
 You can install the development version from this repository using `devtools` or `remotes`:
 
 ```{r, eval=FALSE}
 # install.packages('remotes')
 remotes::install_github('lgaborini/rstanBF')
+```
+
+```{r}
+plot(1:5)
 ```
 

@@ -18,11 +18,11 @@ stan_BF_elicit_hyperpriors <- function(df_background, model, mode_hyperparameter
 
    if (model == 'DirDir') {
       if (mode_hyperparameter == 'ML') {
-         fun_estimate_hyper <- function(df_background, ...){
+         fun_estimate_hyperpriors <- function(df_background, ...){
             fun_estimate_Dirichlet_hyperparameter(df_background, 'MLE', ...)
          }
       } else {
-         fun_estimate_hyper <- function(df_background,...) {
+         fun_estimate_hyperpriors <- function(df_background,...) {
             alpha <- rep(1, p)
          }
       }
@@ -31,7 +31,7 @@ stan_BF_elicit_hyperpriors <- function(df_background, model, mode_hyperparameter
       if (mode_hyperparameter == 'ML') {
          stop('Not implemented.')
       } else {
-         fun_estimate_hyper <- function(df_background,...) {
+         fun_estimate_hyperpriors <- function(df_background,...) {
             sigma <- sqrt(pi)/sqrt(2)*rep(1, p)
             mu <- rep(0, p)
             list(sigma = sigma, mu = mu)
@@ -43,7 +43,7 @@ stan_BF_elicit_hyperpriors <- function(df_background, model, mode_hyperparameter
       if (mode_hyperparameter == 'ML') {
          stop('Not implemented.')
       } else {
-         fun_estimate_hyper <- function(df_background,...) {
+         fun_estimate_hyperpriors <- function(df_background,...) {
             alpha <- rep(1, p)
             alpha_0 <- 1
             beta_0 <- 1
@@ -53,7 +53,7 @@ stan_BF_elicit_hyperpriors <- function(df_background, model, mode_hyperparameter
    }
 
    # Estimate the hyperparameters
-   list_hyper <- fun_estimate_hyper(df_background,...)
+   list_hyper <- fun_estimate_hyperpriors(df_background,...)
    list_hyper
 }
 

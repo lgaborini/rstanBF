@@ -1,3 +1,4 @@
+^README\.Rmd$
 ^rstanBF\.Rproj$
 ^\.Rproj\.user$
 ^\.travis\.yml$

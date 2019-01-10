@@ -24,7 +24,7 @@ Let's first create some data.
 We will use the package `rsamplestudy` to generate a population and to extract the reference/questioned samples.
 
 ```{r}
-requireNamespace('rstanBF')
+library(rstanBF)
 library(dplyr)
 library(rsamplestudy)
 
@@ -64,8 +64,8 @@ list_samples_H <- list(H1 = list_samples_same, H2 = list_samples_diff)
 These need to be converted to a friendly format (matrices and lists) from `rsamplestudy` output:
 
 ```{r}
-list_data_diff <- rstanBF::stanBF_prepare_rsamplestudy_data(list_pop, list_samples_diff)
-list_data_same <- rstanBF::stanBF_prepare_rsamplestudy_data(list_pop, list_samples_same)
+list_data_diff <- stanBF_prepare_rsamplestudy_data(list_pop, list_samples_diff)
+list_data_same <- stanBF_prepare_rsamplestudy_data(list_pop, list_samples_same)
 ```
 
 ## Hyperparameter elicitation
@@ -89,7 +89,7 @@ list_hyperpriors <- list(alpha = list_pop$alpha)
 If one wants to elicit a value for the hyperparameter(s) required by the model, the package supplies the function `stan_BF_elicit_hyperpriors`:
 
 ```{r}
-rstanBF::stan_BF_elicit_hyperpriors(list_samples_same$df_background, model, mode_hyperparameter = 'ML')
+stan_BF_elicit_hyperpriors(list_samples_same$df_background, model, mode_hyperparameter = 'ML')
 ```
 
 

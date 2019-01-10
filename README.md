@@ -15,9 +15,3 @@ You can install the development version from this repository using `devtools` or
 # install.packages('remotes')
 remotes::install_github('lgaborini/rstanBF')
 ```
-
-``` r
-plot(1:5)
-```
-
-<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />

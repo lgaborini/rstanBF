@@ -6,7 +6,7 @@
 #' @return a list of hyperprior parameters
 #' @export
 #' @md
-stan_BF_elicit_hyperpriors <- function(df_background, model, mode_hyperparameter, ...) {
+stanBF_elicit_hyperpriors <- function(df_background, model, mode_hyperparameter, ...) {
 
    assertthat::assert_that(mode_hyperparameter %in% c('ML', 'vague'),
                            msg = paste0('mode_hyperparameter not valid, must be one of: "ML", "vague"'))

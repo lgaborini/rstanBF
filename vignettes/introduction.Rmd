@@ -86,10 +86,10 @@ list_hyperpriors <- list(alpha = list_pop$alpha)
 
 ### Using functions
 
-If one wants to elicit a value for the hyperparameter(s) required by the model, the package supplies the function `stan_BF_elicit_hyperpriors`:
+If one wants to elicit a value for the hyperparameter(s) required by the model, the package supplies the function `stanBF_elicit_hyperpriors`:
 
 ```{r}
-stan_BF_elicit_hyperpriors(list_samples_same$df_background, model, mode_hyperparameter = 'ML')
+stanBF_elicit_hyperpriors(list_samples_same$df_background, model, mode_hyperparameter = 'ML')
 ```
 
 

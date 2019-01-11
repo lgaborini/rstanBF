@@ -7,7 +7,7 @@
 stanBF_elicit_hyperpriors(df_background, model, mode_hyperparameter, ...)
 }
 \arguments{
-\item{df_background}{the dataframe containing background data, as returned by \code{\link[rsamplestudy:make_dataset_splits]{rsamplestudy::make_dataset_splits()}}}
+\item{df_background}{the dataframe containing background data (must contain only numeric columns!).}
 
 \item{model}{the model short name}
 

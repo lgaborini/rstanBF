@@ -1,6 +1,6 @@
 #' Elicit hyperpriors to use for Stan BF
 #'
-#' @param df_background the dataframe containing background data, as returned by [rsamplestudy::make_dataset_splits()]
+#' @param df_background the dataframe containing background data (must contain only numeric columns!).
 #' @param model the model short name
 #' @param mode_hyperparameter how the parameters are estimated
 #' @return a list of hyperprior parameters
@@ -15,15 +15,18 @@ stanBF_elicit_hyperpriors <- function(df_background, model, mode_hyperparameter,
                            msg = paste0('model "', model, '" has not been implemented, must be one of: ', paste_vec(rstanBF:::env_stanBF$stanBF_model_shortnames)))
 
    # Assign the hyperprior function
+   p <- ncol(df_background)
 
    if (model == 'DirDir') {
       if (mode_hyperparameter == 'ML') {
          fun_estimate_hyperpriors <- function(df_background, ...){
-            fun_estimate_Dirichlet_hyperparameter(df_background, 'MLE', ...)
+            alpha = fun_estimate_Dirichlet_hyperparameter(df_background, 'MLE', ...)
+            list(alpha = alpha)
          }
       } else {
          fun_estimate_hyperpriors <- function(df_background,...) {
             alpha <- rep(1, p)
+            list(alpha = alpha)
          }
       }
    }

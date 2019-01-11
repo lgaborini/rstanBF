@@ -17,7 +17,7 @@ list_hyperpriors_OK <- list(alpha = seq(p))
 
 # Models load correctly ----------------------------------------------------
 
-test_that('Models are checked: missing', expect_error(compute_BF_Stan(list_data_OK, 'FAKEMODEL', hyperpriors = list_hyperpriors_OK)))
+test_that('Models are checked: missing', expect_error(compute_BF_Stan(list_data_OK, model = 'FAKEMODEL', hyperpriors = list_hyperpriors_OK)))
 
 
 # Input errors ------------------------------------------------------------

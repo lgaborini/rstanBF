@@ -21,8 +21,17 @@ fun_estimate_Dirichlet_from_single_source <- function(df, name_param = 'theta', 
    fun_est <- NULL
    if (use == 'MLE') {
       fun_est <- function(mtx){
-         est <- Compositional::diri.est(mtx, type = 'mle')
-         est$param
+
+         # Using package Compositional
+         # iterative MLE
+
+         # est <- Compositional::diri.est(mtx, type = 'mle')
+         # est$param
+
+         # using sirt:
+         #
+         est <- dirichlet.mle(mtx)
+         est$alpha
       }
    }
    if (use == 'naive') {

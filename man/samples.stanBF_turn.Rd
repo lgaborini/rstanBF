@@ -10,9 +10,9 @@
 \item{stanBF}{a \code{stanBF_turn} object}
 }
 \description{
-\code{stanBF_turn} objects share the Dirichlet likelihood, with $\theta$ as prior parameter.
+\code{stanBF_turn} objects share the Dirichlet likelihood, with \eqn{\theta} as prior parameter.
 }
 \details{
-This function extract posterior samples for $\theta$.
-Also returns the normalized version of them ($\rho$).
+This function extract posterior samples for \eqn{\theta}.
+Also returns the normalized version of them (\eqn{\rho}).
 }

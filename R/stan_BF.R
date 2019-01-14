@@ -207,10 +207,10 @@ samples <- function(x, ...) {
 
 #' Exctract theta posterior samples for a turn-like object
 #'
-#' `stanBF_turn` objects share the Dirichlet likelihood, with $\theta$ as prior parameter.
+#' `stanBF_turn` objects share the Dirichlet likelihood, with \eqn{\theta} as prior parameter.
 #'
-#' This function extract posterior samples for $\theta$.
-#' Also returns the normalized version of them ($\rho$).
+#' This function extract posterior samples for \eqn{\theta}.
+#' Also returns the normalized version of them (\eqn{\rho}).
 #'
 #' @param stanBF a `stanBF_turn` object
 #' @export

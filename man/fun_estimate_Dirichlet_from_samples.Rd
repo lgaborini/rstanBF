@@ -12,7 +12,7 @@ fun_estimate_Dirichlet_from_samples(df, col_source = source, ...)
 \item{...}{Arguments passed on to \code{fun_estimate_Dirichlet_from_single_source}
 \describe{
   \item{name_param}{name of output parameter (default: \code{'theta'})}
-  \item{use}{if \code{'MLE'}, use MLE estimator, else the sample mean (unbiased for \eqn{\theta})}
+  \item{use}{if \code{'ML'}, use MLE estimator, else the sample mean (unbiased for \eqn{\theta}, but not optimal)}
 }}
 
 \item{df_samples}{dataframe of Dirichlet samples with a source column}
@@ -25,6 +25,6 @@ Estimate MLE parameters from a dataframe of Dirichlet samples from different sou
 The sources must be known.
 }
 \details{
-Suppose that rows in source i are $X ~ Dir(\theta_i)$ iid.
-This function estimates $\theta_i$.
+Suppose that rows in source i are \eqn{X ~ Dir(\theta_i)} iid.
+This function estimates \eqn{\theta_i}.
 }

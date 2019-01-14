@@ -5,14 +5,14 @@
 \title{Estimate Dirichlet parameter from a dataframe using ML or naive estimator}
 \usage{
 fun_estimate_Dirichlet_from_single_source(df, name_param = "theta",
-  use = "MLE")
+  use = "ML")
 }
 \arguments{
 \item{df}{the dataframe, must contain only the samples}
 
 \item{name_param}{name of output parameter (default: \code{'theta'})}
 
-\item{use}{if \code{'MLE'}, use MLE estimator, else the sample mean (unbiased for \eqn{\theta})}
+\item{use}{if \code{'ML'}, use MLE estimator, else the sample mean (unbiased for \eqn{\theta}, but not optimal)}
 }
 \value{
 a dataframe (tibble) with the Dirichlet parameter named columns

@@ -2,7 +2,7 @@ context("test-dirichlet")
 
 
 # Test that Dirichlet functions work
-n <- 10000
+n <- 100000
 alpha_target_1 <- c(1, 2, 3, 4, 5)
 alpha_target_2 <- c(0.1, 0.2, 3, 4, 0.5)
 alpha_target_3 <- c(0.1, 0.1, 0.1, 0.1, 0.1)
@@ -39,4 +39,39 @@ test_that("Single source: naive converges", {
 test_that('Single source: wrong parameters', {
    expect_error(fun_estimate_Dirichlet_from_single_source(df_1, use = 'ZZZZ'))
    expect_error(fun_estimate_Dirichlet_from_single_source(df_1, use = '3141'))
+})
+
+# Multiple sources --------------------------------------------------------
+
+df_item <- df %>% rename(item = source)
+
+test_that('Multiple sources: standard', {
+          expect_silent(fun_estimate_Dirichlet_from_samples(df, use = 'ML'))
+          expect_equal(nrow(fun_estimate_Dirichlet_from_samples(df, use = 'ML')), 3)
+          expect_silent(fun_estimate_Dirichlet_from_samples(df_item, use = 'ML', col_source = 'item'))
+})
+
+test_that('Multiple sources: source column checks', {
+          expect_silent(fun_estimate_Dirichlet_from_samples(df_item, use = 'ML', col_source = 'item'))
+          expect_error(fun_estimate_Dirichlet_from_samples(df_item, use = 'ML', col_source = 'AAAA'))
+          expect_error(fun_estimate_Dirichlet_from_samples(df_item, use = 'ML'))
+
+          expect_silent(fun_estimate_Dirichlet_from_samples(df, use = 'ML', col_source = 'source'))
+          expect_error(fun_estimate_Dirichlet_from_samples(df, use = 'ML', col_source = item))
+          expect_error(fun_estimate_Dirichlet_from_samples(df, use = 'ML', col_source = 'item'))
+
+          expect_identical(
+          	fun_estimate_Dirichlet_from_samples(df, use = 'ML', col_source = 'source') %>% dplyr::select(-source),
+          	fun_estimate_Dirichlet_from_samples(df_item, use = 'ML', col_source = 'item') %>% dplyr::select(-item)
+			 )
+})
+
+
+# Multiple sources: source estimates --------------------------------------
+
+test_that('Multiple sources: source estimates are correct', {
+   df_1_single <- fun_estimate_Dirichlet_from_single_source(df_1, use = 'ML')
+   df_1_multiple <- fun_estimate_Dirichlet_from_samples(df, use = 'ML') %>% filter(source == 1) %>% select(-source)
+
+   expect_identical(df_1_single, df_1_multiple)
 })

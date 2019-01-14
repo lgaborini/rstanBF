@@ -72,8 +72,8 @@ fun_estimate_Dirichlet_from_single_source <- function(df, name_param = 'theta', 
 #' This function estimates \eqn{\theta_i}.
 #'
 #' @param df_samples dataframe of Dirichlet samples with a source column
-#' @param col_source the column name, unquoted, containing the source column
-#' @importFrom dplyr group_by mutate select ungroup
+#' @param col_source the column name containing the source column
+#' @importFrom dplyr group_by_at mutate select ungroup
 #' @importFrom tidyr nest unnest
 #' @importFrom purrr map
 #' @importFrom rlang enquo
@@ -81,11 +81,11 @@ fun_estimate_Dirichlet_from_single_source <- function(df, name_param = 'theta', 
 #' @return a dataframe containing the Dirichlet parameter estimates for each source
 #' @export
 #' @md
-fun_estimate_Dirichlet_from_samples <- function(df, col_source = source, ...) {
+fun_estimate_Dirichlet_from_samples <- function(df, col_source = 'source', ...) {
 
-   df %>%
-      group_by(!! enquo(col_source)) %>%
-      nest() %>%
+   assertthat::assert_that(length(col_source) == 1)
+
+   df %>% group_by_at(.vars = col_source) %>% nest() %>%
       mutate(param = map(data, fun_estimate_Dirichlet_from_single_source, ...)) %>%
       select(-data) %>%
       unnest() %>%

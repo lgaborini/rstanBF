@@ -1,12 +1,13 @@
 Package: rstanBF
-Title: What the Package Does (One Line, Title Case)
+Title: rstanBF computes the Bayes Factor for data in specified two-level hierarchical models.
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Lorenzo",
+           family = "Gaborini",
            role = c("aut", "cre"),
-           email = "first.last@example.com")
-Description: What the package does (one paragraph).
+           email = "lorenzo.gaborini@gmail.com")
+Description: rstanBF computes the Bayes Factor for data in specified two-level hierarchical models.   
+    Also contains tools to elicit the hyperpriors, and obtain the posteriors.
 License: GPL (>=3)
 Depends: 
     methods,
@@ -35,4 +36,7 @@ Roxygen: list(markdown = TRUE)
 Suggests: 
     knitr,
     rsamplestudy,
-    testthat
+    testthat,
+    rmarkdown,
+    dplyr
+VignetteBuilder: knitr

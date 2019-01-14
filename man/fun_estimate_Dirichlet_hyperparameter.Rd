@@ -4,13 +4,20 @@
 \alias{fun_estimate_Dirichlet_hyperparameter}
 \title{Compute Dirichlet hyperparameters, using 'MLE' or 'naive'}
 \usage{
-fun_estimate_Dirichlet_hyperparameter(df_background, method)
+fun_estimate_Dirichlet_hyperparameter(df_background, method,
+  col_source = "source")
 }
 \arguments{
 \item{df_background}{dataframe with background data}
 
 \item{method}{'MLE' or 'naive'}
+
+\item{col_source}{name of the source column (default: 'source')}
 }
 \description{
+For the 'DirichletDirichlet' model.
+It computes the best
+}
+\details{
 Returns a numeric vector
 }

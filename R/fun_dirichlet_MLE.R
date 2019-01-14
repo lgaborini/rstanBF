@@ -11,7 +11,7 @@
 #' @return a dataframe (tibble) with the Dirichlet parameter named columns
 #' @export
 #' @md
-fun_Dirichlet_MLE_from_single_source <- function(df, name_param = 'theta', use = 'MLE') {
+fun_estimate_Dirichlet_from_single_source <- function(df, name_param = 'theta', use = 'MLE') {
 
    if (!any(use %in% c('MLE', 'naive'))) stop("use must be either 'MLE' or 'naive'")
 
@@ -22,7 +22,7 @@ fun_Dirichlet_MLE_from_single_source <- function(df, name_param = 'theta', use =
    if (use == 'MLE') {
       fun_est <- function(mtx){
          est <- Compositional::diri.est(mtx, type = 'mle')
-         purrr::pluck(est, 'param')
+         est$param
       }
    }
    if (use == 'naive') {
@@ -38,7 +38,7 @@ fun_Dirichlet_MLE_from_single_source <- function(df, name_param = 'theta', use =
 
 }
 
-#' Compute Dirichlet parameter MLE for samples from multiple sources
+#' Estimate Dirichlet parameters for samples from multiple sources
 #'
 #' Estimate MLE parameters from a dataframe of Dirichlet samples from different sources.
 #' The sources must be known.
@@ -52,16 +52,16 @@ fun_Dirichlet_MLE_from_single_source <- function(df, name_param = 'theta', use =
 #' @importFrom tidyr nest unnest
 #' @importFrom purrr map
 #' @importFrom rlang enquo
-#' @inheritDotParams fun_Dirichlet_MLE_from_single_source -df
+#' @inheritDotParams fun_estimate_Dirichlet_from_single_source -df
 #' @return a dataframe containing the Dirichlet parameter estimates for each source
 #' @export
 #' @md
-fun_Dirichlet_MLE_from_samples <- function(df, col_source = source, ...) {
+fun_estimate_Dirichlet_from_samples <- function(df, col_source = source, ...) {
 
    df %>%
       group_by(!! enquo(col_source)) %>%
       nest() %>%
-      mutate(param = map(data, fun_Dirichlet_MLE_from_single_source, ...)) %>%
+      mutate(param = map(data, fun_estimate_Dirichlet_from_single_source, ...)) %>%
       select(-data) %>%
       unnest() %>%
       ungroup()

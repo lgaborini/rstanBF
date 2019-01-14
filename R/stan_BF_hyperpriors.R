@@ -4,6 +4,7 @@
 #' @param model the model short name
 #' @param mode_hyperparameter how the parameters are estimated
 #' @param col_source name of the source column
+#' @param ... arguments to hyperprior estimation methods
 #' @return a list of hyperprior parameters
 #' @export
 #' @md
@@ -23,7 +24,7 @@ stanBF_elicit_hyperpriors <- function(df_background, model, mode_hyperparameter,
    if (model == 'DirDir') {
       if (mode_hyperparameter == 'ML') {
          fun_estimate_hyperpriors <- function(df_background, ...){
-            alpha <- fun_estimate_Dirichlet_hyperparameter(df_background, 'MLE', col_source = col_source)
+            alpha <- fun_estimate_Dirichlet_hyperparameter(df_background, method = 'ML', col_source = col_source, ...)
             list(alpha = alpha)
          }
       } else {
@@ -69,9 +70,10 @@ stanBF_elicit_hyperpriors <- function(df_background, model, mode_hyperparameter,
 #' Compute Dirichlet hyperparameters, using 'MLE' or 'naive' estimators
 #'
 #' For the 'DirichletDirichlet' model.
-#' It computes the best
+#' It computes an estimate using ML estimates of the parameters in each group.
 #'
-#' Returns a numeric vector
+#' Returns a numeric vector.
+#'
 #' @param df_background dataframe with background data
 #' @param method 'ML' or 'naive'
 #' @param col_source name of the source column (default: 'source')
@@ -84,7 +86,7 @@ fun_estimate_Dirichlet_hyperparameter <- function(df_background, method, col_sou
    df_sources_MLE_hyper[, col_source] <- 1
 
    fun_estimate_Dirichlet_from_samples(df_sources_MLE_hyper, use = method, name_param = 'alpha') %>%
-      dplyr::select(-source) %>%
+      dplyr::select(-col_source) %>%
       as.numeric()
 }
 

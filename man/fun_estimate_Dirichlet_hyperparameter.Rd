@@ -16,8 +16,8 @@ fun_estimate_Dirichlet_hyperparameter(df_background, method,
 }
 \description{
 For the 'DirichletDirichlet' model.
-It computes the best
+It computes an estimate using ML estimates of the parameters in each group.
 }
 \details{
-Returns a numeric vector
+Returns a numeric vector.
 }

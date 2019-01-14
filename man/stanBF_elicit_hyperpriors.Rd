@@ -15,6 +15,8 @@ stanBF_elicit_hyperpriors(df_background, model, mode_hyperparameter,
 \item{mode_hyperparameter}{how the parameters are estimated}
 
 \item{col_source}{name of the source column}
+
+\item{...}{arguments to hyperprior estimation methods}
 }
 \value{
 a list of hyperprior parameters

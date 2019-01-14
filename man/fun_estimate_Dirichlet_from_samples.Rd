@@ -4,10 +4,10 @@
 \alias{fun_estimate_Dirichlet_from_samples}
 \title{Estimate Dirichlet parameters for samples from multiple sources}
 \usage{
-fun_estimate_Dirichlet_from_samples(df, col_source = source, ...)
+fun_estimate_Dirichlet_from_samples(df, col_source = "source", ...)
 }
 \arguments{
-\item{col_source}{the column name, unquoted, containing the source column}
+\item{col_source}{the column name containing the source column}
 
 \item{...}{Arguments passed on to \code{fun_estimate_Dirichlet_from_single_source}
 \describe{

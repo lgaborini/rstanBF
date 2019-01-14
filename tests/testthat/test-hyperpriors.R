@@ -15,7 +15,7 @@ k_ref <- 10
 k_quest <- 10
 list_samples <- rsamplestudy::make_dataset_splits(list_pop$df_pop, k_ref, k_quest)
 
-df_background <- list_samples$df_background[, list_pop$names_var]
+df_background <- list_samples$df_background
 
 # Hyperprior estimation ---------------------------------------------------
 
@@ -34,6 +34,7 @@ test_that('model is checked', {
 
    list_hyper <- stanBF_elicit_hyperpriors(df_background, model = 'DirDir', mode_hyperparameter = 'vague')
    expect_true(is.list(list_hyper) && 'alpha' %in% names(list_hyper))
+   expect_length(list_hyper$alpha, p)
 
    expect_error(stanBF_elicit_hyperpriors(df_background, model = 'FAKEMODEL', mode_hyperparameter = 'vague'))
 })
@@ -49,5 +50,6 @@ test_that('mode_hyperparameter is checked', {
    expect_silent(stanBF_elicit_hyperpriors(df_background, model = 'DirDir', mode_hyperparameter = 'vague'))
 })
 
+stanBF_elicit_hyperpriors(df_background, model = 'DirDir', mode_hyperparameter = 'ML')
 
 

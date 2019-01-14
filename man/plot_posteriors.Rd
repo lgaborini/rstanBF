@@ -8,6 +8,8 @@ plot_posteriors(x, ...)
 }
 \arguments{
 \item{x}{a \code{stanBF} object}
+
+\item{...}{other arguments}
 }
 \description{
 Plot posterior distributions of a stanBF object.

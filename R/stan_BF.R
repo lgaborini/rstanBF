@@ -193,8 +193,8 @@ print.stanBF <- function(stanBF, verbose=FALSE) {
 
 #' Extract posterior samples from a stanBF object
 #'
-#' @param x a `stanBF` object
-#' @param ...
+#' @param stanBF a `stanBF` object
+#' @param ... other arguments
 #' @export
 samples <- function(x, ...) {
   UseMethod('samples')
@@ -213,6 +213,7 @@ samples <- function(x, ...) {
 #' Also returns the normalized version of them (\eqn{\rho}).
 #'
 #' @param stanBF a `stanBF_turn` object
+#' @rdname stanBF_turn
 #' @export
 samples.stanBF_turn <- function(stanBF) {
    make_theta_df <- function(x.samples, ...) {
@@ -259,7 +260,7 @@ samples.stanBF_turn <- function(stanBF) {
 #' Plot posterior distributions of a stanBF object.
 #'
 #' @param x a `stanBF` object
-#' @param ...
+#' @param ... other arguments
 #' @export
 plot_posteriors <- function(x, ...) {
   UseMethod('plot_posteriors')

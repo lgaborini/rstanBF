@@ -12,7 +12,7 @@ fun_estimate_Dirichlet_from_samples(df, col_source = source, ...)
 \item{...}{Arguments passed on to \code{fun_estimate_Dirichlet_from_single_source}
 \describe{
   \item{name_param}{name of output parameter (default: \code{'theta'})}
-  \item{use}{if \code{'ML'}, use MLE estimator, else the sample mean (unbiased for \eqn{\theta}, but not optimal)}
+  \item{use}{if \code{'ML'}, use MLE estimator, else the sample estimators (unbiased for \eqn{\theta}, but not optimal)}
 }}
 
 \item{df_samples}{dataframe of Dirichlet samples with a source column}

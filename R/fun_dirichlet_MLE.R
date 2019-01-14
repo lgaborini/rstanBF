@@ -11,20 +11,22 @@
 #'
 #' @param df the dataframe, must contain only the samples
 #' @param name_param name of output parameter (default: `'theta'`)
-#' @param use if `'ML'`, use MLE estimator, else the sample mean (unbiased for \eqn{\theta}, but not optimal)
+#' @param use if `'ML'`, use MLE estimator, else the sample estimators (unbiased for \eqn{\theta}, but not optimal)
+#' @param ... additional parameters to the estimation method
 #' @return a dataframe (tibble) with the Dirichlet parameter named columns
 #' @export
 #' @md
-fun_estimate_Dirichlet_from_single_source <- function(df, name_param = 'theta', use = 'ML') {
+fun_estimate_Dirichlet_from_single_source <- function(df, name_param = 'theta', use = 'ML', ...) {
 
    if (!any(use %in% c('ML', 'naive'))) stop("use must be either 'ML' or 'naive'")
 
    mtx <- as.matrix(df)
+   p <- ncol(mtx)
 
    # Choose between MLE or sample mean
    fun_est <- NULL
    if (use == 'ML') {
-      fun_est <- function(mtx){
+      fun_est <- function(mtx, ...){
 
          # Using package Compositional
          # iterative MLE
@@ -33,16 +35,15 @@ fun_estimate_Dirichlet_from_single_source <- function(df, name_param = 'theta', 
          # est$param
 
          # using sirt:
-         #
-         est <- dirichlet.mle(mtx)
+         est <- dirichlet.mle(mtx, ...)
          est$alpha
       }
    }
    if (use == 'naive') {
       # Use sample estimators
       #
-      # Bibliography
-      # Ng, Kai Wang, Guo-Liang Tian, and Man-Lai Tang. Dirichlet and Related Distributions: Theory, Methods and Applications. Wiley Series in Probability and Statistics. Chichester, UK: John Wiley & Sons, Ltd, 2011. https://doi.org/10.1002/9781119995784.
+      # Reference:
+      #   Ng, Kai Wang, Guo-Liang Tian, and Man-Lai Tang. Dirichlet and Related Distributions: Theory, Methods and Applications. Wiley Series in Probability and Statistics. Chichester, UK: John Wiley & Sons, Ltd, 2011. https://doi.org/10.1002/9781119995784.
       fun_est <- function(x) {
          p <- ncol(x)
          m <- colMeans(x)
@@ -54,7 +55,7 @@ fun_estimate_Dirichlet_from_single_source <- function(df, name_param = 'theta', 
    }
    stopifnot(!is.null(fun_est))
 
-   theta_est <- fun_est(mtx)
+   theta_est <- fun_est(mtx, ...)
    theta_est_named <- purrr::set_names(theta_est, paste0(name_param, '[', seq(p), ']'))
 
    # Convert to tibble

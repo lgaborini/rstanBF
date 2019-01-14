@@ -7,7 +7,9 @@
 samples(x, ...)
 }
 \arguments{
-\item{x}{a \code{stanBF} object}
+\item{...}{other arguments}
+
+\item{stanBF}{a \code{stanBF} object}
 }
 \description{
 Extract posterior samples from a stanBF object

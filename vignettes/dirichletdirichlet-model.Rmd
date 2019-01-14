@@ -1,0 +1,155 @@
+---
+title: "Dirichlet-Dirichlet model, and tests"
+author: "LG"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Dirichlet-Dirichlet model, and tests}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+\newcommand{\hr}[1]{{#1}_{\text{ref}}}
+\newcommand{\hq}[1]{{#1}_{\text{quest}}}
+\newcommand{\hrq}[1]{{#1}_{\text{ref,quest}}}
+\renewcommand{\vec}[1]{\boldsymbol{#1}}
+\newcommand{\tot}[1]{\overline{#1}}
+\newcommand{\simiid}{\overset{iid}{~\sim~}}
+\newcommand{\BF}{\mathrm{BF}} 
+\newcommand{\indep}{~\perp\!\!\!\perp~}
+\newcommand{\EE}{\mathop{\mathbb{E}}}
+\newcommand{\Var}{\mathop{\mathrm{Var}}}
+\newcommand{\dirichlet}[1]{\text{Dirichlet}{(#1)}}
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r}
+library(rstanBF)
+library(rsamplestudy)
+library(dplyr)
+```
+
+
+## Dirichlet-Dirichlet model
+
+This package implements the Dirichlet-Dirichlet model.   
+
+### Model
+
+Consider Dirichlet samples $X_i$ from $m$ different sources. Each source is sampled $n$ times.   
+Dirichlet parameter are also assumed to be sampled from Dirichlet distributions.
+
+- $\vec{X}_{ij} \mid \vec{\theta_i} \sim \dirichlet{\vec{\theta}_i}$ iid $\forall j = 1, \ldots, n$ with $i = 1, \ldots, m$
+- $\vec{\theta}_i \mid \vec{\alpha} \sim \dirichlet{\vec{\alpha}} \quad \forall i = 1, \ldots, m$
+
+We assume that $\vec{\alpha}$ is known.
+
+### Data generation
+
+Let's generate some data using `rsamplestudy`:
+
+```{r}
+n <- 50        # Number of items per source
+m <- 5         # Number of sources
+p <- 4         # Number of variables per item
+
+# The generating hyperparameter: components not too small
+alpha <- c(1, 0.7, 1.3, 1)   
+list_pop <- fun_rdirichlet_population(n, m, p, alpha = alpha)
+```
+
+
+Data:
+
+- $p = `r p`$ 
+- $n = `r n`$ samples from $m = `r m`$ sources: in total, $`r n*m`$ samples.
+- $\vec{\alpha} = \left( `r alpha` \right)$
+
+```{r}
+list_pop$df_pop %>% head(10)
+```
+
+Sources:
+
+```{r, message=FALSE}
+list_pop$df_sources %>% head(10)
+```
+
+### Background data
+
+We then need to simulate a situation where two sets of samples (reference and questioned data) are recovered.    
+These sets are compared, and the results evaluated using the Bayesian approach.
+
+We want to evaluate two situations: 
+
+- $H_1$: the samples come from the same source
+- $H_2$: the samples come from different sources
+
+One can generate these sets from the full data using `rsamplestudy`.
+
+Let's fix the reference source: 
+
+```{r, echo=TRUE}
+k_ref <- 10
+k_quest <- 10
+source_ref <- sample(list_pop$df_pop$source, 1)
+```
+
+```{r}
+list_samples <- make_dataset_splits(list_pop$df_pop, k_ref, k_quest)
+```
+
+### Hyperpriors
+
+We want to use the background data to evaluate the hyperpriors.   
+
+Notice that we have `r nrow(list_samples$df_background)` samples, with  `r nrow(list_pop$df_pop)` as the population size.
+This should ensure that our hyperparameter estimates are good enough.
+
+#### Within-source means
+
+One can start to estimate the source parameters, although this is not required by the `rstanBF` package.    
+According to the model, this should be an estimate of the Dirichlet parameters $\vec{\theta}_i$.
+
+Naive estimator:
+
+```{r}
+df_sources_est <- fun_estimate_Dirichlet_from_samples(list_samples$df_background, use = 'naive')
+df_sources_est
+```
+
+ML estimator:
+
+```{r}
+df_sources_est_ML <- fun_estimate_Dirichlet_from_samples(list_samples$df_background, use = 'MLE')
+df_sources_est_ML
+```
+
+
+Compare with the real sources $\vec{\theta}_i$:
+```{r}
+list_pop$df_sources
+```
+
+The ML estimator is much more accurate.
+
+#### Between-source means
+
+We suppose that they are samples from the same *hyper-source*, so the procedure can be repeated.    
+This time, we use the ML estimator to obtain point estimates, then again the ML estimator.
+
+```{r}
+df_alpha_ML_ML <- df_sources_est_ML %>% select(-source) %>% fun_estimate_Dirichlet_from_single_source(use = 'MLE')
+df_alpha_ML_ML
+```
+
+Compare with the real Dirichlet hyperparameter: 
+$\vec{\alpha} = \left( `r list_pop$alpha` \right)$
+```{r}
+list_pop$alpha
+```
+

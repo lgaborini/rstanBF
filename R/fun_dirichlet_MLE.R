@@ -1,4 +1,8 @@
 # Functions to fit Dirichlet distributions and estimate Dirichlet parameters
+#
+#
+
+
 
 #' Estimate Dirichlet parameter from a dataframe using ML or naive estimator
 #'

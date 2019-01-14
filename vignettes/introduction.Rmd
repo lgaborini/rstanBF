@@ -23,7 +23,7 @@ This vignette introduces the package.
 Let's first create some data.    
 We will use the package `rsamplestudy` to generate a population and to extract the reference/questioned samples.
 
-```{r}
+```{r pop-generation}
 library(rstanBF)
 library(dplyr)
 library(rsamplestudy)
@@ -47,7 +47,7 @@ Sample extraction: we generate two sets of splits
 - $H_1$: the questioned items come from the reference source
 - $H_2$: the questioned items come from other different sources
 
-```{r}
+```{r sampling-generation}
 k_ref <- 10
 k_quest <- 10
 
@@ -63,7 +63,7 @@ list_samples_H <- list(H1 = list_samples_same, H2 = list_samples_diff)
 
 These need to be converted to a friendly format (matrices and lists) from `rsamplestudy` output:
 
-```{r}
+```{r data-preparation}
 list_data_diff <- stanBF_prepare_rsamplestudy_data(list_pop, list_samples_diff)
 list_data_same <- stanBF_prepare_rsamplestudy_data(list_pop, list_samples_same)
 ```
@@ -80,23 +80,28 @@ The only hyperparameter which must be provided is $\alpha$, the Dirichlet parame
 
 It is known since the data has been generated: let's use it, for now.
 
-```{r}
+```{r hyperpriors-manual}
 list_hyperpriors <- list(alpha = list_pop$alpha)
 ```
 
 ### Using functions
 
-If one wants to elicit a value for the hyperparameter(s) required by the model, the package supplies the function `stanBF_elicit_hyperpriors`:
+If one wants to elicit a value for the hyperparameter(s) required by the model, the package supplies the function `stanBF_elicit_hyperpriors`.   
+See the documentation for details:
 
-```{r}
-stanBF_elicit_hyperpriors(list_samples_same$df_background, model, mode_hyperparameter = 'ML')
+```{r hyperpriors-function}
+stanBF_elicit_hyperpriors(list_samples_same$df_background, model, mode_hyperparameter = 'ML', mode_ML = 'naive')
+stanBF_elicit_hyperpriors(list_samples_same$df_background, model, mode_hyperparameter = 'ML', mode_ML = 'ML')
 ```
 
+Compare the estimate with the generating value:
+
+$\alpha = \left( `r paste0_vec(list_pop$alpha)` \right)$
 
 ## Sampling
 
 We need to set up the HMC parameters, first:
-```{r}
+```{r HMC-params}
 n.iter <- 1000
 n.burnin <- 100
 # n.iter <- 10000
@@ -108,12 +113,12 @@ n.cores <- 3
 
 Now we are ready! Let's sample:
 
-```{r}
+```{r HMC-sampling}
 stanBF_obj_same <- rstanBF::compute_BF_Stan(list_data_same, model, list_hyperpriors, data_other = NULL, n.iter, n.burnin, n.chains, n.cores)
 stanBF_obj_diff <- rstanBF::compute_BF_Stan(list_data_diff, model, list_hyperpriors, data_other = NULL, n.iter, n.burnin, n.chains, n.cores)
 ```
 
-```{r}
+```{r HMC-outputs}
 stanBF_obj_same
 stanBF_obj_diff
 ```
@@ -123,7 +128,7 @@ stanBF_obj_diff
 
 The objects contain the Bayes Factors:
 
-```{r}
+```{r HMC-BF}
 stanBF_obj_same$BF
 stanBF_obj_diff$BF
 ```
@@ -132,7 +137,7 @@ stanBF_obj_diff$BF
 
 Returned objects often implement a `samples` method:
 
-```{r}
+```{r, HMC-posteriors}
 head(rstanBF::samples(stanBF_obj_same))
 head(rstanBF::samples(stanBF_obj_diff))
 ```
@@ -141,7 +146,7 @@ head(rstanBF::samples(stanBF_obj_diff))
 
 Returned objects often implement a `plot_posteriors` method:
 
-```{r}
+```{r, HMC-posteriors-plot}
 rstanBF::plot_posteriors(stanBF_obj_same, 'theta')
 rstanBF::plot_posteriors(stanBF_obj_diff, 'theta')
 ```

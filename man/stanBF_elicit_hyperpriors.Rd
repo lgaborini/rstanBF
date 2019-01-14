@@ -12,14 +12,14 @@ stanBF_elicit_hyperpriors(df_background, model, mode_hyperparameter,
 
 \item{model}{the model short name}
 
-\item{mode_hyperparameter}{how the parameters are estimated}
+\item{mode_hyperparameter}{how the parameters are estimated (can be 'ML' or 'vague')}
 
-\item{col_source}{name of the source column}
+\item{col_source}{name of the source column (default: 'source')}
 
 \item{...}{arguments to hyperprior estimation methods}
 }
 \value{
-a list of hyperprior parameters
+a list of hyperprior parameters, as many as expected by \code{\link[=compute_BF_Stan]{compute_BF_Stan()}}
 }
 \description{
 Elicit hyperpriors to use for Stan BF

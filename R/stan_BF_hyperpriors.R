@@ -2,10 +2,10 @@
 #'
 #' @param df_background the dataframe containing background data, with the source column
 #' @param model the model short name
-#' @param mode_hyperparameter how the parameters are estimated
-#' @param col_source name of the source column
+#' @param mode_hyperparameter how the parameters are estimated (can be 'ML' or 'vague')
+#' @param col_source name of the source column (default: 'source')
 #' @param ... arguments to hyperprior estimation methods
-#' @return a list of hyperprior parameters
+#' @return a list of hyperprior parameters, as many as expected by [compute_BF_Stan()]
 #' @export
 #' @md
 stanBF_elicit_hyperpriors <- function(df_background, model, mode_hyperparameter, col_source = 'source', ...) {
@@ -16,15 +16,24 @@ stanBF_elicit_hyperpriors <- function(df_background, model, mode_hyperparameter,
    assertthat::assert_that(model %in% rstanBF:::env_stanBF$stanBF_model_shortnames,
                            msg = paste0('model "', model, '" has not been implemented, must be one of: ', paste_vec(rstanBF:::env_stanBF$stanBF_model_shortnames)))
 
+   assertthat::assert_that(col_source %in% colnames(df_background),
+                           msg = paste0('cannot find source column "', col_source, '" in the data.frame'))
+
    # p variables + the source column
    p <- ncol(df_background) - 1
 
    # Assign the hyperprior function
+   # It MUST return a list of hyperparameters
 
    if (model == 'DirDir') {
       if (mode_hyperparameter == 'ML') {
-         fun_estimate_hyperpriors <- function(df_background, ...){
-            alpha <- fun_estimate_Dirichlet_hyperparameter(df_background, method = 'ML', col_source = col_source, ...)
+         fun_estimate_hyperpriors <- function(df_background, mode_ML = 'ML', ...){
+            if (mode_ML == 'naive') {
+               alpha <- fun_estimate_Dirichlet_hyperparameter(df_background, method = 'naive', col_source = col_source, ...)
+            } else {
+               alpha <- fun_estimate_Dirichlet_hyperparameter(df_background, method = 'ML', col_source = col_source, ...)
+            }
+
             list(alpha = alpha)
          }
       } else {

@@ -140,6 +140,7 @@ The ML estimator is much more accurate.
 #### Between-source means
 
 We suppose that they are samples from the same *hyper-source*, so the procedure can be repeated.    
+
 This time, we use the ML estimator to obtain point estimates, then again the ML estimator.
 
 ```{r}
@@ -147,9 +148,6 @@ df_alpha_ML_ML <- df_sources_est_ML %>% select(-source) %>% fun_estimate_Dirichl
 df_alpha_ML_ML
 ```
 
-Compare with the real Dirichlet hyperparameter: 
+Compare with the real Dirichlet hyperparameter:    
 $\vec{\alpha} = \left( `r list_pop$alpha` \right)$
-```{r}
-list_pop$alpha
-```
 

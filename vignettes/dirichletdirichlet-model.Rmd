@@ -125,7 +125,7 @@ df_sources_est
 ML estimator:
 
 ```{r}
-df_sources_est_ML <- fun_estimate_Dirichlet_from_samples(list_samples$df_background, use = 'MLE')
+df_sources_est_ML <- fun_estimate_Dirichlet_from_samples(list_samples$df_background, use = 'ML')
 df_sources_est_ML
 ```
 
@@ -143,7 +143,7 @@ We suppose that they are samples from the same *hyper-source*, so the procedure 
 This time, we use the ML estimator to obtain point estimates, then again the ML estimator.
 
 ```{r}
-df_alpha_ML_ML <- df_sources_est_ML %>% select(-source) %>% fun_estimate_Dirichlet_from_single_source(use = 'MLE')
+df_alpha_ML_ML <- df_sources_est_ML %>% select(-source) %>% fun_estimate_Dirichlet_from_single_source(use = 'ML')
 df_alpha_ML_ML
 ```
 

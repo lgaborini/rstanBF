@@ -84,8 +84,9 @@ stanBF_elicit_hyperpriors <- function(df_background, model, mode_hyperparameter,
 #' Returns a numeric vector.
 #'
 #' @param df_background dataframe with background data
-#' @param method 'ML' or 'naive'
+#' @param method 'ML' or 'naive' (see [fun_estimate_Dirichlet_from_samples()])
 #' @param col_source name of the source column (default: 'source')
+#' @return a numeric vector for the estimated Dirichlet hyperparameter
 fun_estimate_Dirichlet_hyperparameter <- function(df_background, method, col_source = 'source') {
 
    df_sources_MLE <- fun_estimate_Dirichlet_from_samples(df_background, use = 'ML', col_source = col_source)

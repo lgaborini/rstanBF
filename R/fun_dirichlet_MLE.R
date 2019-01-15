@@ -13,7 +13,7 @@
 #' @param name_param name of output parameter (default: `'theta'`)
 #' @param use if `'ML'`, use MLE estimator, else the sample estimators (unbiased for \eqn{\theta}, but not optimal)
 #' @param ... additional parameters to the estimation method
-#' @return a dataframe (tibble) with the Dirichlet parameter named columns
+#' @return a dataframe (tibble) with the columns named as the Dirichlet parameter
 #' @export
 #' @md
 fun_estimate_Dirichlet_from_single_source <- function(df, name_param = 'theta', use = 'ML', ...) {
@@ -43,7 +43,7 @@ fun_estimate_Dirichlet_from_single_source <- function(df, name_param = 'theta', 
       # Use sample estimators
       #
       # Reference:
-      #   Ng, Kai Wang, Guo-Liang Tian, and Man-Lai Tang. Dirichlet and Related Distributions: Theory, Methods and Applications. Wiley Series in Probability and Statistics. Chichester, UK: John Wiley & Sons, Ltd, 2011. https://doi.org/10.1002/9781119995784.
+      # Ng, Kai Wang, Guo-Liang Tian, and Man-Lai Tang, "Dirichlet and Related Distributions: Theory, Methods and Applications", Wiley Series in Probability and Statistics. Chichester, UK: John Wiley & Sons, Ltd, 2011. https://doi.org/10.1002/9781119995784.
       fun_est <- function(x) {
          p <- ncol(x)
          m <- colMeans(x)
@@ -59,8 +59,7 @@ fun_estimate_Dirichlet_from_single_source <- function(df, name_param = 'theta', 
    theta_est_named <- purrr::set_names(theta_est, paste0(name_param, '[', seq(p), ']'))
 
    # Convert to tibble
-   tibble::as_tibble(t(tibble::as_tibble(theta_est_named)))
-
+   named_vector_to_tibble(theta_est_named)
 }
 
 #' Estimate Dirichlet parameters for samples from multiple sources
@@ -78,7 +77,7 @@ fun_estimate_Dirichlet_from_single_source <- function(df, name_param = 'theta', 
 #' @importFrom purrr map
 #' @importFrom rlang enquo
 #' @inheritDotParams fun_estimate_Dirichlet_from_single_source -df
-#' @return a dataframe containing the Dirichlet parameter estimates for each source
+#' @return a tibble containing the Dirichlet parameter estimates for each source
 #' @export
 #' @md
 fun_estimate_Dirichlet_from_samples <- function(df, col_source = 'source', ...) {

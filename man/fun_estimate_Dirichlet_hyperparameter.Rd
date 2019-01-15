@@ -10,9 +10,12 @@ fun_estimate_Dirichlet_hyperparameter(df_background, method,
 \arguments{
 \item{df_background}{dataframe with background data}
 
-\item{method}{'ML' or 'naive'}
+\item{method}{'ML' or 'naive' (see \code{\link[=fun_estimate_Dirichlet_from_samples]{fun_estimate_Dirichlet_from_samples()}})}
 
 \item{col_source}{name of the source column (default: 'source')}
+}
+\value{
+a numeric vector for the estimated Dirichlet hyperparameter
 }
 \description{
 For the 'DirichletDirichlet' model.

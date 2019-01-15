@@ -17,7 +17,7 @@ fun_estimate_Dirichlet_from_single_source(df, name_param = "theta",
 \item{...}{additional parameters to the estimation method}
 }
 \value{
-a dataframe (tibble) with the Dirichlet parameter named columns
+a dataframe (tibble) with the columns named as the Dirichlet parameter
 }
 \description{
 Assume that data is \eqn{X ~ Dir(\theta)} iid.

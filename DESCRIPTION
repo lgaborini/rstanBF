@@ -20,7 +20,8 @@ Imports:
     assertthat,
     Compositional,
     tibble,
-    stringr
+    stringr,
+    purrr
 LinkingTo: 
     BH (>= 1.69.0-1),
     Rcpp (>= 1.0.0),

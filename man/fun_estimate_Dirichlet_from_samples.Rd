@@ -18,7 +18,7 @@ fun_estimate_Dirichlet_from_samples(df, col_source = "source", ...)
 \item{df_samples}{dataframe of Dirichlet samples with a source column}
 }
 \value{
-a dataframe containing the Dirichlet parameter estimates for each source
+a tibble containing the Dirichlet parameter estimates for each source
 }
 \description{
 Estimate MLE parameters from a dataframe of Dirichlet samples from different sources.

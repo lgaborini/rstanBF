@@ -5,6 +5,7 @@ dist: trusty
 
 latex: true
 
+r_github_packages: lgaborini/rsamplestudy
 
 env:
   global:

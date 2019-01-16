@@ -1,3 +1,4 @@
+^codecov\.yml$
 ^README\.Rmd$
 ^rstanBF\.Rproj$
 ^\.Rproj\.user$

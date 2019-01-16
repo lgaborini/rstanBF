@@ -39,5 +39,6 @@ Suggests:
     rsamplestudy,
     testthat,
     rmarkdown,
-    dplyr
+    dplyr,
+    covr
 VignetteBuilder: knitr

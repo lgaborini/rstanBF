@@ -63,9 +63,6 @@ compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter = 
 
   # Parameter validation ------------
 
-  paste_vec <- function(...){ paste(..., collapse = ',') }
-  paste0_vec <- function(...){ paste0(..., collapse = ', ') }
-
   # Validate model names
   assertthat::assert_that(is.character(model))
   assertthat::assert_that(model %in% implemented_models,
@@ -197,7 +194,7 @@ print.stanBF <- function(stanBF, verbose=FALSE) {
 #' @param stanBF a `stanBF` object
 #' @param ... other arguments
 #' @export
-samples <- function(x, ...) {
+samples <- function(stanBF, ...) {
   UseMethod('samples')
 }
 

@@ -14,7 +14,7 @@ digamma1 <- function(x,h = .001){
 #' Maximum Likelihood Estimation of the Dirichlet Distribution
 #'
 #' Maximum likelihood estimation of the parameters of the Dirichlet distribution
-#' @importFrom sirt dirichlet.mle
+#' @keywords internal
 dirichlet.mle <- function( x,  weights=NULL, eps=10^(-5),convcrit=.00001, maxit=1000,
                            oldfac=.3, progress=FALSE){
 

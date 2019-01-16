@@ -174,7 +174,11 @@ Once all is set, one can run the HMC sampler:
 ```{r}
 list_data <- stanBF_prepare_rsamplestudy_data(list_pop, list_samples)
 
-obj_HMC <- compute_BF_Stan(data = list_data, model =  'DirDir', hyperpriors = list_hyper)
+obj_StanBF <- compute_BF_Stan(data = list_data, model =  'DirDir', hyperpriors = list_hyper)
+```
+
+```{r}
+obj_StanBF
 ```
 
 ```{r}

@@ -4,12 +4,12 @@
 \alias{samples}
 \title{Extract posterior samples from a stanBF object}
 \usage{
-samples(x, ...)
+samples(stanBF, ...)
 }
 \arguments{
-\item{...}{other arguments}
-
 \item{stanBF}{a \code{stanBF} object}
+
+\item{...}{other arguments}
 }
 \description{
 Extract posterior samples from a stanBF object

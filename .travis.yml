@@ -5,6 +5,10 @@ dist: trusty
 
 latex: true
 
+# Required by rsamplestudy dependence
+apt_packages:
+   - libgsl0-dev
+
 r_github_packages: lgaborini/rsamplestudy
 
 env:

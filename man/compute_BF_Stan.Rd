@@ -5,7 +5,8 @@
 \title{Sample and compute BF for various models using Stan}
 \usage{
 compute_BF_Stan(data, model, hyperpriors, data_other = NULL,
-  n.iter = 1000, n.burnin = 100, n.chains = 1, n.cores = 1)
+  n.iter = 1000, n.burnin = 100, n.chains = 1, n.cores = 1,
+  silent = FALSE)
 }
 \arguments{
 \item{data}{a list containing \code{mtx}, \code{idx.ref}, \code{idx.quest}}
@@ -23,6 +24,8 @@ compute_BF_Stan(data, model, hyperpriors, data_other = NULL,
 \item{n.chains}{number of HMC chains (default: 1)}
 
 \item{n.cores}{number of cores to use for HMC and bridgesampling (default: 1)}
+
+\item{silent}{if TRUE, do not print any progress}
 }
 \value{
 a \code{stanBF} object

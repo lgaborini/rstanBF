@@ -39,10 +39,11 @@
 #' @param n.burnin number of HMC burn-in iterations (default: 100)
 #' @param n.chains number of HMC chains (default: 1)
 #' @param n.cores number of cores to use for HMC and bridgesampling (default: 1)
+#' @param silent if TRUE, do not print any progress
 #' @return a `stanBF` object
 #' @export
 #' @md
-compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter = 1000, n.burnin = 100, n.chains = 1, n.cores = 1) {
+compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter = 1000, n.burnin = 100, n.chains = 1, n.cores = 1, silent = FALSE) {
 
   # Setup returned fields --------------
 
@@ -138,8 +139,8 @@ compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter = 
   # Fitting -----------------------------------------------------------------
 
   # Hypotheses
-  stanfit_h1 <- rstan::sampling(stanmodel_h1, data=data_H1, iter=default_iter$iter, warmup=default_iter$warmup, chains=default_iter$chains, cores=default_iter$cores)
-  stanfit_h2 <- rstan::sampling(stanmodel_h2, data=data_H2, iter=default_iter$iter, warmup=default_iter$warmup, chains=default_iter$chains, cores=default_iter$cores)
+  stanfit_h1 <- with(default_iter, rstan::sampling(stanmodel_h1, data=data_H1, iter=iter, warmup=warmup, chains=chains, cores=cores, show_messages = !silent))
+  stanfit_h2 <- with(default_iter, rstan::sampling(stanmodel_h2, data=data_H2, iter=iter, warmup=warmup, chains=chains, cores=cores, show_messages = !silent))
   stanBF_obj$stanfit <- list(H1=stanfit_h1, H2=stanfit_h2)
 
   # Sample extraction --------------------------------------------------------
@@ -151,15 +152,15 @@ compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter = 
 
   # Bridge sampling --------------------------------------------------------
 
-  print('Bridge sampling...')
+  if (!silent) cat('Bridge sampling...\n')
 
   # Hypotheses
-  bridge_h1 <- bridgesampling::bridge_sampler(stanfit_h1, silent=TRUE, cores=default_iter$cores)
-  bridge_h2 <- bridgesampling::bridge_sampler(stanfit_h2, silent=TRUE, cores=default_iter$cores)
+  bridge_h1 <- bridgesampling::bridge_sampler(stanfit_h1, silent=silent, cores=default_iter$cores)
+  bridge_h2 <- bridgesampling::bridge_sampler(stanfit_h2, silent=silent, cores=default_iter$cores)
 
   stanBF_obj$stanbridge <- list(H1=bridge_h1, H2=bridge_h2)
 
-  print('Finished.')
+  if (!silent) cat('Finished.\n')
   BF.stan <- bridgesampling::bf(bridge_h1, bridge_h2)
 
   stanBF_obj$BF <- BF.stan$bf
@@ -179,13 +180,13 @@ print.stanBF <- function(stanBF, verbose=FALSE) {
   if (verbose) {
     print.default(stanBF)
   } else {
-    print('stanBF object containing posterior samples from H1, H2.')
+    cat('stanBF object containing posterior samples from H1, H2.\n')
 
     n.chains <- length(stanBF$stanfit$H1@stan_args)
     n.iter <- stanBF$stanfit$H1@stan_args[[1]]$iter
-    print(paste('Model:', stanBF$model_name))
-    print(paste('Obtained BF:', stanBF$BF))
-    print(paste('Ran with', n.chains, 'chains,', n.iter, 'HMC iterations.'))
+    cat('Model:', stanBF$model_name, '\n')
+    cat('Obtained BF:', stanBF$BF, '\n')
+    cat('Ran with', n.chains, 'chains,', n.iter, 'HMC iterations.\n')
   }
 }
 

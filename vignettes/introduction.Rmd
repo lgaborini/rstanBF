@@ -14,6 +14,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
+paste0_vec <- function(...){ paste(..., collapse = ',') }
 ```
 
 This vignette introduces the package. 

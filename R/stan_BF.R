@@ -155,8 +155,8 @@ compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter = 
   if (!silent) cat('Bridge sampling...\n')
 
   # Hypotheses
-  bridge_h1 <- bridgesampling::bridge_sampler(stanfit_h1, silent=silent, cores=default_iter$cores)
-  bridge_h2 <- bridgesampling::bridge_sampler(stanfit_h2, silent=silent, cores=default_iter$cores)
+  bridge_h1 <- bridgesampling::bridge_sampler(stanfit_h1, silent=TRUE, cores=default_iter$cores)
+  bridge_h2 <- bridgesampling::bridge_sampler(stanfit_h2, silent=TRUE, cores=default_iter$cores)
 
   stanBF_obj$stanbridge <- list(H1=bridge_h1, H2=bridge_h2)
 

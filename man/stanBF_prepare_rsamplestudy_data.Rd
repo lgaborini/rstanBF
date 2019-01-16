@@ -4,12 +4,15 @@
 \alias{stanBF_prepare_rsamplestudy_data}
 \title{Convert the output of rsamplestudy to rstanBF data parameter}
 \usage{
-stanBF_prepare_rsamplestudy_data(list_pop, list_samples)
+stanBF_prepare_rsamplestudy_data(list_pop, list_samples,
+  col_source = "source")
 }
 \arguments{
 \item{list_pop}{the output of a \code{rsamplestudy}-generated population}
 
 \item{list_samples}{the output of \code{\link[rsamplestudy:make_dataset_splits]{rsamplestudy::make_dataset_splits()}}}
+
+\item{col_source}{the name of the source column (default: 'source')}
 }
 \value{
 a list containing \code{mtx}, \code{idx.ref}, \code{idx.quest}

@@ -84,7 +84,7 @@ list_pop$df_sources %>% head(10)
 We then need to simulate a situation where two sets of samples (reference and questioned data) are recovered.    
 These sets are compared, and the results evaluated using the Bayesian approach.
 
-We want to evaluate two situations: 
+We want to evaluate two hypotheses: 
 
 - $H_1$: the samples come from the same source
 - $H_2$: the samples come from different sources
@@ -97,22 +97,29 @@ Let's fix the reference source:
 k_ref <- 10
 k_quest <- 10
 source_ref <- sample(list_pop$df_pop$source, 1)
+
+# The reference source
+source_ref
 ```
 
 ```{r}
-list_samples <- make_dataset_splits(list_pop$df_pop, k_ref, k_quest)
+list_samples <- make_dataset_splits(list_pop$df_pop, k_ref, k_quest, source_ref = source_ref)
+
+# The true (unseen) questioned sources
+list_samples$df_questioned$source
 ```
 
 ### Hyperpriors
 
-We want to use the background data to evaluate the hyperpriors.   
+We want to use the background data to evaluate the hyperpriors, i.e., the between-source Dirichlet parameter.   
 
 Notice that we have `r nrow(list_samples$df_background)` samples, with  `r nrow(list_pop$df_pop)` as the population size.
 This should ensure that our hyperparameter estimates are good enough.
 
-#### Within-source means
+#### Within-source parameters
 
-One can start to estimate the source parameters, although this is not required by the `rstanBF` package.    
+One can start to estimate the parameters for each source, although this is not required by the `rstanBF` package.
+
 According to the model, this should be an estimate of the Dirichlet parameters $\vec{\theta}_i$.
 
 Naive estimator:
@@ -137,11 +144,11 @@ list_pop$df_sources
 
 The ML estimator is much more accurate.
 
-#### Between-source means
+#### Between-source parameters
 
-We suppose that they are samples from the same *hyper-source*, so the procedure can be repeated.    
+We suppose that the within-source ML estimates are samples from the same *hyper-source*, so the procedure can be repeated.    
 
-This time, we use the ML estimator to obtain point estimates, then again the ML estimator.
+We use again the ML estimator:
 
 ```{r}
 df_alpha_ML_ML <- df_sources_est_ML %>% select(-source) %>% fun_estimate_Dirichlet_from_single_source(use = 'ML')
@@ -149,5 +156,28 @@ df_alpha_ML_ML
 ```
 
 Compare with the real Dirichlet hyperparameter:    
+
 $\vec{\alpha} = \left( `r list_pop$alpha` \right)$
+
+
+rstanBF provides a function to estimate the hyperparameters:
+
+```{r}
+list_hyper <- stanBF_elicit_hyperpriors(list_samples$df_background, 'DirDir', mode_hyperparameter = 'ML')
+list_hyper
+```
+
+### Posterior sampling
+
+Once all is set, one can run the HMC sampler:
+
+```{r}
+list_data <- stanBF_prepare_rsamplestudy_data(list_pop, list_samples)
+
+obj_HMC <- compute_BF_Stan(data = list_data, model =  'DirDir', hyperpriors = list_hyper)
+```
+
+```{r}
+obj_HMC
+```
 

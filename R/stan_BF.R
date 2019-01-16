@@ -249,6 +249,23 @@ samples.stanBF_turn <- function(stanBF) {
 }
 
 
+# Prior and posterior distribution extraction methods ---------------------
+
+#' Extract prior predictive distributions
+#'
+#' Extract prior predictive distributions
+#' @export
+prior_pred <- function(x, ...) {
+  # UseMethod('prior_pred')
+
+  all_variables <- purrr::map(obj_StanBF$stanfit, names)
+  prior_pred_variables <- purrr::map(all_variables, ~ purrr::keep(., ~ stringr::str_detect(., '^sim_')))
+
+  purrr::map2(obj_StanBF$stanfit, prior_pred_variables, rstan::extract)
+}
+
+
+
 # Diagnostics -------------------------------------------------------------
 
 

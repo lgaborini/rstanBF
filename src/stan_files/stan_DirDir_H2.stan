@@ -23,6 +23,7 @@ model {
    target += dirichlet_lpdf(theta_quest | alpha);
 }
 generated quantities {
+   // Prior predictive distribution
    simplex[p] sim_d_ref;
    simplex[p] sim_d_quest;
    simplex[p] sim_theta_ref;
@@ -32,4 +33,6 @@ generated quantities {
    sim_theta_quest = dirichlet_rng(alpha);
    sim_d_ref = dirichlet_rng(sim_theta_ref);
    sim_d_quest = dirichlet_rng(sim_theta_quest);
+
+   // Posterior predictive distribution
 }

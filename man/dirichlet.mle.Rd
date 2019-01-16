@@ -10,3 +10,4 @@ dirichlet.mle(x, weights = NULL, eps = 10^(-5), convcrit = 1e-05,
 \description{
 Maximum likelihood estimation of the parameters of the Dirichlet distribution
 }
+\keyword{internal}

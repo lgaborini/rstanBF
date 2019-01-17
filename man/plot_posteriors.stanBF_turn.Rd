@@ -2,7 +2,7 @@
 % Please edit documentation in R/stan_BF.R
 \name{plot_posteriors.stanBF_turn}
 \alias{plot_posteriors.stanBF_turn}
-\title{Make boxplots for turn-point posteriors.}
+\title{Make boxplots for turn-point posteriors}
 \usage{
 \method{plot_posteriors}{stanBF_turn}(obj_turn, variable = NULL,
   type = "boxplots")

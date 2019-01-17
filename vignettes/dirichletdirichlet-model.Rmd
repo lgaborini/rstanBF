@@ -122,17 +122,20 @@ One can start to estimate the parameters for each source, although this is not r
 
 According to the model, this should be an estimate of the Dirichlet parameters $\vec{\theta}_i$.
 
+The package contains functions to compute ML estimators of Dirichlet parameters.   
+For now, they are hidden from the general namespace, but can still be called if needed.
+
 Naive estimator:
 
 ```{r}
-df_sources_est <- fun_estimate_Dirichlet_from_samples(list_samples$df_background, use = 'naive')
+df_sources_est <- rstanBF:::fun_estimate_Dirichlet_from_samples(list_samples$df_background, use = 'naive')
 df_sources_est
 ```
 
 ML estimator:
 
 ```{r}
-df_sources_est_ML <- fun_estimate_Dirichlet_from_samples(list_samples$df_background, use = 'ML')
+df_sources_est_ML <- rstanBF:::fun_estimate_Dirichlet_from_samples(list_samples$df_background, use = 'ML')
 df_sources_est_ML
 ```
 
@@ -151,7 +154,7 @@ We suppose that the within-source ML estimates are samples from the same *hyper-
 We use again the ML estimator:
 
 ```{r}
-df_alpha_ML_ML <- df_sources_est_ML %>% select(-source) %>% fun_estimate_Dirichlet_from_single_source(use = 'ML')
+df_alpha_ML_ML <- df_sources_est_ML %>% select(-source) %>% rstanBF:::fun_estimate_Dirichlet_from_single_source(use = 'ML')
 df_alpha_ML_ML
 ```
 

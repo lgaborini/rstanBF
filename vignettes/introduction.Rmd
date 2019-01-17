@@ -25,6 +25,9 @@ This vignette introduces the package.
 Let's first create some data.    
 We will use the package `rsamplestudy` to generate a population and to extract the reference/questioned samples.
 
+Here, we will be generating data from a "Dirichlet-Dirichlet" model.    
+Note that this has nothing to do with the models implemented in this package.
+
 ```{r pop-generation}
 library(rstanBF)
 library(dplyr)
@@ -42,12 +45,14 @@ list_pop
 
 ```
 
-### Sampling
+### Sampling generation
 
-Sample extraction: we generate two sets of splits
+The package compares two sets of *items* (reference and questioned) and evaluates their support to a pair of hypotheses.
 
 - $H_1$: the questioned items come from the reference source
 - $H_2$: the questioned items come from other different sources
+
+We simulate a situation using the function `make_dataset_splits` from the package `rsamplestudy`:
 
 ```{r sampling-generation}
 k_ref <- 10
@@ -68,6 +73,20 @@ These need to be converted to a friendly format (matrices and lists) from `rsamp
 ```{r data-preparation}
 list_data_diff <- stanBF_prepare_rsamplestudy_data(list_pop, list_samples_diff)
 list_data_same <- stanBF_prepare_rsamplestudy_data(list_pop, list_samples_same)
+```
+
+We see that each list contains the full set of observations, the set of indexes to reference items, and the set of indexes to the questioned items:
+```{r}
+list_data_diff
+```
+
+From now on, we are ready to use the `rstanBF` package.
+
+## Data model
+
+The package supports several models:
+```{r}
+available_models()
 ```
 
 ## Hyperparameter elicitation

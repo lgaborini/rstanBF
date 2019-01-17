@@ -2,7 +2,7 @@
 % Please edit documentation in R/stan_BF.R
 \name{print.stanBF}
 \alias{print.stanBF}
-\title{Print a \code{stanBF} object.}
+\title{Print a \code{stanBF} object}
 \usage{
 \method{print}{stanBF}(stanBF, verbose = FALSE)
 }
@@ -12,5 +12,5 @@
 \item{verbose}{print more details}
 }
 \description{
-Print a \code{stanBF} object.
+Print a \code{stanBF} object
 }

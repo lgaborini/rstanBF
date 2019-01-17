@@ -33,9 +33,9 @@ is.stanBF <- function(x) inherits(x, "stanBF")
 #' Make a tibble with columns representing a range
 #'
 #' Make a tibble with columns representing a range.
-#' All column will have the same base name, and will follow the format of "text[col_id]".
+#' All column will have the same base name, and will follow the format of `'text[col_idx]'`, indexed from 1 to `ncol(x.samples)`.
 #'
-#' It can be used to convert messy [rstan::extract()] output from multidimensional variables, to a more manageable form.
+#' It can be used to convert messy `rstan::extract` output from multidimensional variables, to a more manageable form.
 #'
 #' @param x.samples a matrix, data.frame or text which will be converted and re-named to a tibble
 #' @param text the base name for the new column names

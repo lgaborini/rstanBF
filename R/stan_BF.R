@@ -158,7 +158,7 @@ compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter = 
 
 # Print methods -------------------------------------------
 
-#' Print a `stanBF` object.
+#' Print a `stanBF` object
 #'
 #' @param stanBF a `stanBF` object
 #' @param verbose print more details
@@ -194,7 +194,7 @@ samples <- function(stanBF, ...) {
 #   invisible(NULL)
 # }
 
-#' Exctract theta posterior samples for a turn-like object
+#' Extract theta posterior samples for a turn-like object
 #'
 #' `stanBF_turn` objects share the Dirichlet likelihood, with \eqn{\theta} as prior parameter.
 #'
@@ -256,12 +256,13 @@ prior_pred <- function(x, ...) {
   # purrr::map2(obj_StanBF$stanfit, prior_pred_variables, rstan::extract)
 }
 
-#' Extract prior predictive distributions for turn-point posteriors.
+#' Extract prior predictive distributions for turn-point posteriors
 #'
 #' Extract prior predictive distributions for turn-point posteriors.
 #'
 #' @param x a `stanBF_turn` object
 #' @return a tibble containing prior predictions across hypotheses and sources
+#' @rdname stanBF_turn
 #' @export
 prior_pred.stanBF_turn <- function(obj_StanBF, ...) {
 
@@ -284,8 +285,10 @@ prior_pred.stanBF_turn <- function(obj_StanBF, ...) {
 
 # Plotting methods -------------------------------
 
-#' Plot posterior distributions of a stanBF object.
+#' Plot posterior distributions of a stanBF object
 #'
+#' Plot posterior distributions of a stanBF object.
+#' 
 #' @param x a `stanBF` object
 #' @param ... other arguments
 #' @export
@@ -293,6 +296,8 @@ plot_posteriors <- function(x, ...) {
   UseMethod('plot_posteriors')
 }
 
+#' Make boxplots for turn-point posteriors
+#' 
 #' Make boxplots for turn-point posteriors.
 #'
 #' @param obj_turn a supported `stanBF` object

@@ -2,15 +2,25 @@
 % Please edit documentation in R/stan_BF.R
 \name{samples.stanBF_turn}
 \alias{samples.stanBF_turn}
-\title{Exctract theta posterior samples for a turn-like object}
+\alias{prior_pred.stanBF_turn}
+\title{Extract theta posterior samples for a turn-like object}
 \usage{
 \method{samples}{stanBF_turn}(stanBF)
+
+\method{prior_pred}{stanBF_turn}(obj_StanBF, ...)
 }
 \arguments{
 \item{stanBF}{a \code{stanBF_turn} object}
+
+\item{x}{a \code{stanBF_turn} object}
+}
+\value{
+a tibble containing prior predictions across hypotheses and sources
 }
 \description{
 \code{stanBF_turn} objects share the Dirichlet likelihood, with \eqn{\theta} as prior parameter.
+
+Extract prior predictive distributions for turn-point posteriors.
 }
 \details{
 This function extract posterior samples for \eqn{\theta}.

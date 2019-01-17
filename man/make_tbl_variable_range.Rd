@@ -18,8 +18,8 @@ a tibble
 }
 \description{
 Make a tibble with columns representing a range.
-All column will have the same base name, and will follow the format of "text\link{col_id}".
+All column will have the same base name, and will follow the format of \code{'text[col_idx]'}, indexed from 1 to \code{ncol(x.samples)}.
 }
 \details{
-It can be used to convert messy \code{\link[rstan:extract]{rstan::extract()}} output from multidimensional variables, to a more manageable form.
+It can be used to convert messy \code{rstan::extract} output from multidimensional variables, to a more manageable form.
 }

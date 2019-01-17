@@ -2,7 +2,7 @@
 % Please edit documentation in R/stan_BF.R
 \name{plot_posteriors}
 \alias{plot_posteriors}
-\title{Plot posterior distributions of a stanBF object.}
+\title{Plot posterior distributions of a stanBF object}
 \usage{
 plot_posteriors(x, ...)
 }

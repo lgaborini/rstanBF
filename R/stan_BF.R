@@ -261,20 +261,20 @@ prior_pred <- function(x, ...) {
 #' Extract prior predictive distributions for turn-point posteriors.
 #'
 #' @param x a `stanBF_turn` object
-#' @return a list of data.frames
+#' @return a tibble containing prior predictions across hypotheses and sources
 #' @export
 prior_pred.stanBF_turn <- function(obj_StanBF, ...) {
-  UseMethod('prior_pred')
 
-  all_variables <- purrr::map(obj_StanBF$stanfit, names)
-  prior_pred_variables <- purrr::map(all_variables, ~ purrr::keep(., ~ stringr::str_detect(., '^sim_d_')))
+  sim_d_H1 <- rstan::extract(obj_StanBF$stanfit$H1, pars = 'sim_d_ref')$sim_d_ref
+  sim_d_ref_H2 <- rstan::extract(obj_StanBF$stanfit$H2, pars = 'sim_d_ref')$sim_d_ref
+  sim_d_quest_H2 <- rstan::extract(obj_StanBF$stanfit$H2, pars = 'sim_d_quest')$sim_d_quest
 
+  df_prior_samples <- dplyr::bind_rows(
+    make_tbl_variable_range(sim_d_H1, text = 'd', Hypothesis = 'Hp', Source = 'Both'),
+    make_tbl_variable_range(sim_d_ref_H2, text = 'd', Hypothesis = 'Hd', Source = 'Reference'),
+    make_tbl_variable_range(sim_d_quest_H2, text = 'd', Hypothesis = 'Hd', Source = 'Questioned'))
 
-  sim_d_H1 <- rstan::extract(obj_StanBF$stanfit$H1)$sim_d_ref
-  sim_d_ref_H2 <- rstan::extract(obj_StanBF$stanfit$H2)$sim_d_ref
-  sim_d_quest_H2 <- rstan::extract(obj_StanBF$stanfit$H2)$sim_d_quest
-
-  purrr::map2(obj_StanBF$stanfit, prior_pred_variables, rstan::extract)
+  df_prior_samples
 }
 
 

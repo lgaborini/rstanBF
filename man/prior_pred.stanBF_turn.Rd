@@ -4,13 +4,13 @@
 \alias{prior_pred.stanBF_turn}
 \title{Extract prior predictive distributions for turn-point posteriors.}
 \usage{
-prior_pred.stanBF_turn(obj_StanBF, ...)
+\method{prior_pred}{stanBF_turn}(obj_StanBF, ...)
 }
 \arguments{
 \item{x}{a \code{stanBF_turn} object}
 }
 \value{
-a list of data.frames
+a tibble containing prior predictions across hypotheses and sources
 }
 \description{
 Extract prior predictive distributions for turn-point posteriors.

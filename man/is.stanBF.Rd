@@ -10,7 +10,7 @@ is.stanBF(x)
 \item{x}{an object}
 }
 \value{
-TRUE
+TRUE if an object is a 'stanBF' object
 }
 \description{
 Check if an object is a 'stanBF' object.

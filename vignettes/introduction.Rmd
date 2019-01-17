@@ -104,13 +104,13 @@ $\alpha = \left( `r paste0_vec(list_pop$alpha)` \right)$
 
 We need to set up the HMC parameters, first:
 ```{r HMC-params}
-n.iter <- 1000
-n.burnin <- 100
+n.iter <- 2000
+n.burnin <- 200
 # n.iter <- 10000
 # n.burnin <- 1000
 
-n.chains <- 3
-n.cores <- 3
+n.chains <- 2 # parallel::detectCores()
+n.cores <- 2 # parallel::detectCores()
 ```
 
 Now we are ready! Let's sample:
@@ -152,4 +152,16 @@ Returned objects often implement a `plot_posteriors` method:
 rstanBF::plot_posteriors(stanBF_obj_same, 'theta')
 rstanBF::plot_posteriors(stanBF_obj_diff, 'theta')
 ```
+
+
+### Prior predictive distributions
+
+Models often implement draws from the prior predictive distribution.
+
+The names of the variables start with `sim_`:
+```{r}
+df_prior_pred_same <- prior_pred(stanBF_obj_same)
+
+```
+
 

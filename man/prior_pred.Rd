@@ -6,6 +6,9 @@
 \usage{
 prior_pred(x, ...)
 }
+\arguments{
+\item{x}{a \code{stanBF} object}
+}
 \description{
 Extract prior predictive distributions
 }

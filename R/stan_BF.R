@@ -245,16 +245,37 @@ samples.stanBF_turn <- function(stanBF) {
 #' Extract prior predictive distributions
 #'
 #' Extract prior predictive distributions
+#' @param x a `stanBF` object
 #' @export
 prior_pred <- function(x, ...) {
-  # UseMethod('prior_pred')
+  UseMethod('prior_pred')
+
+  # all_variables <- purrr::map(obj_StanBF$stanfit, names)
+  # prior_pred_variables <- purrr::map(all_variables, ~ purrr::keep(., ~ stringr::str_detect(., '^sim_')))
+
+  # purrr::map2(obj_StanBF$stanfit, prior_pred_variables, rstan::extract)
+}
+
+#' Extract prior predictive distributions for turn-point posteriors.
+#'
+#' Extract prior predictive distributions for turn-point posteriors.
+#'
+#' @param x a `stanBF_turn` object
+#' @return a list of data.frames
+#' @export
+prior_pred.stanBF_turn <- function(obj_StanBF, ...) {
+  UseMethod('prior_pred')
 
   all_variables <- purrr::map(obj_StanBF$stanfit, names)
-  prior_pred_variables <- purrr::map(all_variables, ~ purrr::keep(., ~ stringr::str_detect(., '^sim_')))
+  prior_pred_variables <- purrr::map(all_variables, ~ purrr::keep(., ~ stringr::str_detect(., '^sim_d_')))
+
+
+  sim_d_H1 <- rstan::extract(obj_StanBF$stanfit$H1)$sim_d_ref
+  sim_d_ref_H2 <- rstan::extract(obj_StanBF$stanfit$H2)$sim_d_ref
+  sim_d_quest_H2 <- rstan::extract(obj_StanBF$stanfit$H2)$sim_d_quest
 
   purrr::map2(obj_StanBF$stanfit, prior_pred_variables, rstan::extract)
 }
-
 
 
 # Diagnostics -------------------------------------------------------------

@@ -75,7 +75,6 @@ fun_estimate_Dirichlet_from_single_source <- function(df, name_param = 'theta', 
 #' @importFrom dplyr group_by_at mutate select ungroup
 #' @importFrom tidyr nest unnest
 #' @importFrom purrr map
-#' @importFrom rlang enquo
 #' @inheritDotParams fun_estimate_Dirichlet_from_single_source -df
 #' @return a tibble containing the Dirichlet parameter estimates for each source
 #' @export

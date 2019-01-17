@@ -21,6 +21,11 @@ Imports:
     Compositional,
     tibble,
     stringr,
+    dplyr,
+    ggplot2,
+    magrittr,
+    rlang,
+    tidyr,
     purrr
 LinkingTo: 
     BH (>= 1.69.0-1),
@@ -39,6 +44,5 @@ Suggests:
     rsamplestudy,
     testthat,
     rmarkdown,
-    dplyr,
     covr
 VignetteBuilder: knitr

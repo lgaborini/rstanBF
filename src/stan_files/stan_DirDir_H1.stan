@@ -21,8 +21,4 @@ generated quantities {
    
    sim_theta_ref = dirichlet_rng(alpha);
    sim_d_ref = dirichlet_rng(sim_theta_ref);
-
-
-   // Posterior predictive distribution
-   
 }

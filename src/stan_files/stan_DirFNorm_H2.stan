@@ -36,6 +36,7 @@ model {
    
 }
 generated quantities {
+   // Prior predictive distribution
    simplex[p] sim_d_ref;
    simplex[p] sim_d_quest;
    vector<lower=0>[p] sim_theta_ref;

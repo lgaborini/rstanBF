@@ -5,3 +5,5 @@
 ^\.travis\.yml$
 ^rstanBF\.sublime-project$
 ^rstanBF\.sublime-workspace$
+^src/stan_files/.*\.o$
+^src/stan_files/.*\.hpp$

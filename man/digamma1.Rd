@@ -12,5 +12,4 @@ https://github.com/alexanderrobitzsch/sirt
 }
 \details{
 GPL3 license
-derivative of digamma function
 }

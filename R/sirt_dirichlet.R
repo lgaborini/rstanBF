@@ -6,7 +6,7 @@
 #' GPL3 license
 
 
-#' derivative of digamma function
+# derivative of digamma function
 digamma1 <- function(x,h = .001){
    ( digamma(x+h) - digamma(x-h) ) / (2*h)
 }

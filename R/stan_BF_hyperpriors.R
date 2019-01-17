@@ -63,7 +63,7 @@ stanBF_elicit_hyperpriors <- function(df_background, model, mode_hyperparameter,
             alpha <- rep(1, p)
             alpha_0 <- 1
             beta_0 <- 1
-            list(alpha = alpha, alpha_0 = alpha_0, beta_0 = alpha_0)
+            list(alpha = alpha, alpha_0 = alpha_0, beta_0 = beta_0)
          }
       }
    }

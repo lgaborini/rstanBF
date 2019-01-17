@@ -38,6 +38,8 @@ library(dplyr)
 
 This package implements the Dirichlet-Dirichlet model.   
 
+In this package, the model is referred by its short name: `'DirDir'`.
+
 ### Model
 
 Consider Dirichlet samples $X_i$ from $m$ different sources. Each source is sampled $n$ times.   
@@ -163,7 +165,7 @@ Compare with the real Dirichlet hyperparameter:
 $\vec{\alpha} = \left( `r list_pop$alpha` \right)$
 
 
-rstanBF provides a function to estimate the hyperparameters:
+rstanBF provides `stanBF_elicit_hyperpriors`, a function to estimate the hyperparameters according to a specified model:
 
 ```{r}
 list_hyper <- stanBF_elicit_hyperpriors(list_samples$df_background, 'DirDir', mode_hyperparameter = 'ML')
@@ -180,6 +182,9 @@ list_data <- stanBF_prepare_rsamplestudy_data(list_pop, list_samples)
 obj_StanBF <- compute_BF_Stan(data = list_data, model =  'DirDir', hyperpriors = list_hyper)
 ```
 
+The results:
+
 ```{r}
 obj_StanBF
 ```
+

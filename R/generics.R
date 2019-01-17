@@ -20,10 +20,32 @@ named_vector_to_tibble <- function(v) {
 }
 
 #' Check if an object is a stanBF object
-#' 
+#'
 #' Check if an object is a 'stanBF' object.
 #'
 #' @param x an object
-#' @return TRUE 
+#' @return TRUE if an object is a 'stanBF' object
 #' @export
 is.stanBF <- function(x) inherits(x, "stanBF")
+
+
+
+#' Make a tibble with columns representing a range
+#'
+#' Make a tibble with columns representing a range.
+#' All column will have the same base name, and will follow the format of "text[col_id]".
+#'
+#' It can be used to convert messy [rstan::extract()] output from multidimensional variables, to a more manageable form.
+#'
+#' @param x.samples a matrix, data.frame or text which will be converted and re-named to a tibble
+#' @param text the base name for the new column names
+#' @param ... additional value-name pairs which will be added as new columns ( [tibble::add_column()])
+#' @return a tibble
+make_tbl_variable_range <- function(x.samples, text, ...) {
+
+   p <- ncol(x.samples)
+   col_names <- rsamplestudy::fun_var_names(p, text = text)
+
+   tbl.out <- tibble::as_tibble(x.samples) %>% purrr::set_names(col_names) %>% tibble::add_column(...)
+   tbl.out
+}

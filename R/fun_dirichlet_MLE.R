@@ -45,10 +45,10 @@ fun_estimate_Dirichlet_from_single_source <- function(df, name_param = 'theta', 
       #
       # Reference:
       # Ng, Kai Wang, Guo-Liang Tian, and Man-Lai Tang, "Dirichlet and Related Distributions: Theory, Methods and Applications", Wiley Series in Probability and Statistics. Chichester, UK: John Wiley & Sons, Ltd, 2011. https://doi.org/10.1002/9781119995784.
-      fun_est <- function(x) {
-         p <- ncol(x)
-         m <- colMeans(x)
-         C <- stats::cov(x)
+      fun_est <- function(mtx) {
+         p <- ncol(mtx)
+         m <- colMeans(mtx)
+         C <- stats::cov(mtx)
          conc_initial <- prod((m * (1-m) / diag(C))[1:(p-1)])^(1/(p-1)) - 1
          alpha_initial <- conc_initial * m
          alpha_initial
@@ -71,7 +71,7 @@ fun_estimate_Dirichlet_from_single_source <- function(df, name_param = 'theta', 
 #' Suppose that rows in source i are \eqn{X ~ Dir(\theta_i)} iid.
 #' This function estimates \eqn{\theta_i}.
 #'
-#' @param df_samples dataframe of Dirichlet samples with a source column
+#' @param df dataframe of Dirichlet samples with a source column
 #' @param col_source the column name containing the source column
 #' @importFrom dplyr group_by_at mutate select ungroup
 #' @importFrom tidyr nest unnest
@@ -85,8 +85,8 @@ fun_estimate_Dirichlet_from_samples <- function(df, col_source = 'source', ...) 
    assertthat::assert_that(length(col_source) == 1)
 
    df %>% group_by_at(.vars = col_source) %>% nest() %>%
-      mutate(param = map(data, fun_estimate_Dirichlet_from_single_source, ...)) %>%
-      select(-data) %>%
+      mutate(param = map(.data$data, fun_estimate_Dirichlet_from_single_source, ...)) %>%
+      select(-.data$data) %>%
       unnest() %>%
       ungroup()
 }

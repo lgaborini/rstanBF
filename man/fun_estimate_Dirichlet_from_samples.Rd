@@ -7,6 +7,8 @@
 fun_estimate_Dirichlet_from_samples(df, col_source = "source", ...)
 }
 \arguments{
+\item{df}{dataframe of Dirichlet samples with a source column}
+
 \item{col_source}{the column name containing the source column}
 
 \item{...}{Arguments passed on to \code{fun_estimate_Dirichlet_from_single_source}
@@ -14,8 +16,6 @@ fun_estimate_Dirichlet_from_samples(df, col_source = "source", ...)
   \item{name_param}{name of output parameter (default: \code{'theta'})}
   \item{use}{if \code{'ML'}, use MLE estimator, else the sample estimators (unbiased for \eqn{\theta}, but not optimal)}
 }}
-
-\item{df_samples}{dataframe of Dirichlet samples with a source column}
 }
 \value{
 a tibble containing the Dirichlet parameter estimates for each source

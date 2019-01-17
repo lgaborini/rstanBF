@@ -4,10 +4,12 @@
 \alias{prior_pred}
 \title{Extract prior predictive distributions}
 \usage{
-prior_pred(x, ...)
+prior_pred(stanBF, ...)
 }
 \arguments{
-\item{x}{a \code{stanBF} object}
+\item{stanBF}{a \code{stanBF} object}
+
+\item{...}{additional parameters}
 }
 \description{
 Extract prior predictive distributions

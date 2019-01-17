@@ -7,12 +7,14 @@
 \usage{
 \method{samples}{stanBF_turn}(stanBF)
 
-\method{prior_pred}{stanBF_turn}(obj_StanBF, ...)
+\method{prior_pred}{stanBF_turn}(stanBF, ...)
 }
 \arguments{
 \item{stanBF}{a \code{stanBF_turn} object}
 
-\item{x}{a \code{stanBF_turn} object}
+\item{stanBF}{a \code{stanBF_turn} object}
+
+\item{additional}{parameters}
 }
 \value{
 a tibble containing prior predictions across hypotheses and sources

@@ -6,10 +6,19 @@
 \usage{
 digamma1(x, h = 0.001)
 }
+\arguments{
+\item{x}{x}
+
+\item{h}{dx}
+}
 \description{
 From package \code{sirt}:
 https://github.com/alexanderrobitzsch/sirt
 }
 \details{
 GPL3 license
+Derivative of digamma function
+
+Derivative of digamma function.
 }
+\keyword{internal}

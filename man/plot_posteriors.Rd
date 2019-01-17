@@ -4,10 +4,10 @@
 \alias{plot_posteriors}
 \title{Plot posterior distributions of a stanBF object}
 \usage{
-plot_posteriors(x, ...)
+plot_posteriors(stanBF, ...)
 }
 \arguments{
-\item{x}{a \code{stanBF} object}
+\item{stanBF}{a \code{stanBF} object}
 
 \item{...}{other arguments}
 }

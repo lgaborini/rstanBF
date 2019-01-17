@@ -4,10 +4,10 @@
 \alias{print.stanBF}
 \title{Print a \code{stanBF} object}
 \usage{
-\method{print}{stanBF}(stanBF, verbose = FALSE)
+\method{print}{stanBF}(x, verbose = FALSE)
 }
 \arguments{
-\item{stanBF}{a \code{stanBF} object}
+\item{x}{a \code{stanBF} object}
 
 \item{verbose}{print more details}
 }

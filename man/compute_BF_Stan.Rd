@@ -5,7 +5,7 @@
 \title{Sample and compute BF for various models using Stan}
 \usage{
 compute_BF_Stan(data, model, hyperpriors, data_other = NULL,
-  n.iter = 1000, n.burnin = 100, n.chains = 1, n.cores = 1,
+  n.iter = 1000, n.burnin = 200, n.chains = 1, n.cores = 1,
   silent = FALSE)
 }
 \arguments{
@@ -19,7 +19,7 @@ compute_BF_Stan(data, model, hyperpriors, data_other = NULL,
 
 \item{n.iter}{number of HMC iterations (default: 1000)}
 
-\item{n.burnin}{number of HMC burn-in iterations (default: 100)}
+\item{n.burnin}{number of HMC burn-in iterations (default: 200)}
 
 \item{n.chains}{number of HMC chains (default: 1)}
 

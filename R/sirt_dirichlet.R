@@ -6,7 +6,12 @@
 #' GPL3 license
 
 
-# derivative of digamma function
+#' Derivative of digamma function
+#' 
+#' Derivative of digamma function.
+#' @param x x
+#' @param h dx
+#' @keywords internal
 digamma1 <- function(x,h = .001){
    ( digamma(x+h) - digamma(x-h) ) / (2*h)
 }
@@ -14,6 +19,7 @@ digamma1 <- function(x,h = .001){
 #' Maximum Likelihood Estimation of the Dirichlet Distribution
 #'
 #' Maximum likelihood estimation of the parameters of the Dirichlet distribution
+#' @param x x
 #' @keywords internal
 dirichlet.mle <- function( x,  weights=NULL, eps=10^(-5),convcrit=.00001, maxit=1000,
                            oldfac=.3, progress=FALSE){

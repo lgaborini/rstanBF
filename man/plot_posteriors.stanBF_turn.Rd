@@ -4,13 +4,15 @@
 \alias{plot_posteriors.stanBF_turn}
 \title{Make boxplots for turn-point posteriors}
 \usage{
-\method{plot_posteriors}{stanBF_turn}(obj_turn, variable = NULL,
+\method{plot_posteriors}{stanBF_turn}(stanBF, variable = NULL,
   type = "boxplots")
 }
 \arguments{
-\item{obj_turn}{a supported \code{stanBF} object}
+\item{stanBF}{a supported \code{stanBF} object}
 
 \item{variable}{'theta' or 'rho' (normalized theta)}
+
+\item{type}{type of plot (default: 'boxplots')}
 }
 \value{
 a ggplot plot

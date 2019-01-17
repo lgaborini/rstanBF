@@ -23,7 +23,7 @@ compute_BF_Stan(data, model, hyperpriors, data_other = NULL,
 
 \item{n.chains}{number of HMC chains (default: 1)}
 
-\item{n.cores}{number of cores to use for HMC and bridgesampling (default: 1)}
+\item{n.cores}{number of cores to use for HMC and bridge sampling (default: 1)}
 
 \item{silent}{if TRUE, do not print any progress}
 }

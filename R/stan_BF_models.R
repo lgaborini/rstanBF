@@ -31,6 +31,14 @@ env_stanBF$stanBF_default_hyperpriors[['DirDirGamma']] <- c('alpha', 'alpha_0', 
 # env_stanBF$stanBF_default_hyperpriors[['logNormNHN']] <- c('mu_0', 'sigma_0', 'sigma_s')
 
 
+# S3 child classes for stan_BF objects
+# Specialize methods (plot_posterior, samples, ...) depending on the likelihood
+
+# 'stanBF_turn' objects share the Dirichlet likelihood
+env_stanBF$stanBF_child_class <- list()
+env_stanBF$stanBF_child_class[['DirDir']] <- 'stanBF_turn'
+env_stanBF$stanBF_child_class[['DirFNorm']] <- 'stanBF_turn'
+env_stanBF$stanBF_child_class[['DirDirGamma']] <- 'stanBF_turn'
 
 # Export functions --------------------------------------------------------
 

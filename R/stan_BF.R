@@ -38,7 +38,7 @@
 #' @param n.iter number of HMC iterations (default: 1000)
 #' @param n.burnin number of HMC burn-in iterations (default: 100)
 #' @param n.chains number of HMC chains (default: 1)
-#' @param n.cores number of cores to use for HMC and bridgesampling (default: 1)
+#' @param n.cores number of cores to use for HMC and bridge sampling (default: 1)
 #' @param silent if TRUE, do not print any progress
 #' @return a `stanBF` object
 #' @export
@@ -50,15 +50,6 @@ compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter = 
   # Will be filled and returned
   stanBF_obj <- list(model_name=NULL, stanmodel=NULL, stanfit=NULL, df_samples=NULL, stanbridge=NULL, BF=NULL)
   class(stanBF_obj) <- 'stanBF'
-
-
-  # S3 inheritance children classes
-  child_class <- list()
-  child_class[['DirDir']] <- 'stanBF_turn'
-  child_class[['DirFNorm']] <- 'stanBF_turn'
-  child_class[['DirDirGamma']] <- 'stanBF_turn'
-  # child_class[['logNormNHN']] <- NA
-
   implemented_models <- rstanBF:::env_stanBF$stanBF_model_shortnames
 
   # Parameter validation ------------
@@ -72,9 +63,9 @@ compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter = 
   module_file <- rstanBF:::env_stanBF$stanBF_modules[[model]]
   stanBF_obj$model_name <- rstanBF:::env_stanBF$stanBF_model_names[[model]]
 
-  # Assign inheritance if available
-  if (!is.null(child_class[[model]])){
-    class(stanBF_obj) <- c(class(stanBF_obj), child_class[[model]])
+  # Assign S3 inheritance if available
+  if (!is.null(env_stanBF$stanBF_child_class[[model]])){
+    class(stanBF_obj) <- c(class(stanBF_obj), env_stanBF$stanBF_child_class[[model]])
   }
 
   # Validate data requirements

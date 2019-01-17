@@ -15,6 +15,7 @@
 #' @param ... additional parameters to the estimation method
 #' @return a dataframe (tibble) with the columns named as the Dirichlet parameter
 #' @export
+#' @importFrom stats cov
 #' @md
 fun_estimate_Dirichlet_from_single_source <- function(df, name_param = 'theta', use = 'ML', ...) {
 
@@ -47,7 +48,7 @@ fun_estimate_Dirichlet_from_single_source <- function(df, name_param = 'theta', 
       fun_est <- function(x) {
          p <- ncol(x)
          m <- colMeans(x)
-         C <- cov(x)
+         C <- stats::cov(x)
          conc_initial <- prod((m * (1-m) / diag(C))[1:(p-1)])^(1/(p-1)) - 1
          alpha_initial <- conc_initial * m
          alpha_initial

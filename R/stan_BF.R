@@ -41,6 +41,7 @@
 #' @param n.cores number of cores to use for HMC and bridge sampling (default: 1)
 #' @param silent if TRUE, do not print any progress
 #' @return a `stanBF` object
+#' @importFrom utils modifyList
 #' @export
 #' @md
 compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter = 1000, n.burnin = 100, n.chains = 1, n.cores = 1, silent = FALSE) {
@@ -104,13 +105,13 @@ compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter = 
 
 
   # Merge and overwrite hyperparameters, if passed
-  data_H1 <- modifyList(default_data_H1, hyperpriors)
-  data_H2 <- modifyList(default_data_H2, hyperpriors)
+  data_H1 <- utils::modifyList(default_data_H1, hyperpriors)
+  data_H2 <- utils::modifyList(default_data_H2, hyperpriors)
 
   # Inject additional data, if exists
   if (!is.null(data_other)) {
-    data_H1 <- modifyList(data_H1, data_other)
-    data_H2 <- modifyList(data_H2, data_other)
+    data_H1 <- utils::modifyList(data_H1, data_other)
+    data_H2 <- utils::modifyList(data_H2, data_other)
   }
 
   # Simulation parameters
@@ -224,6 +225,10 @@ samples.stanBF_turn <- function(stanBF) {
 
   # Normalize theta.* by their sums, creating rho.*
   # Hackish
+
+  # Suppress CRAN checks
+  Iteration <- value <- variable <- value.norm <- variable.norm <- NULL
+  
   tmp <- df_theta_samples %>%
      tibble::rowid_to_column('Iteration') %>%
      tidyr::gather('variable', 'value', dplyr::starts_with('theta.')) %>%
@@ -288,7 +293,7 @@ prior_pred.stanBF_turn <- function(obj_StanBF, ...) {
 #' Plot posterior distributions of a stanBF object
 #'
 #' Plot posterior distributions of a stanBF object.
-#' 
+#'
 #' @param x a `stanBF` object
 #' @param ... other arguments
 #' @export
@@ -297,7 +302,7 @@ plot_posteriors <- function(x, ...) {
 }
 
 #' Make boxplots for turn-point posteriors
-#' 
+#'
 #' Make boxplots for turn-point posteriors.
 #'
 #' @param obj_turn a supported `stanBF` object
@@ -307,7 +312,7 @@ plot_posteriors <- function(x, ...) {
 #' @import dplyr tidyr ggplot2
 plot_posteriors.stanBF_turn <- function(obj_turn, variable=NULL, type='boxplots') {
 
-  if (type != 'boxplots') error('plot not implemented.')
+  if (type != 'boxplots') stop('plot not implemented.')
 
   default.variables <- c('rho', 'theta')
   if (is.null(variable)) {
@@ -320,10 +325,10 @@ plot_posteriors.stanBF_turn <- function(obj_turn, variable=NULL, type='boxplots'
   n.iter <- obj_turn$stanfit$H1@stan_args[[1]]$iter
 
   obj_turn$df_samples %>%
-    group_by(Hypothesis) %>%
-    gather('Variable', 'Value', starts_with(paste0(variable, '.'))) %>%
+    group_by(.data$Hypothesis) %>%
+    gather('Variable', 'Value', starts_with(paste0(.data$variable, '.'))) %>%
     # mutate(Grouping = paste0(ifelse(Hypothesis == 'Hp', 'H_p', 'H_d'), ', ', tolower(Source))) %>%
-    mutate(Grouping = paste0(Hypothesis, ', ', tolower(Source))) %>%
+    mutate(Grouping = paste0(.data$Hypothesis, ', ', tolower(.data$Source))) %>%
     ggplot() +
     geom_boxplot(aes(x = Variable, y = Value, fill = Grouping) ) +
     ggtitle(bquote(paste(.(obj_turn$model_name), ' model for delays: posterior samples for ', .(variable))),

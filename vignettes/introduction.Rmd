@@ -135,20 +135,41 @@ stanBF_obj_same$BF
 stanBF_obj_diff$BF
 ```
 
-## Posteriors
 
-Returned objects often implement a `samples` method:
+## Stan objects
+
+rstanBF objects contain `stanfit` objects (one under $H_1$, one under $H_2$), which are actually the outputs of Stan sampling procedure.
+
+They are available under the `stanfit` property:
+
+```{r, eval = FALSE}
+stanBF_obj_same$stanfit$H1
+stanBF_obj_same$stanfit$H2
+```
+
+One can either further process them using standard tools (`rstan` post-processing functions, `coda`, etc.), or use the supplied functions in the package. 
+
+These functions usually do different things depending on the model (e.g. often only the likelihood).
+
+## Post-processing
+
+What follows must be implemented for each model.   
+For now, only `stanBF_turn` models are completely specified.
+
+### Posteriors
+
+Returned objects often implement a `samples` method to extract samples from the interesting posteriors:
 
 ```{r, HMC-posteriors}
 head(rstanBF::samples(stanBF_obj_same))
 head(rstanBF::samples(stanBF_obj_diff))
 ```
 
-## Plots
+### Plots
 
 Returned objects often implement a `plot_posteriors` method:
 
-```{r, HMC-posteriors-plot}
+```{r, HMC-posteriors-plot, fig.width = 6}
 rstanBF::plot_posteriors(stanBF_obj_same, 'theta')
 rstanBF::plot_posteriors(stanBF_obj_diff, 'theta')
 ```
@@ -156,12 +177,17 @@ rstanBF::plot_posteriors(stanBF_obj_diff, 'theta')
 
 ### Prior predictive distributions
 
-Models often implement draws from the prior predictive distribution.
+Models often implement draws from the prior predictive distributions.
 
-The names of the variables start with `sim_`:
+The names of the variables in the Stan source start with `sim_`.   
+One can use the `prior_pred` method to extract and format them:
+
 ```{r}
 df_prior_pred_same <- prior_pred(stanBF_obj_same)
-
+head(df_prior_pred_same, 20)
 ```
 
+This is interpreted as an example of a dataset, generated according to the model, before having observed any data.
+
+They can be used to assess if the specified hyperparameters are too restrictive or too wide. 
 

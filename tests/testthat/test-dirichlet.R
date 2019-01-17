@@ -22,7 +22,7 @@ df <- dplyr::bind_rows(df_1_s, df_2_s, df_3_s)
 
 # Single source -----------------------------------------------------------
 
-expect_equal_tol <- function(...) expect_equal(..., tolerance = 0.01, scale = NULL)
+expect_equal_tol <- function(...) expect_equal(..., tolerance = 0.05, scale = NULL)
 
 test_that("Single source: ML converges", {
    expect_equal_tol(as.numeric(fun_estimate_Dirichlet_from_single_source(df_1, use = 'ML', eps = 1e-14)), as.numeric(alpha_target_1))

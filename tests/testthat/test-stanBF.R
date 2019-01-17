@@ -44,10 +44,25 @@ test_that('Missing hyperparameters are checked', {
 
 fields <- c('model_name', 'stanmodel', 'stanfit', 'stanbridge', 'BF')
 
+obj <- compute_BF_Stan(list_data_OK, model_OK, hyperpriors = list_hyperpriors_OK)
+
 test_that('Models are checked: good', {
    skip_on_cran()
-
-   obj <- compute_BF_Stan(list_data_OK, model_OK, hyperpriors = list_hyperpriors_OK)
    expect_is(obj, 'stanBF')
+   expect_true(is.stanBF(obj))
    expect_true(all(fields %in% names(obj)), info = 'stanBF is missing some fields!')
+})
+
+
+test_that('plot_posteriors works', {
+   expect_true(ggplot2::is.ggplot(plot_posteriors(obj)))
+})
+
+
+test_that('samples works', {
+   expect_true(tibble::is_tibble(samples(obj)))
+})
+
+test_that('prior_pred works', {
+   expect_true(tibble::is_tibble(prior_pred(obj)))
 })

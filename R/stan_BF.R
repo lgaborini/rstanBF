@@ -228,7 +228,7 @@ samples.stanBF_turn <- function(stanBF) {
 
   # Suppress CRAN checks
   Iteration <- value <- variable <- value.norm <- variable.norm <- NULL
-  
+
   tmp <- df_theta_samples %>%
      tibble::rowid_to_column('Iteration') %>%
      tidyr::gather('variable', 'value', dplyr::starts_with('theta.')) %>%
@@ -326,7 +326,7 @@ plot_posteriors.stanBF_turn <- function(obj_turn, variable=NULL, type='boxplots'
 
   obj_turn$df_samples %>%
     group_by(.data$Hypothesis) %>%
-    gather('Variable', 'Value', starts_with(paste0(.data$variable, '.'))) %>%
+    gather('Variable', 'Value', starts_with(paste0(variable, '.'))) %>%
     # mutate(Grouping = paste0(ifelse(Hypothesis == 'Hp', 'H_p', 'H_d'), ', ', tolower(Source))) %>%
     mutate(Grouping = paste0(.data$Hypothesis, ', ', tolower(.data$Source))) %>%
     ggplot() +

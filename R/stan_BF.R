@@ -36,7 +36,7 @@
 #' @param hyperpriors a list containing hyperparameter definitions
 #' @param data_other a list containing additional data for $H_1$ and $H_2$ models (default: `NULL`)
 #' @param n.iter number of HMC iterations (default: 1000)
-#' @param n.burnin number of HMC burn-in iterations (default: 100)
+#' @param n.burnin number of HMC burn-in iterations (default: 200)
 #' @param n.chains number of HMC chains (default: 1)
 #' @param n.cores number of cores to use for HMC and bridge sampling (default: 1)
 #' @param silent if TRUE, do not print any progress
@@ -44,7 +44,7 @@
 #' @importFrom utils modifyList
 #' @export
 #' @md
-compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter = 1000, n.burnin = 100, n.chains = 1, n.cores = 1, silent = FALSE) {
+compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter = 1000, n.burnin = 200, n.chains = 1, n.cores = 1, silent = FALSE) {
 
   # Setup returned fields --------------
 
@@ -324,12 +324,13 @@ plot_posteriors.stanBF_turn <- function(obj_turn, variable=NULL, type='boxplots'
   n.chains <- length(obj_turn$stanfit$H1@stan_args)
   n.iter <- obj_turn$stanfit$H1@stan_args[[1]]$iter
 
-  obj_turn$df_samples %>%
+  df_samples_plot <- obj_turn$df_samples %>%
     group_by(.data$Hypothesis) %>%
     gather('Variable', 'Value', starts_with(paste0(variable, '.'))) %>%
     # mutate(Grouping = paste0(ifelse(Hypothesis == 'Hp', 'H_p', 'H_d'), ', ', tolower(Source))) %>%
-    mutate(Grouping = paste0(.data$Hypothesis, ', ', tolower(.data$Source))) %>%
-    ggplot() +
+    mutate(Grouping = paste0(.data$Hypothesis, ', ', tolower(.data$Source)))
+
+  ggplot(df_samples_plot) +
     geom_boxplot(aes(x = Variable, y = Value, fill = Grouping) ) +
     ggtitle(bquote(paste(.(obj_turn$model_name), ' model for delays: posterior samples for ', .(variable))),
            subtitle = bquote(paste(.(n.chains), ' chains, ', .(n.iter), ' HMC iterations')) ) +

@@ -19,3 +19,11 @@ named_vector_to_tibble <- function(v) {
    tidyr::spread(tibble::enframe(v), 'name', 'value')
 }
 
+#' Check if an object is a stanBF object
+#' 
+#' Check if an object is a 'stanBF' object.
+#'
+#' @param x an object
+#' @return TRUE 
+#' @export
+is.stanBF <- function(x) inherits(x, "stanBF")

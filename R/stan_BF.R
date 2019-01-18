@@ -268,7 +268,7 @@ prior_pred <- function(stanBF, ...) {
 #' Extract prior predictive distributions for turn-point posteriors.
 #'
 #' @param stanBF a `stanBF_turn` object
-#' @param additional parameters
+#' @param ... additional parameters
 #' @return a tibble containing prior predictions across hypotheses and sources
 #' @rdname stanBF_turn
 #' @export

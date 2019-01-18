@@ -236,9 +236,10 @@ samples.stanBF_turn <- function(stanBF) {
      dplyr::mutate(value.norm = value / sum(value)) %>%
      dplyr::mutate(variable.norm = gsub('theta.', 'rho.', variable, fixed = TRUE))
 
+  . <- NULL   # fix CRAN check
   df_theta_samples <- tmp %>%
      dplyr::select(-value.norm, -variable.norm) %>%
-     tidyr::spread(data = .data, key = variable, value = value) %>%
+     tidyr::spread(data = ., key = variable, value = value) %>%
      dplyr::inner_join(tmp %>% dplyr::select(Iteration, variable.norm, value.norm) %>% tidyr::spread(data = ., variable.norm, value.norm), by = 'Iteration')
 
   df_theta_samples %>% dplyr::ungroup()
@@ -324,20 +325,20 @@ plot_posteriors.stanBF_turn <- function(stanBF, variable=NULL, type='boxplots') 
   }
   assertthat::assert_that(variable %in% default.variables, msg = paste0('Variable must be in: ', paste0(default.variables, collapse = ', ')))
 
-  n.chains <- length(obj_turn$stanfit$H1@stan_args)
-  n.iter <- obj_turn$stanfit$H1@stan_args[[1]]$iter
+  n.chains <- length(stanBF$stanfit$H1@stan_args)
+  n.iter <- stanBF$stanfit$H1@stan_args[[1]]$iter
 
-  df_samples_plot <- obj_turn$df_samples %>%
+  df_samples_plot <- stanBF$df_samples %>%
     group_by(.data$Hypothesis) %>%
     gather('Variable', 'Value', starts_with(paste0(variable, '.'))) %>%
     # mutate(Grouping = paste0(ifelse(Hypothesis == 'Hp', 'H_p', 'H_d'), ', ', tolower(Source))) %>%
     mutate(Grouping = paste0(.data$Hypothesis, ', ', tolower(.data$Source)))
-  
+
   # To suppress CRAN check warnings
-  Variable <- Value <- Grouping <- NULL  
+  Variable <- Value <- Grouping <- NULL
   ggplot(df_samples_plot) +
     geom_boxplot(aes(x = Variable, y = Value, fill = Grouping) ) +
-    ggtitle(bquote(paste(.(obj_turn$model_name), ' model for delays: posterior samples for ', .(variable))),
+    ggtitle(bquote(paste(.(stanBF$model_name), ' model for delays: posterior samples for ', .(variable))),
            subtitle = bquote(paste(.(n.chains), ' chains, ', .(n.iter), ' HMC iterations')) ) +
     labs(x = NULL, y = variable) + scale_y_continuous(limits = c(0,NA), expand = expand_scale(mult = c(0, .1)))
 }

@@ -34,8 +34,8 @@ before_install:
 
 script:
   - |
-    travis_wait 62 R CMD build .
-    travis_wait 129 R CMD check rstanBF*tar.gz
+    travis_wait 80 R CMD build .
+    travis_wait 149 R CMD check rstanBF*tar.gz
 
 after_script:
   - tar -ztvf rstanBF_*.tar.gz

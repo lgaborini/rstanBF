@@ -12,7 +12,8 @@ vignette: >
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  fig.width = 7
 )
 
 paste0_vec <- function(...){ paste(..., collapse = ',') }
@@ -77,7 +78,7 @@ list_data_same <- stanBF_prepare_rsamplestudy_data(list_pop, list_samples_same)
 
 We see that each list contains the full set of observations, the set of indexes to reference items, and the set of indexes to the questioned items:
 ```{r}
-list_data_diff
+str(list_data_diff)
 ```
 
 From now on, we are ready to use the `rstanBF` package.
@@ -188,7 +189,7 @@ head(rstanBF::samples(stanBF_obj_diff))
 
 Returned objects often implement a `plot_posteriors` method:
 
-```{r, HMC-posteriors-plot, fig.width = 6}
+```{r, HMC-posteriors-plot}
 rstanBF::plot_posteriors(stanBF_obj_same, 'theta')
 rstanBF::plot_posteriors(stanBF_obj_diff, 'theta')
 ```
@@ -209,4 +210,76 @@ head(df_prior_pred_same, 20)
 This is interpreted as an example of a dataset, generated according to the model, before having observed any data.
 
 They can be used to assess if the specified hyperparameters are too restrictive or too wide. 
+
+### rstan functions
+
+`stanfit` objects implement several plotting functions (see [here](http://mc-stan.org/rstan/reference/plotting-functions.html) for a reference).    
+For example, traceplots:
+
+```{r}
+
+# A stanfit object
+# stanBF_obj_same$stanfit$H1
+
+# Plot using all params
+stanBF_obj_diff$stanfit$H1 %>% rstan::stan_trace()
+stanBF_obj_diff$stanfit$H2 %>% rstan::stan_trace()
+```
+
+### bayesplot
+
+The popular [bayesplot](http://mc-stan.org/bayesplot) package can be used to produce plots to assess convergence of the MCMC chains. It includes an interface to `stanfit` objects, returned by rstan.
+
+It is easy to use `bayesplot` with this package.
+One must first extract all MCMC samples using the `rstan` tools:
+
+```{r}
+library(bayesplot)
+
+# A stanfit object
+# stanBF_obj_same$stanfit$H1
+
+# All variables except the logPosterior
+all_vars_no_lp <- setdiff(names(stanBF_obj_same$stanfit$H2), 'lp__')
+all_vars_no_lp
+
+outputs_H1 <- stanBF_obj_same$stanfit$H1 %>% rstan::As.mcmc.list()
+outputs_H2 <- stanBF_obj_same$stanfit$H2 %>% rstan::As.mcmc.list()
+
+# Equivalent:
+# outputs_H1 <- stanBF_obj_same$stanfit$H1 %>% rstan::extract(pars = all_vars_no_lp)
+# outputs_H2 <- stanBF_obj_same$stanfit$H2 %>% rstan::extract(pars = all_vars_no_lp)
+
+```
+
+Then, one can use `bayesplot` methods. (see the [documentation](http://mc-stan.org/bayesplot/reference/MCMC-overview.html))    
+As an example, we can plot the posterior densities across MCMC chains, selecting only the `theta_ref` parameters:
+
+```{r}
+
+# Density across chains
+# use a regular expression to subset the interesting variables
+outputs_H1 %>% bayesplot::mcmc_dens_overlay(regex_pars = '^theta_ref')
+
+```
+
+#### Parameter value checks
+
+`bayesplot` contains methods to overlay generating values to posterior distributions.
+
+Lets' try for $\vec{\theta_i}$ (see the [Dirichlet-Dirichlet model][Dirichlet-Dirichlet model, and tests] vignette).
+
+
+```{r}
+
+# Collect the true values
+df_source_same <- list_pop$df_sources %>% filter(source == source_same) %>% select(-source)
+df_source_same
+
+true_vals <- as.numeric(df_source_same)
+draws_same <- stanBF_obj_same$stanfit$H1 %>% 
+  as.matrix(pars = 'theta_ref')
+
+bayesplot::mcmc_recover_intervals(draws_same, true_vals)
+```
 

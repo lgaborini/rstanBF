@@ -30,3 +30,4 @@ vignettes/*.pdf
 /src/stan_files/*.cc
 /src/stan_files/*.hpp
 /src/stan_files/*.o
+/vignettes/*_cache/

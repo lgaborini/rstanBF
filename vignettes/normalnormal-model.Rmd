@@ -12,6 +12,7 @@ vignette: >
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
+  cache = TRUE,
   comment = "#>"
 )
 ```
@@ -43,17 +44,21 @@ list_pop$df_sources
 list_pop$list_hyper
 ```
 
+Generate two sets of samples, under two different hypotheses:
+
 ```{r}
 k_ref <- 10
 k_quest <- 10
 
 source_ref <- 1
 source_same <- source_ref
-source_diff <- c(3, 5)
+source_diff <- 3             # single questioned different source
 list_samples_same <- rsamplestudy::make_dataset_splits(list_pop$df_pop, k_ref, k_quest, source_ref = source_ref, source_quest = source_same)
 list_samples_diff <- rsamplestudy::make_dataset_splits(list_pop$df_pop, k_ref, k_quest, source_ref = source_ref, source_quest = source_diff)
 
 ```
+
+Organize data, and elicit the hyperprior from the background data (assume vague hyperpriors):
 
 ```{r}
 list_data_same <- rstanBF::stanBF_prepare_rsamplestudy_data(list_pop, list_samples_same)
@@ -61,13 +66,15 @@ list_data_diff <- rstanBF::stanBF_prepare_rsamplestudy_data(list_pop, list_sampl
 list_hyper <- rstanBF::stanBF_elicit_hyperpriors(list_samples_same$df_background, 'NormNorm', 'vague')
 ```
 
+Perform the NUTS sampling:
+
 ```{r sampling}
 n.iter <- 5000
 n.burnin <- 1000
 n.cores <- 3
 n.chains <- n.cores
-obj_StanBF_same <- rstanBF::compute_BF_Stan(list_data_same, 'NormNorm', list_hyper, n.iter = n.iter, n.burnin = n.burnin, n.cores = n.cores, n.chains = n.chains)
-obj_StanBF_diff <- rstanBF::compute_BF_Stan(list_data_diff, 'NormNorm', list_hyper, n.iter = n.iter, n.burnin = n.burning, n.cores = n.cores, n.chains = n.chains)
+obj_StanBF_same <- rstanBF::compute_BF_Stan(list_data_same, 'NormNorm', list_hyper, n.iter = n.iter, n.burnin = n.burnin, n.cores = n.cores, n.chains = n.chains, silent = TRUE)
+obj_StanBF_diff <- rstanBF::compute_BF_Stan(list_data_diff, 'NormNorm', list_hyper, n.iter = n.iter, n.burnin = n.burnin, n.cores = n.cores, n.chains = n.chains, silent = TRUE)
 ```
 
 ```{r results}
@@ -75,5 +82,105 @@ obj_StanBF_same
 obj_StanBF_diff
 ```
 
+More details on the Stan outputs:
 
+```{r}
+obj_StanBF_same$stanfit
+
+obj_StanBF_diff$stanfit
+```
+
+
+## Post-processing
+
+Using general post-processing utils in `bayesplot` package: 
+
+```{r pp-init}
+suppressPackageStartupMessages(library(rstan))
+library(bayesplot)
+
+results_same_H1 <- obj_StanBF_same$stanfit$H1 %>% As.mcmc.list()
+results_same_H2 <- obj_StanBF_same$stanfit$H2 %>% As.mcmc.list()
+```
+
+### Parameter recovery
+
+First, we recover NUTS draws and true values.
+Then we use `bayesplot` tools to plot them.   
+Notice that the orders of the variables in `mcmc_recover_intervals` arguments must match.
+
+Questioned data sampled under $H_1$:   
+
+```{r par-recovery-H1}
+
+# H1
+draws <- obj_StanBF_same$stanfit$H1 %>% As.mcmc.list(pars = c('mu_ref', 'sigma_ref'))
+df_sources_ref <- list_pop$df_sources %>% filter(source == source_same) %>% select(mu, sigma)
+true_sources <- as.numeric(df_sources_ref)
+
+bayesplot::mcmc_recover_intervals(draws, true_sources)
+
+# H2, reference and questioned
+draws <- obj_StanBF_same$stanfit$H2 %>% As.mcmc.list(pars = c('mu_ref', 'sigma_ref', 'mu_quest', 'sigma_quest'))
+df_sources <- list_pop$df_sources %>% filter(source == source_same) %>% select(mu, sigma)
+true_sources <- rep(as.numeric(df_sources), 2)
+
+bayesplot::mcmc_recover_intervals(draws, true_sources)
+
+```
+
+
+Questioned data sampled under $H_2$:
+
+```{r par-recovery-H2}
+
+
+# H1: assuming that sources are the same
+# This is not true, so the posteriors do not fit well
+draws <- obj_StanBF_diff$stanfit$H1 %>% As.mcmc.list(pars = c('mu_ref', 'sigma_ref'))
+df_sources_ref <- list_pop$df_sources %>% filter(source == source_same) %>% select(mu, sigma)
+true_sources <- as.numeric(df_sources_ref)
+
+bayesplot::mcmc_recover_intervals(draws, true_sources)
+
+# H2, reference and questioned from different sources
+# This is true, the posteriors are also good
+draws <- obj_StanBF_diff$stanfit$H2 %>% As.mcmc.list(pars = c('mu_ref', 'sigma_ref', 'mu_quest', 'sigma_quest'))
+df_sources_ref <- list_pop$df_sources %>% filter(source == source_same) %>% select(mu, sigma)
+df_sources_quest <- list_pop$df_sources %>% filter(source == source_diff) %>% select(mu, sigma)
+true_sources <- c(as.numeric(df_sources_ref), as.numeric(df_sources_quest))
+
+bayesplot::mcmc_recover_intervals(draws, true_sources)
+```
+
+
+### Prior and posterior predictive checks
+
+To simplify, consider only when data is sampled from the same source.
+
+Here, we plot the **prior** predictive distribution.    
+It should generate data which should be realistic (but not adapted to the observed data).
+
+Here, we specified a very vague prior, so the generated values are really extreme compared to the measured data.
+
+```{r prior-check}
+
+# H1: prior predictive
+draws_prior <- obj_StanBF_same$stanfit$H1 %>% as.matrix(pars = c('sim_d_ref'))
+data_ref <- list_pop$df_pop %>% filter(source == source_ref) %>% pull('x')
+
+# extract a subset of draws
+draws_prior_sub <- t(as.matrix(draws_prior[1:length(data_ref)]))
+bayesplot::ppc_dens_overlay(data_ref, draws_prior_sub) +
+  scale_x_continuous(limits = c(-10, 10))
+```
+
+The posterior predictive distribution, instead, should be a good approximation of the observed data.
+
+If it does not occur, it means that the model is not capable of predicting from the correct distribution.    
+In other words, the trained model is not adapted to the observed data.
+
+```{r posterior-check}
+
+```
 

@@ -12,9 +12,9 @@ stanBF_elicit_hyperpriors(df_background, model, mode_hyperparameter,
 
 \item{model}{the model short name}
 
-\item{mode_hyperparameter}{how the parameters are estimated (can be 'ML' or 'vague')}
+\item{mode_hyperparameter}{how the parameters are estimated (can be \code{'ML'} or \code{'vague'})}
 
-\item{col_source}{name of the source column (default: 'source')}
+\item{col_source}{name of the source column (default: \code{'source'})}
 
 \item{...}{arguments to hyperprior estimation methods}
 }

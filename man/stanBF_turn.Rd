@@ -12,9 +12,9 @@
 \arguments{
 \item{stanBF}{a \code{stanBF_turn} object}
 
-\item{stanBF}{a \code{stanBF_turn} object}
+\item{...}{additional parameters}
 
-\item{additional}{parameters}
+\item{stanBF}{a \code{stanBF_turn} object}
 }
 \value{
 a tibble containing prior predictions across hypotheses and sources

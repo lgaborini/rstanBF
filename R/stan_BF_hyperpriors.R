@@ -2,8 +2,8 @@
 #'
 #' @param df_background the dataframe containing background data, with the source column
 #' @param model the model short name
-#' @param mode_hyperparameter how the parameters are estimated (can be 'ML' or 'vague')
-#' @param col_source name of the source column (default: 'source')
+#' @param mode_hyperparameter how the parameters are estimated (can be `'ML'` or `'vague'`)
+#' @param col_source name of the source column (default: `'source'`)
 #' @param ... arguments to hyperprior estimation methods
 #' @return a list of hyperprior parameters, as many as expected by [compute_BF_Stan()]
 #' @export
@@ -17,7 +17,7 @@ stanBF_elicit_hyperpriors <- function(df_background, model, mode_hyperparameter,
                            msg = paste0('model "', model, '" has not been implemented, must be one of: ', paste_vec(rstanBF:::env_stanBF$stanBF_model_shortnames)))
 
    assertthat::assert_that(col_source %in% colnames(df_background),
-                           msg = paste0('cannot find source column "', col_source, '" in the data.frame'))
+                           msg = paste0('cannot find source column "', col_source, '" in the background data.frame'))
 
    # p variables + the source column
    p <- ncol(df_background) - 1
@@ -64,6 +64,20 @@ stanBF_elicit_hyperpriors <- function(df_background, model, mode_hyperparameter,
             alpha_0 <- 1
             beta_0 <- 1
             list(alpha = alpha, alpha_0 = alpha_0, beta_0 = beta_0)
+         }
+      }
+   }
+
+   if (model == 'NormNorm') {
+      if (mode_hyperparameter == 'ML') {
+         stop('Not implemented.')
+      } else {
+         fun_estimate_hyperpriors <- function(df_background,...) {
+            mu_mu0 <- 0
+            mu_sigma0 <- 0
+            sigma_mu0 <- 100
+            sigma_sigma0 <- 100
+            list(mu_mu0 = mu_mu0, mu_sigma0 = mu_sigma0, sigma_mu0 = sigma_mu0, sigma_sigma0 = sigma_sigma0)
          }
       }
    }

@@ -43,12 +43,12 @@ generated quantities {
    real sim_d_quest;
 
    sim_mu_ref = normal_rng(mu_mu0, mu_sigma0);
-   sim_sigma_ref = normal_rng(sigma_mu0, sigma_sigma0);
+   sim_sigma_ref = fabs(normal_rng(sigma_mu0, sigma_sigma0));
    sim_mu_quest = normal_rng(mu_mu0, mu_sigma0);
-   sim_sigma_quest = normal_rng(sigma_mu0, sigma_sigma0);
+   sim_sigma_quest = fabs(normal_rng(sigma_mu0, sigma_sigma0));
 
-   sim_d_ref = normal_rng(sim_mu_ref, fabs(sim_sigma_ref));
-   sim_d_quest = normal_rng(sim_mu_quest, fabs(sim_sigma_quest));
+   sim_d_ref = normal_rng(sim_mu_ref, sim_sigma_ref);
+   sim_d_quest = normal_rng(sim_mu_quest, sim_sigma_quest);
 
    // Posterior predictive distribution
 }

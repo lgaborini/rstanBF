@@ -61,9 +61,18 @@ list_data_diff <- rstanBF::stanBF_prepare_rsamplestudy_data(list_pop, list_sampl
 list_hyper <- rstanBF::stanBF_elicit_hyperpriors(list_samples_same$df_background, 'NormNorm', 'vague')
 ```
 
-```{r}
-obj_StanBF_same <- rstanBF::compute_BF_Stan(list_data_same, 'NormNorm', list_hyper)
-# obj_StanBF_diff <- compute_BF_Stan(list_data_diff, 'NormNorm', list_hyper)
+```{r sampling}
+n.iter <- 5000
+n.burnin <- 1000
+n.cores <- 3
+n.chains <- n.cores
+obj_StanBF_same <- rstanBF::compute_BF_Stan(list_data_same, 'NormNorm', list_hyper, n.iter = n.iter, n.burnin = n.burnin, n.cores = n.cores, n.chains = n.chains)
+obj_StanBF_diff <- rstanBF::compute_BF_Stan(list_data_diff, 'NormNorm', list_hyper, n.iter = n.iter, n.burnin = n.burning, n.cores = n.cores, n.chains = n.chains)
+```
+
+```{r results}
+obj_StanBF_same
+obj_StanBF_diff
 ```
 
 

@@ -190,10 +190,10 @@ samples <- function(stanBF, ...) {
   UseMethod('samples')
 }
 
-# samples.stanBF <- function(...) {
-#   print('Not implemented.')
-#   invisible(NULL)
-# }
+samples.stanBF <- function(...) {
+  # message('Not implemented.')
+  invisible(NULL)
+}
 
 #' Extract theta posterior samples for a turn-like object
 #'

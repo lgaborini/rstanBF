@@ -74,8 +74,8 @@ stanBF_elicit_hyperpriors <- function(df_background, model, mode_hyperparameter,
       } else {
          fun_estimate_hyperpriors <- function(df_background,...) {
             mu_mu0 <- 0
-            mu_sigma0 <- 0
-            sigma_mu0 <- 100
+            mu_sigma0 <- 100
+            sigma_mu0 <- 0
             sigma_sigma0 <- 100
             list(mu_mu0 = mu_mu0, mu_sigma0 = mu_sigma0, sigma_mu0 = sigma_mu0, sigma_sigma0 = sigma_sigma0)
          }

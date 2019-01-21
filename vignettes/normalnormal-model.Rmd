@@ -8,20 +8,33 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-
+\renewcommand{\vec}[1]{\boldsymbol{#1}}
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   cache = TRUE,
-  comment = "#>"
+  comment = "#>",
+  fig.width = 7
 )
 ```
 
 This vignette introduces the Normal-Normal model. It is designed to be a benchmark.
 
+## Model
+
+Consider Normal samples $X_i$ from $m$ different sources. Each source is sampled $n$ times.   
+Dirichlet parameter are also assumed to be sampled from Dirichlet distributions.
+
+- $\vec{X}_{ij} \sim N(\mu_i, \sigma_i)$ iid $\forall j = 1, \ldots, n$ with $i = 1, \ldots, m$
+- $\mu_i \sim N(\mu_0^{(\mu)}, \sigma_0^{(\mu)}) \quad \forall i = 1, \ldots, m$
+- $\sigma_i \sim N(\mu_0^{(\sigma)}, \sigma_0^{(\sigma)}) \quad \forall i = 1, \ldots, m$
+
+We assume that $\mu_0^{(\mu)}, \sigma_0^{(\mu)}, \mu_0^{(\sigma)}, \sigma_0^{(\sigma)}$ are known.
+
 ## Data
 
-The Normal-Normal model is implemented in `rsamplestudy`. Let's generate some data:
+The Normal-Normal model is implemented in `rsamplestudy`.    
+Let's generate some data:
 
 ```{r}
 library(dplyr)
@@ -159,9 +172,10 @@ bayesplot::mcmc_recover_intervals(draws, true_sources)
 To simplify, consider only when data is sampled from the same source.
 
 Here, we plot the **prior** predictive distribution.    
-It should generate data which should be realistic (but not adapted to the observed data).
+It should generate data which should be realistic, but not necessarily adapted to the observed data.   
+It represents the background knowledge of our data.
 
-Here, we specified a very vague prior, so the generated values are really extreme compared to the measured data.
+Here, we specified a very vague prior, so the generated values are really extreme compared to the one measured.
 
 ```{r prior-check}
 

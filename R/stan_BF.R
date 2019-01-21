@@ -66,7 +66,7 @@ compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter = 
 
   # Assign S3 inheritance if available
   if (!is.null(env_stanBF$stanBF_child_class[[model]])){
-    class(stanBF_obj) <- c(class(stanBF_obj), env_stanBF$stanBF_child_class[[model]])
+    class(stanBF_obj) <- c(env_stanBF$stanBF_child_class[[model]], class(stanBF_obj))
   }
 
   # Validate data requirements
@@ -190,11 +190,6 @@ samples <- function(stanBF, ...) {
   UseMethod('samples')
 }
 
-samples.stanBF <- function(...) {
-  # message('Not implemented.')
-  invisible(NULL)
-}
-
 #' Extract theta posterior samples for a turn-like object
 #'
 #' `stanBF_turn` objects share the Dirichlet likelihood, with \eqn{\theta} as prior parameter.
@@ -245,6 +240,10 @@ samples.stanBF_turn <- function(stanBF) {
   df_theta_samples %>% dplyr::ungroup()
 }
 
+samples.default <- function(...) {
+  # message('Not implemented.')
+  invisible(NULL)
+}
 
 # Prior and posterior distribution extraction methods ---------------------
 

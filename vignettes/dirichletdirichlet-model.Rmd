@@ -21,9 +21,14 @@ vignette: >
 \newcommand{\dirichlet}[1]{\text{Dirichlet}{(#1)}}
 
 ```{r setup, include = FALSE}
+set.seed(123)
+
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  cache = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  cache.extra = knitr::rand_seed
 )
 ```
 

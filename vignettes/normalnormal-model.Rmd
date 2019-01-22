@@ -10,6 +10,7 @@ vignette: >
 ---
 \renewcommand{\vec}[1]{\boldsymbol{#1}}
 ```{r setup, include = FALSE}
+set.seed(7)
 knitr::opts_chunk$set(
   collapse = TRUE,
   cache = TRUE,

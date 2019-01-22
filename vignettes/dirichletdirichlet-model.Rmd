@@ -181,7 +181,7 @@ list_hyper
 
 Once all is set, one can run the HMC sampler:
 
-```{r}
+```{r sampling}
 list_data <- stanBF_prepare_rsamplestudy_data(list_pop, list_samples)
 
 obj_StanBF <- compute_BF_Stan(data = list_data, model =  'DirDir', hyperpriors = list_hyper)
@@ -192,4 +192,11 @@ The results:
 ```{r}
 obj_StanBF
 ```
+
+### Prior and posterior predictive checks
+
+```{r}
+
+```
+
 

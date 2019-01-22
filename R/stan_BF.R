@@ -250,7 +250,7 @@ samples.default <- function(...) {
 
 #' Extract prior predictive distributions
 #'
-#' Extract prior predictive distributions
+#' Extract prior predictive distributions.
 #' @param stanBF a `stanBF` object
 #' @param ... additional parameters
 #' @export
@@ -261,6 +261,16 @@ prior_pred <- function(stanBF, ...) {
   # prior_pred_variables <- purrr::map(all_variables, ~ purrr::keep(., ~ stringr::str_detect(., '^sim_')))
 
   # purrr::map2(obj_StanBF$stanfit, prior_pred_variables, rstan::extract)
+}
+
+#' Extract posterior predictive distributions
+#'
+#' Extract posterior predictive distributions.
+#' @param stanBF a `stanBF` object
+#' @param ... additional parameters
+#' @export
+posterior_pred <- function(stanBF, ...) {
+  UseMethod('posterior_pred')
 }
 
 #' Extract prior predictive distributions for turn-point posteriors
@@ -284,6 +294,29 @@ prior_pred.stanBF_turn <- function(stanBF, ...) {
     make_tbl_variable_range(sim_d_quest_H2, text = 'd', Hypothesis = 'Hd', Source = 'Questioned'))
 
   df_prior_samples
+}
+
+#' Extract posterior predictive distributions for turn-point posteriors
+#'
+#' Extract posterior predictive distributions for turn-point posteriors.
+#'
+#' @param stanBF a `stanBF_turn` object
+#' @param ... additional parameters
+#' @return a tibble containing posterior predictions across hypotheses and sources
+#' @rdname stanBF_turn
+#' @export
+posterior_pred.stanBF_turn <- function(stanBF, ...) {
+
+  pred_d_H1 <- rstan::extract(stanBF$stanfit$H1, pars = 'pred_d_ref')$pred_d_ref
+  pred_d_ref_H2 <- rstan::extract(stanBF$stanfit$H2, pars = 'pred_d_ref')$pred_d_ref
+  pred_d_quest_H2 <- rstan::extract(stanBF$stanfit$H2, pars = 'pred_d_quest')$pred_d_quest
+
+  df_posterior_samples <- dplyr::bind_rows(
+    make_tbl_variable_range(pred_d_H1, text = 'd', Hypothesis = 'Hp', Source = 'Both'),
+    make_tbl_variable_range(pred_d_ref_H2, text = 'd', Hypothesis = 'Hd', Source = 'Reference'),
+    make_tbl_variable_range(pred_d_quest_H2, text = 'd', Hypothesis = 'Hd', Source = 'Questioned'))
+
+  df_posterior_samples
 }
 
 
@@ -339,6 +372,6 @@ plot_posteriors.stanBF_turn <- function(stanBF, variable=NULL, type='boxplots') 
   ggplot(df_samples_plot) +
     geom_boxplot(aes(x = Variable, y = Value, fill = Grouping) ) +
     ggtitle(bquote(paste(.(stanBF$model_name), ' model for delays: posterior samples for ', .(variable))),
-           subtitle = bquote(paste(.(n.chains), ' chains, ', .(n.iter), ' HMC iterations')) ) +
+           subtitle = bquote(paste(.(n.chains), ' chains, ', .(n.iter), ' Stan iterations')) ) +
     labs(x = NULL, y = variable) + scale_y_continuous(limits = c(0,NA), expand = expand_scale(mult = c(0, .1)))
 }

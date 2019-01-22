@@ -66,3 +66,7 @@ test_that('samples works', {
 test_that('prior_pred works', {
    expect_true(tibble::is_tibble(prior_pred(obj)))
 })
+
+test_that('posterior_pred works', {
+   expect_true(tibble::is_tibble(prior_pred(obj)))
+})

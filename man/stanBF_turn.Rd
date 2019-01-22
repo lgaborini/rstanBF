@@ -3,11 +3,14 @@
 \name{samples.stanBF_turn}
 \alias{samples.stanBF_turn}
 \alias{prior_pred.stanBF_turn}
+\alias{posterior_pred.stanBF_turn}
 \title{Extract theta posterior samples for a turn-like object}
 \usage{
 \method{samples}{stanBF_turn}(stanBF)
 
 \method{prior_pred}{stanBF_turn}(stanBF, ...)
+
+\method{posterior_pred}{stanBF_turn}(stanBF, ...)
 }
 \arguments{
 \item{stanBF}{a \code{stanBF_turn} object}
@@ -15,14 +18,22 @@
 \item{...}{additional parameters}
 
 \item{stanBF}{a \code{stanBF_turn} object}
+
+\item{stanBF}{a \code{stanBF_turn} object}
+
+\item{...}{additional parameters}
 }
 \value{
 a tibble containing prior predictions across hypotheses and sources
+
+a tibble containing posterior predictions across hypotheses and sources
 }
 \description{
 \code{stanBF_turn} objects share the Dirichlet likelihood, with \eqn{\theta} as prior parameter.
 
 Extract prior predictive distributions for turn-point posteriors.
+
+Extract posterior predictive distributions for turn-point posteriors.
 }
 \details{
 This function extract posterior samples for \eqn{\theta}.

@@ -39,10 +39,15 @@ generated quantities {
    vector<lower=0>[p] sim_theta_ref;
    vector<lower=0>[p] sim_rho_ref;
    real<lower=0>      sim_theta_0_ref;
+   // Posterior predictive distribution
+   simplex[p] pred_d_ref;
 
+   // Prior predictive distribution
    sim_theta_0_ref = gamma_rng(alpha_0, beta_0);
    sim_rho_ref = dirichlet_rng(alpha);
-   
    sim_theta_ref = sim_theta_0_ref * sim_rho_ref;
    sim_d_ref = dirichlet_rng(sim_theta_ref);
+
+   // Posterior predictive distribution
+   pred_d_ref = dirichlet_rng(theta_ref);
 }

@@ -29,10 +29,14 @@ generated quantities {
    real sim_mu_ref;
    real<lower=0> sim_sigma_ref;
    real sim_d_ref;
+   // Posterior predictive distribution
+   real pred_d_ref;
 
+   // Prior predictive distribution
    sim_mu_ref = normal_rng(mu_mu0, mu_sigma0);
    sim_sigma_ref = fabs(normal_rng(sigma_mu0, sigma_sigma0));
    sim_d_ref = normal_rng(sim_mu_ref, sim_sigma_ref);
 
    // Posterior predictive distribution
+   pred_d_ref = normal_rng(mu_ref, sigma_ref);
 }

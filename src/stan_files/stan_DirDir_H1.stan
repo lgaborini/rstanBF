@@ -1,7 +1,7 @@
 data {
    int<lower=1> n_ref;        // number of observations
    int<lower=1> p;            // number of turns
-   
+
    simplex[p] d_ref[n_ref];   // observations (Dirichlet likelihood)
    vector<lower=0>[p] alpha;  // Dirichlet hyperparameter
 }
@@ -18,7 +18,13 @@ generated quantities {
    // Prior predictive distribution
    simplex[p] sim_d_ref;
    vector<lower=0>[p] sim_theta_ref;
-   
+   // Posterior predictive distribution
+   simplex[p] pred_d_ref;
+
+   // Prior predictive distribution
    sim_theta_ref = dirichlet_rng(alpha);
    sim_d_ref = dirichlet_rng(sim_theta_ref);
+
+   // Posterior predictive distribution
+   pred_d_ref = dirichlet_rng(theta_ref);
 }

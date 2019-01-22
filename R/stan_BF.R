@@ -65,6 +65,7 @@ compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter = 
   stanBF_obj$model_name <- rstanBF:::env_stanBF$stanBF_model_names[[model]]
 
   # Assign S3 inheritance if available
+  # Notice the order: child class before the parent class, else the method is never called.
   if (!is.null(env_stanBF$stanBF_child_class[[model]])){
     class(stanBF_obj) <- c(env_stanBF$stanBF_child_class[[model]], class(stanBF_obj))
   }

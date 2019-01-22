@@ -34,9 +34,15 @@ generated quantities {
    // Prior predictive distribution
    simplex[p] sim_d_ref;
    vector<lower=0>[p] sim_theta_ref;
+   // Posterior predictive distribution
+   simplex[p] pred_d_ref;
    
+   // Prior predictive distribution
    for (j in 1:p) {
       sim_theta_ref[j] = fabs(normal_rng(mu[j], sigma[j]));
    }
    sim_d_ref = dirichlet_rng(sim_theta_ref);
+
+   // Posterior predictive distribution
+   pred_d_ref = dirichlet_rng(theta_ref);
 }

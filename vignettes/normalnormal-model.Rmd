@@ -42,8 +42,6 @@ library(dplyr)
 library(ggplot2)
 library(rsamplestudy)
 
-set.seed(7)
-
 n <- 200
 m <- 5
 list_pop <- rsamplestudy::fun_rnorm_population(n, m)
@@ -197,5 +195,28 @@ In other words, the trained model is not adapted to the observed data.
 
 ```{r posterior-check}
 
+draws_posterior <- obj_StanBF_same$stanfit$H1 %>% as.matrix(pars = c('pred_d_ref'))
+draws_posterior_sub <- t(as.matrix(draws_posterior[length(draws_posterior) - (1:length(data_ref)) ]))
+
+bayesplot::ppc_dens_overlay(data_ref, draws_posterior_sub)
+```
+
+To check that it is working, let's consider the situation where the sources are different, and consider the reference and questioned items separately.
+
+```{r posterior-check}
+data_quest <- list_pop$df_pop %>% filter(source == source_diff) %>% pull('x')
+
+# Reference data
+draws_posterior <- obj_StanBF_diff$stanfit$H2 %>% as.matrix(pars = c('pred_d_ref'))
+draws_posterior_sub <- t(as.matrix(draws_posterior[length(draws_posterior) - (1:length(data_ref)) ]))
+
+bayesplot::ppc_dens_overlay(data_ref, draws_posterior_sub)
+
+# Questioned data
+draws_posterior <- obj_StanBF_diff$stanfit$H2 %>% as.matrix(pars = c('pred_d_quest'))
+draws_posterior_sub <- t(as.matrix(draws_posterior[length(draws_posterior) - (1:length(data_quest)) ]))
+
+bayesplot::ppc_dens_overlay(data_ref, draws_posterior_sub) + ggtitle('Predicting reference samples with the questioned data')
+bayesplot::ppc_dens_overlay(data_quest, draws_posterior_sub) + ggtitle('Predicting questioned samples with the questioned data')
 ```
 

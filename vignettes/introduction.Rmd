@@ -278,6 +278,7 @@ outputs_H1 %>% bayesplot::mcmc_dens_overlay(regex_pars = '^theta_ref')
 
 Lets' try for $\vec{\theta_i}$ (see the [Dirichlet-Dirichlet model](Dirichlet-Dirichlet model, and tests) vignette).
 
+Using data generated under $H_1$:
 
 ```{r}
 

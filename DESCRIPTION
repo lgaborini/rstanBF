@@ -42,5 +42,6 @@ Suggests:
     rsamplestudy,
     testthat,
     rmarkdown,
-    covr
+    covr,
+    bayesplot
 VignetteBuilder: knitr

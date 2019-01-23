@@ -15,7 +15,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   cache = TRUE,
   comment = "#>",
-  fig.width = 7
+  fig.width = 7,
+  autodep = TRUE
 )
 ```
 
@@ -193,7 +194,7 @@ The posterior predictive distribution, instead, should be a good approximation o
 If it does not occur, it means that the model is not capable of predicting from the correct distribution.    
 In other words, the trained model is not adapted to the observed data.
 
-```{r posterior-check}
+```{r posterior-check-H1}
 
 draws_posterior <- obj_StanBF_same$stanfit$H1 %>% as.matrix(pars = c('pred_d_ref'))
 draws_posterior_sub <- t(as.matrix(draws_posterior[length(draws_posterior) - (1:length(data_ref)) ]))
@@ -203,7 +204,7 @@ bayesplot::ppc_dens_overlay(data_ref, draws_posterior_sub)
 
 To check that it is working, let's consider the situation where the sources are different, and consider the reference and questioned items separately.
 
-```{r posterior-check}
+```{r posterior-check-H2}
 data_quest <- list_pop$df_pop %>% filter(source == source_diff) %>% pull('x')
 
 # Reference data

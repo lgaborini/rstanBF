@@ -28,7 +28,8 @@ knitr::opts_chunk$set(
   cache = TRUE,
   comment = "#>",
   fig.width = 7,
-  cache.extra = knitr::rand_seed
+  cache.extra = knitr::rand_seed,
+  autodep=TRUE
 )
 ```
 
@@ -195,7 +196,11 @@ obj_StanBF
 
 ### Prior and posterior predictive checks
 
+Get the posterior predictive samples under all hypotheses:
+
 ```{r}
+df_posterior_pred <- posterior_pred(obj_StanBF)
+head(df_posterior_pred, 10)
 
 ```
 

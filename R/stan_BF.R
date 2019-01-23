@@ -278,20 +278,23 @@ posterior_pred <- function(stanBF, ...) {
 #' Extract prior predictive distributions for turn-point posteriors.
 #'
 #' @param stanBF a `stanBF_turn` object
+#' @param var_name the base name for output variable columns (default: `'x'`)
 #' @param ... additional parameters
 #' @return a tibble containing prior predictions across hypotheses and sources
 #' @rdname stanBF_turn
 #' @export
-prior_pred.stanBF_turn <- function(stanBF, ...) {
+prior_pred.stanBF_turn <- function(stanBF, var_name = 'x', ...) {
+
+  assertthat::assert_that(assertthat::is.string(var_name), nchar(var_name) > 0)
 
   sim_d_H1 <- rstan::extract(stanBF$stanfit$H1, pars = 'sim_d_ref')$sim_d_ref
   sim_d_ref_H2 <- rstan::extract(stanBF$stanfit$H2, pars = 'sim_d_ref')$sim_d_ref
   sim_d_quest_H2 <- rstan::extract(stanBF$stanfit$H2, pars = 'sim_d_quest')$sim_d_quest
 
   df_prior_samples <- dplyr::bind_rows(
-    make_tbl_variable_range(sim_d_H1, text = 'd', Hypothesis = 'Hp', Source = 'Both'),
-    make_tbl_variable_range(sim_d_ref_H2, text = 'd', Hypothesis = 'Hd', Source = 'Reference'),
-    make_tbl_variable_range(sim_d_quest_H2, text = 'd', Hypothesis = 'Hd', Source = 'Questioned'))
+    make_tbl_variable_range(sim_d_H1, text = var_name, Hypothesis = 'Hp', Source = 'Both'),
+    make_tbl_variable_range(sim_d_ref_H2, text = var_name, Hypothesis = 'Hd', Source = 'Reference'),
+    make_tbl_variable_range(sim_d_quest_H2, text = var_name, Hypothesis = 'Hd', Source = 'Questioned'))
 
   df_prior_samples
 }
@@ -301,20 +304,23 @@ prior_pred.stanBF_turn <- function(stanBF, ...) {
 #' Extract posterior predictive distributions for turn-point posteriors.
 #'
 #' @param stanBF a `stanBF_turn` object
+#' @param var_name the base name for output variable columns (default: `'x'`)
 #' @param ... additional parameters
 #' @return a tibble containing posterior predictions across hypotheses and sources
 #' @rdname stanBF_turn
 #' @export
-posterior_pred.stanBF_turn <- function(stanBF, ...) {
+posterior_pred.stanBF_turn <- function(stanBF, var_name = 'x', ...) {
+
+  assertthat::assert_that(assertthat::is.string(var_name), nchar(var_name) > 0)
 
   pred_d_H1 <- rstan::extract(stanBF$stanfit$H1, pars = 'pred_d_ref')$pred_d_ref
   pred_d_ref_H2 <- rstan::extract(stanBF$stanfit$H2, pars = 'pred_d_ref')$pred_d_ref
   pred_d_quest_H2 <- rstan::extract(stanBF$stanfit$H2, pars = 'pred_d_quest')$pred_d_quest
 
   df_posterior_samples <- dplyr::bind_rows(
-    make_tbl_variable_range(pred_d_H1, text = 'd', Hypothesis = 'Hp', Source = 'Both'),
-    make_tbl_variable_range(pred_d_ref_H2, text = 'd', Hypothesis = 'Hd', Source = 'Reference'),
-    make_tbl_variable_range(pred_d_quest_H2, text = 'd', Hypothesis = 'Hd', Source = 'Questioned'))
+    make_tbl_variable_range(pred_d_H1, text = var_name, Hypothesis = 'Hp', Source = 'Both'),
+    make_tbl_variable_range(pred_d_ref_H2, text = var_name, Hypothesis = 'Hd', Source = 'Reference'),
+    make_tbl_variable_range(pred_d_quest_H2, text = var_name, Hypothesis = 'Hd', Source = 'Questioned'))
 
   df_posterior_samples
 }
@@ -342,8 +348,8 @@ plot_posteriors <- function(stanBF, ...) {
 #' Make boxplots for turn-point posteriors.
 #'
 #' @param stanBF a supported `stanBF` object
-#' @param variable 'theta' or 'rho' (normalized theta)
-#' @param type type of plot (default: 'boxplots')
+#' @param variable `'theta'` or `'rho'` (normalized theta)
+#' @param type type of plot (default: `'boxplots'``)
 #' @export
 #' @return a ggplot plot
 #' @import dplyr tidyr ggplot2

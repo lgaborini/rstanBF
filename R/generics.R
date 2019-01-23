@@ -29,6 +29,18 @@ named_vector_to_tibble <- function(v) {
 is.stanBF <- function(x) inherits(x, "stanBF")
 
 
+#' Generate variable names representing a range
+#'
+#' Generated variable names follow the rule "text\[index\]", with index from 1 to p.
+#'
+#' @param p number of variables
+#' @param text variable name (default: `'x'`)
+#' @return variable names as strings
+#' @keywords internal
+fun_var_names <- function(p, text = 'x'){
+   paste0(text, '[', seq(p), ']')
+}
+
 
 #' Make a tibble with columns representing a range
 #'
@@ -43,9 +55,13 @@ is.stanBF <- function(x) inherits(x, "stanBF")
 #' @return a tibble
 make_tbl_variable_range <- function(x.samples, text, ...) {
 
-   p <- ncol(x.samples)
-   col_names <- rsamplestudy::fun_var_names(p, text = text)
+   assertthat::assert_that(assertthat::is.string(text), nchar(text) > 0)
 
-   tbl.out <- tibble::as_tibble(x.samples) %>% purrr::set_names(col_names) %>% tibble::add_column(...)
-   tbl.out
+   p <- ncol(x.samples)
+   col_names <- fun_var_names(p, text = text)
+
+   tbl.out <- tibble::as_tibble(x.samples)
+   colnames(tbl.out) <- col_names
+
+   tibble::add_column(tbl.out, ...)
 }

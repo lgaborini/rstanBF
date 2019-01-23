@@ -10,9 +10,9 @@
 \arguments{
 \item{stanBF}{a supported \code{stanBF} object}
 
-\item{variable}{'theta' or 'rho' (normalized theta)}
+\item{variable}{\code{'theta'} or \code{'rho'} (normalized theta)}
 
-\item{type}{type of plot (default: 'boxplots')}
+\item{type}{type of plot (default: `'boxplots'``)}
 }
 \value{
 a ggplot plot

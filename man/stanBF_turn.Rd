@@ -8,18 +8,22 @@
 \usage{
 \method{samples}{stanBF_turn}(stanBF)
 
-\method{prior_pred}{stanBF_turn}(stanBF, ...)
+\method{prior_pred}{stanBF_turn}(stanBF, var_name = "x", ...)
 
-\method{posterior_pred}{stanBF_turn}(stanBF, ...)
+\method{posterior_pred}{stanBF_turn}(stanBF, var_name = "x", ...)
 }
 \arguments{
 \item{stanBF}{a \code{stanBF_turn} object}
+
+\item{var_name}{the base name for output variable columns (default: \code{'x'})}
 
 \item{...}{additional parameters}
 
 \item{stanBF}{a \code{stanBF_turn} object}
 
 \item{stanBF}{a \code{stanBF_turn} object}
+
+\item{var_name}{the base name for output variable columns (default: \code{'x'})}
 
 \item{...}{additional parameters}
 }

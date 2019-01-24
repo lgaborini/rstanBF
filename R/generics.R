@@ -4,6 +4,32 @@
 paste0_vec <- function(...){ paste(..., collapse = ',') }
 paste_vec <- function(...){ paste0(..., collapse = ', ') }
 
+#' ggplot2 labeller function for plotmath labels
+#'
+#' ggplot2 labeller function for plotmath labels.
+#' To be used in ggplot2 scale_*_ functions as the `label` argument.
+#'
+#' It is useful when breaks are plotmath-ready character vectors.
+#' This function correctly formats them in order to be parsed and displayed as expressions.
+#'
+#' @param labels character vector of labels to be parsed
+#' @return a list of `expressions`
+#' @export
+#' @examples
+#' df <- data.frame(
+#'    var = c('x[1]', 'x[2]', 'x[3]', 'alpha'),
+#'    value = c(1,2,3,4)
+#' )
+#'
+#' ggplot2(df) +
+#'    geom_point(aes(x = var, y = value)) +
+#'    scale_x_discrete(label = label_parse)
+#'
+#'
+label_parse <- function(labels){
+   parse(text = labels)
+}
+
 
 #' Convert a named vector to a tibble
 #'

@@ -372,5 +372,7 @@ plot_posteriors.stanBF_turn <- function(stanBF, variable=NULL, type='boxplots') 
     geom_boxplot(aes(x = Variable, y = Value, fill = Grouping) ) +
     ggtitle(bquote(paste(.(stanBF$model_name), ' model for delays: posterior samples for ', .(variable))),
             subtitle = bquote(paste(.(n.chains), ' chains, ', .(n.iter), ' Stan iterations')) ) +
-    labs(x = NULL, y = variable) + scale_y_continuous(limits = c(0,NA), expand = expand_scale(mult = c(0, .1)))
+    labs(x = NULL, y = variable) +
+    scale_y_continuous(limits = c(0,NA), expand = expand_scale(mult = c(0, .1))) +
+    scale_x_discrete(label = label_parse)
 }

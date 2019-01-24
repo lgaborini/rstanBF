@@ -6,7 +6,7 @@
 \usage{
 compute_BF_Stan(data, model, hyperpriors, data_other = NULL,
   n.iter = 1000, n.burnin = 200, n.chains = 1, n.cores = 1,
-  silent = FALSE)
+  silent = FALSE, ...)
 }
 \arguments{
 \item{data}{a list containing \code{mtx}, \code{idx.ref}, \code{idx.quest}}
@@ -15,7 +15,7 @@ compute_BF_Stan(data, model, hyperpriors, data_other = NULL,
 
 \item{hyperpriors}{a list containing hyperparameter definitions}
 
-\item{data_other}{a list containing additional data for $H_1$ and $H_2$ models (default: \code{NULL})}
+\item{data_other}{a list containing additional data for \eqn{H_1} and \eqn{H_2} models (default: \code{NULL})}
 
 \item{n.iter}{number of HMC iterations (default: 1000)}
 
@@ -46,16 +46,16 @@ Two-sample model:
 
 Hypotheses:
 \itemize{
-\item $H_1$: samples in \code{idx.ref} and \code{idx.quest} come from the same source
-\item $H_2$: samples in \code{idx.ref} and \code{idx.quest} come from the different sources
+\item \eqn{H_1}: samples in \code{idx.ref} and \code{idx.quest} come from the same source
+\item \eqn{H_2}: samples in \code{idx.ref} and \code{idx.quest} come from different sources
 }
 
 Return a \code{stanBF} object with these properties:
 \itemize{
 \item \code{model_name}
 \item \code{stanmodel} (named list of Stan models)
-\item \code{stanfit} (named list of stanfit objects)
-\item \code{stanbridge} (named list of bridgesampler objects)
+\item \code{stanfit} (named list of \code{stanfit} objects)
+\item \code{stanbridge} (named list of \code{bridgesampler} objects)
 \item \code{BF} (a double)
 }
 
@@ -63,6 +63,7 @@ For Dirichlet likelihoods, the returned object is a \code{stanBF_turn}, inheriti
 These objects contain also:
 \itemize{
 \item \code{df_samples} (data.frame with posterior samples)
+\item custom plot methods
 }
 
 The object contains methods to plot and to extract samples.

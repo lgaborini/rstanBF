@@ -15,26 +15,27 @@
 #'
 #' Hypotheses:
 #'
-#' - $H_1$: samples in `idx.ref` and `idx.quest` come from the same source
-#' - $H_2$: samples in `idx.ref` and `idx.quest` come from the different sources
+#' - \eqn{H_1}: samples in `idx.ref` and `idx.quest` come from the same source
+#' - \eqn{H_2}: samples in `idx.ref` and `idx.quest` come from different sources
 #'
 #' Return a `stanBF` object with these properties:
 #' - `model_name`
 #' - `stanmodel` (named list of Stan models)
-#' - `stanfit` (named list of stanfit objects)
-#' - `stanbridge` (named list of bridgesampler objects)
+#' - `stanfit` (named list of `stanfit` objects)
+#' - `stanbridge` (named list of `bridgesampler` objects)
 #' - `BF` (a double)
 #'
 #' For Dirichlet likelihoods, the returned object is a `stanBF_turn`, inheriting from `stanBF`.
 #' These objects contain also:
 #' - `df_samples` (data.frame with posterior samples)
+#' - custom plot methods
 #'
 #' The object contains methods to plot and to extract samples.
 #'
 #' @param data a list containing `mtx`, `idx.ref`, `idx.quest`
 #' @param model the model shortname (e.g. `'DirDir'`, `'DirFNorm'`)
 #' @param hyperpriors a list containing hyperparameter definitions
-#' @param data_other a list containing additional data for $H_1$ and $H_2$ models (default: `NULL`)
+#' @param data_other a list containing additional data for \eqn{H_1} and \eqn{H_2} models (default: `NULL`)
 #' @param n.iter number of HMC iterations (default: 1000)
 #' @param n.burnin number of HMC burn-in iterations (default: 200)
 #' @param n.chains number of HMC chains (default: 1)
@@ -45,7 +46,7 @@
 #' @importFrom utils modifyList
 #' @export
 #' @md
-compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter = 1000, n.burnin = 200, n.chains = 1, n.cores = 1, silent = FALSE) {
+compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter = 1000, n.burnin = 200, n.chains = 1, n.cores = 1, silent = FALSE, ...) {
 
   # Setup returned fields --------------
 
@@ -59,7 +60,7 @@ compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter = 
   # Validate model names
   assertthat::assert_that(is.character(model))
   assertthat::assert_that(model %in% implemented_models,
-    msg = paste0('model "', model, '" has not been implemented, must be one of: ', paste_vec(implemented_models)))
+                          msg = paste0('model "', model, '" has not been implemented, must be one of: ', paste_vec(implemented_models)))
 
   # Load Stan compiled modules
   module_file <- rstanBF:::env_stanBF$stanBF_modules[[model]]
@@ -201,41 +202,34 @@ samples <- function(stanBF, ...) {
 #' @rdname stanBF_turn
 #' @export
 samples.stanBF_turn <- function(stanBF) {
-   make_theta_df <- function(x.samples, ...) {
-      n.cols <- ncol(x.samples)
-      theta.names <- paste0('theta.', 1:n.cols)
 
-      tbl.out <- tibble::as_tibble(x.samples) %>% purrr::set_names(theta.names) %>% tibble::add_column(...)
-      tbl.out
-   }
+  theta_H1 <- rstan::extract(stanBF$stanfit$H1)$theta_ref
+  theta_ref_H2 <- rstan::extract(stanBF$stanfit$H2)$theta_ref
+  theta_quest_H2 <- rstan::extract(stanBF$stanfit$H2)$theta_quest
 
-   theta_H1 <- rstan::extract(stanBF$stanfit$H1)$theta_ref
-   theta_ref_H2 <- rstan::extract(stanBF$stanfit$H2)$theta_ref
-   theta_quest_H2 <- rstan::extract(stanBF$stanfit$H2)$theta_quest
+  df_theta_samples <- dplyr::bind_rows(
+    make_tbl_variable_range(theta_H1, text = 'theta', Hypothesis = 'Hp', Source = 'Both'),
+    make_tbl_variable_range(theta_ref_H2, text = 'theta', Hypothesis = 'Hd', Source = 'Reference'),
+    make_tbl_variable_range(theta_quest_H2, text = 'theta', Hypothesis = 'Hd', Source = 'Questioned'))
 
-   df_theta_samples <- dplyr::bind_rows(
-      make_theta_df(theta_H1, Hypothesis = 'Hp', Source = 'Both'),
-      make_theta_df(theta_ref_H2, Hypothesis = 'Hd', Source = 'Reference'),
-      make_theta_df(theta_quest_H2, Hypothesis = 'Hd', Source = 'Questioned'))
-
-  # Normalize theta.* by their sums, creating rho.*
+  # Normalize theta[* by their sums, creating rho[*
   # Hackish
 
   # Suppress CRAN checks
   Iteration <- value <- variable <- value.norm <- variable.norm <- NULL
 
   tmp <- df_theta_samples %>%
-     tibble::rowid_to_column('Iteration') %>%
-     tidyr::gather('variable', 'value', dplyr::starts_with('theta.')) %>%
-     dplyr::group_by(Iteration) %>% dplyr::arrange(Iteration) %>%
-     dplyr::mutate(value.norm = value / sum(value)) %>%
-     dplyr::mutate(variable.norm = gsub('theta.', 'rho.', variable, fixed = TRUE))
+    tibble::rowid_to_column('Iteration') %>%
+    tidyr::gather('variable', 'value', dplyr::starts_with('theta[')) %>%
+    dplyr::group_by(Iteration) %>% dplyr::arrange(Iteration) %>%
+    dplyr::mutate(value.norm = value / sum(value)) %>%
+    dplyr::mutate(variable.norm = gsub('theta[', 'rho[', variable, fixed = TRUE))
 
   . <- NULL   # fix CRAN check
   df_theta_samples <- tmp %>%
-     dplyr::select(-value.norm, -variable.norm) %>%
-     tidyr::spread(data = ., key = variable, value = value) %>%
-     dplyr::inner_join(tmp %>% dplyr::select(Iteration, variable.norm, value.norm) %>% tidyr::spread(data = ., variable.norm, value.norm), by = 'Iteration')
+    dplyr::select(-value.norm, -variable.norm) %>%
+    tidyr::spread(data = ., key = variable, value = value) %>%
+    dplyr::inner_join(tmp %>% dplyr::select(Iteration, variable.norm, value.norm) %>% tidyr::spread(data = ., variable.norm, value.norm), by = 'Iteration')
 
   df_theta_samples %>% dplyr::ungroup()
 }
@@ -368,7 +362,7 @@ plot_posteriors.stanBF_turn <- function(stanBF, variable=NULL, type='boxplots') 
 
   df_samples_plot <- stanBF$df_samples %>%
     group_by(.data$Hypothesis) %>%
-    gather('Variable', 'Value', starts_with(paste0(variable, '.'))) %>%
+    gather('Variable', 'Value', starts_with(paste0(variable, '['))) %>%
     # mutate(Grouping = paste0(ifelse(Hypothesis == 'Hp', 'H_p', 'H_d'), ', ', tolower(Source))) %>%
     mutate(Grouping = paste0(.data$Hypothesis, ', ', tolower(.data$Source)))
 
@@ -377,6 +371,6 @@ plot_posteriors.stanBF_turn <- function(stanBF, variable=NULL, type='boxplots') 
   ggplot(df_samples_plot) +
     geom_boxplot(aes(x = Variable, y = Value, fill = Grouping) ) +
     ggtitle(bquote(paste(.(stanBF$model_name), ' model for delays: posterior samples for ', .(variable))),
-           subtitle = bquote(paste(.(n.chains), ' chains, ', .(n.iter), ' Stan iterations')) ) +
+            subtitle = bquote(paste(.(n.chains), ' chains, ', .(n.iter), ' Stan iterations')) ) +
     labs(x = NULL, y = variable) + scale_y_continuous(limits = c(0,NA), expand = expand_scale(mult = c(0, .1)))
 }

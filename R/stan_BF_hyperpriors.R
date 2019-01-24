@@ -92,13 +92,13 @@ stanBF_elicit_hyperpriors <- function(df_background, model, mode_hyperparameter,
 
 #' Compute Dirichlet hyperparameters, using 'MLE' or 'naive' estimators
 #'
-#' For the 'DirichletDirichlet' model.
+#' For the `'DirDir'` model.
 #' It computes an estimate using ML estimates of the parameters in each group.
 #'
 #' Returns a numeric vector.
 #'
 #' @param df_background dataframe with background data
-#' @param method 'ML' or 'naive' (see [fun_estimate_Dirichlet_from_samples()])
+#' @param method `'ML'` or `'naive'` (see [fun_estimate_Dirichlet_from_samples()])
 #' @param col_source name of the source column (default: 'source')
 #' @return a numeric vector for the estimated Dirichlet hyperparameter
 fun_estimate_Dirichlet_hyperparameter <- function(df_background, method, col_source = 'source') {

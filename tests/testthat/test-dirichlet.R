@@ -9,6 +9,7 @@ alpha_target_3 <- c(0.1, 0.1, 0.1, 0.1, 0.1)
 df_1 <- rsamplestudy::fun_rdirichlet(n, alpha_target_1)
 df_2 <- rsamplestudy::fun_rdirichlet(n, alpha_target_2)
 df_3 <- rsamplestudy::fun_rdirichlet(n, alpha_target_3)
+p <- length(alpha_target_1)
 
 # Bind the dataframes
 df_1_s <- df_1
@@ -43,7 +44,7 @@ test_that('Single source: wrong parameters', {
 
 # Multiple sources --------------------------------------------------------
 
-df_item <- df %>% rename(item = source)
+df_item <- df %>% dplyr::rename(item = source)
 
 test_that('Multiple sources: standard', {
           expect_silent(fun_estimate_Dirichlet_from_samples(df, use = 'ML'))
@@ -61,9 +62,9 @@ test_that('Multiple sources: source column checks', {
           expect_error(fun_estimate_Dirichlet_from_samples(df, use = 'ML', col_source = 'item'))
 
           expect_identical(
-          	fun_estimate_Dirichlet_from_samples(df, use = 'ML', col_source = 'source') %>% dplyr::select(-source),
-          	fun_estimate_Dirichlet_from_samples(df_item, use = 'ML', col_source = 'item') %>% dplyr::select(-item)
-			 )
+            fun_estimate_Dirichlet_from_samples(df, use = 'ML', col_source = 'source') %>% dplyr::select(-source),
+            fun_estimate_Dirichlet_from_samples(df_item, use = 'ML', col_source = 'item') %>% dplyr::select(-item)
+       )
 })
 
 
@@ -74,4 +75,14 @@ test_that('Multiple sources: source estimates are correct', {
    df_1_multiple <- fun_estimate_Dirichlet_from_samples(df, use = 'ML') %>% filter(source == 1) %>% select(-source)
 
    expect_identical(df_1_single, df_1_multiple)
+})
+
+
+
+# Hyperparameter ----------------------------------------------------------
+
+test_that('Multiple sources: DirDir hyperparameter ML estimation does not fail', {
+   res <- expect_silent(fun_estimate_Dirichlet_hyperparameter(df, method = 'ML', col_source = 'source'))
+   expect_length(res, p)
+   expect_is(res, 'numeric')
 })

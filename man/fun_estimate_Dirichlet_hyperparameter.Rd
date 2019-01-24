@@ -10,7 +10,7 @@ fun_estimate_Dirichlet_hyperparameter(df_background, method,
 \arguments{
 \item{df_background}{dataframe with background data}
 
-\item{method}{'ML' or 'naive' (see \code{\link[=fun_estimate_Dirichlet_from_samples]{fun_estimate_Dirichlet_from_samples()}})}
+\item{method}{\code{'ML'} or \code{'naive'} (see \code{\link[=fun_estimate_Dirichlet_from_samples]{fun_estimate_Dirichlet_from_samples()}})}
 
 \item{col_source}{name of the source column (default: 'source')}
 }
@@ -18,7 +18,7 @@ fun_estimate_Dirichlet_hyperparameter(df_background, method,
 a numeric vector for the estimated Dirichlet hyperparameter
 }
 \description{
-For the 'DirichletDirichlet' model.
+For the \code{'DirDir'} model.
 It computes an estimate using ML estimates of the parameters in each group.
 }
 \details{

@@ -4,8 +4,8 @@
 \alias{compute_BF_Stan}
 \title{Sample and compute BF for various models using Stan}
 \usage{
-compute_BF_Stan(data, model, hyperpriors, data_other = NULL,
-  n.iter = 1000, n.burnin = 200, n.chains = 1, n.cores = 1,
+compute_BF_Stan(data, model, hyperpriors, n.iter = 1000,
+  n.burnin = 200, n.chains = 1, n.cores = 1, data_other = NULL,
   silent = FALSE, ...)
 }
 \arguments{
@@ -15,8 +15,6 @@ compute_BF_Stan(data, model, hyperpriors, data_other = NULL,
 
 \item{hyperpriors}{a list containing hyperparameter definitions}
 
-\item{data_other}{a list containing additional data for \eqn{H_1} and \eqn{H_2} models (default: \code{NULL})}
-
 \item{n.iter}{number of HMC iterations (default: 1000)}
 
 \item{n.burnin}{number of HMC burn-in iterations (default: 200)}
@@ -24,6 +22,8 @@ compute_BF_Stan(data, model, hyperpriors, data_other = NULL,
 \item{n.chains}{number of HMC chains (default: 1)}
 
 \item{n.cores}{number of cores to use for HMC and bridge sampling (default: 1)}
+
+\item{data_other}{a list containing additional data for \eqn{H_1} and \eqn{H_2} models (default: \code{NULL})}
 
 \item{silent}{if TRUE, do not print any progress}
 

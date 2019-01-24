@@ -35,18 +35,20 @@
 #' @param data a list containing `mtx`, `idx.ref`, `idx.quest`
 #' @param model the model shortname (e.g. `'DirDir'`, `'DirFNorm'`)
 #' @param hyperpriors a list containing hyperparameter definitions
-#' @param data_other a list containing additional data for \eqn{H_1} and \eqn{H_2} models (default: `NULL`)
 #' @param n.iter number of HMC iterations (default: 1000)
 #' @param n.burnin number of HMC burn-in iterations (default: 200)
 #' @param n.chains number of HMC chains (default: 1)
 #' @param n.cores number of cores to use for HMC and bridge sampling (default: 1)
+#' @param data_other a list containing additional data for \eqn{H_1} and \eqn{H_2} models (default: `NULL`)
 #' @param silent if TRUE, do not print any progress
 #' @param ... list of additional parameters to pass to [rstan::sampling()] method
 #' @return a `stanBF` object
 #' @importFrom utils modifyList
 #' @export
 #' @md
-compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter = 1000, n.burnin = 200, n.chains = 1, n.cores = 1, silent = FALSE, ...) {
+compute_BF_Stan <- function(data, model, hyperpriors,
+                            n.iter = 1000, n.burnin = 200, n.chains = 1, n.cores = 1,
+                            data_other=NULL, silent = FALSE, ...) {
 
   # Setup returned fields --------------
 
@@ -370,7 +372,7 @@ plot_posteriors.stanBF_turn <- function(stanBF, variable=NULL, type='boxplots') 
   Variable <- Value <- Grouping <- NULL
   ggplot(df_samples_plot) +
     geom_boxplot(aes(x = Variable, y = Value, fill = Grouping) ) +
-    ggtitle(bquote(paste(.(stanBF$model_name), ' model for delays: posterior samples for ', .(variable))),
+    ggtitle(bquote(paste(.(stanBF$model_name), ' model: posterior samples for ', .(variable))),
             subtitle = bquote(paste(.(n.chains), ' chains, ', .(n.iter), ' Stan iterations')) ) +
     labs(x = NULL, y = variable) +
     scale_y_continuous(limits = c(0,NA), expand = expand_scale(mult = c(0, .1))) +

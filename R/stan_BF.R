@@ -129,8 +129,8 @@ compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter = 
   # Fitting -----------------------------------------------------------------
 
   # Hypotheses
-  stanfit_h1 <- with(default_iter, rstan::sampling(stanmodel_h1, data=data_H1, iter=iter, warmup=warmup, chains=chains, cores=cores, show_messages = !silent, ...))
-  stanfit_h2 <- with(default_iter, rstan::sampling(stanmodel_h2, data=data_H2, iter=iter, warmup=warmup, chains=chains, cores=cores, show_messages = !silent, ...))
+  stanfit_h1 <- rstan::sampling(stanmodel_h1, data=data_H1, iter=default_iter$iter, warmup=default_iter$warmup, chains=default_iter$chains, cores=default_iter$cores, show_messages = !silent, ...)
+  stanfit_h2 <- rstan::sampling(stanmodel_h2, data=data_H2, iter=default_iter$iter, warmup=default_iter$warmup, chains=default_iter$chains, cores=default_iter$cores, show_messages = !silent, ...)
   stanBF_obj$stanfit <- list(H1=stanfit_h1, H2=stanfit_h2)
 
   # Sample extraction --------------------------------------------------------

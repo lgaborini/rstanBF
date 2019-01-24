@@ -27,7 +27,7 @@ compute_BF_Stan(data, model, hyperpriors, data_other = NULL,
 
 \item{silent}{if TRUE, do not print any progress}
 
-\item{...}{list of additional parameters to pass to \code{\link[rstan:sampling]{rstan::sampling()}} method}
+\item{...}{list of additional parameters to pass to \link[rstan:sampling]{rstan::sampling} method}
 }
 \value{
 a \code{stanBF} object

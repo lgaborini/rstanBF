@@ -118,9 +118,6 @@ compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter = 
 
   # Simulation parameters
   default_iter <- list(iter=n.iter, warmup=n.burnin, chains=n.chains, cores=n.cores)
-  default_iter <- utils::modifyList(default_iter, sampling_options)
-
-
 
   # Begin computation code -----------------------------------------------------------------
 

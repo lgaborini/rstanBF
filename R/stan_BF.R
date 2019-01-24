@@ -40,6 +40,7 @@
 #' @param n.chains number of HMC chains (default: 1)
 #' @param n.cores number of cores to use for HMC and bridge sampling (default: 1)
 #' @param silent if TRUE, do not print any progress
+#' @param ... list of additional parameters to pass to [rstan::sampling()] method
 #' @return a `stanBF` object
 #' @importFrom utils modifyList
 #' @export
@@ -116,7 +117,8 @@ compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter = 
   }
 
   # Simulation parameters
-  default_iter = list(iter=n.iter, warmup=n.burnin, chains=n.chains, cores=n.cores)
+  default_iter <- list(iter=n.iter, warmup=n.burnin, chains=n.chains, cores=n.cores)
+  default_iter <- utils::modifyList(default_iter, sampling_options)
 
 
 
@@ -129,8 +131,8 @@ compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter = 
   # Fitting -----------------------------------------------------------------
 
   # Hypotheses
-  stanfit_h1 <- with(default_iter, rstan::sampling(stanmodel_h1, data=data_H1, iter=iter, warmup=warmup, chains=chains, cores=cores, show_messages = !silent))
-  stanfit_h2 <- with(default_iter, rstan::sampling(stanmodel_h2, data=data_H2, iter=iter, warmup=warmup, chains=chains, cores=cores, show_messages = !silent))
+  stanfit_h1 <- with(default_iter, rstan::sampling(stanmodel_h1, data=data_H1, iter=iter, warmup=warmup, chains=chains, cores=cores, show_messages = !silent, ...))
+  stanfit_h2 <- with(default_iter, rstan::sampling(stanmodel_h2, data=data_H2, iter=iter, warmup=warmup, chains=chains, cores=cores, show_messages = !silent, ...))
   stanBF_obj$stanfit <- list(H1=stanfit_h1, H2=stanfit_h2)
 
   # Sample extraction --------------------------------------------------------
@@ -145,8 +147,8 @@ compute_BF_Stan <- function(data, model, hyperpriors, data_other=NULL, n.iter = 
   if (!silent) cat('Bridge sampling...\n')
 
   # Hypotheses
-  bridge_h1 <- bridgesampling::bridge_sampler(stanfit_h1, silent=TRUE, cores=default_iter$cores)
-  bridge_h2 <- bridgesampling::bridge_sampler(stanfit_h2, silent=TRUE, cores=default_iter$cores)
+  bridge_h1 <- bridgesampling::bridge_sampler(stanfit_h1, silent=TRUE, cores=default_iter$cores, method = "normal")
+  bridge_h2 <- bridgesampling::bridge_sampler(stanfit_h2, silent=TRUE, cores=default_iter$cores, method = "normal")
 
   stanBF_obj$stanbridge <- list(H1=bridge_h1, H2=bridge_h2)
 

@@ -21,10 +21,11 @@ paste_vec <- function(...){ paste0(..., collapse = ', ') }
 #'    value = c(1,2,3,4)
 #' )
 #'
+#' library(ggplot2)
+#'
 #' ggplot2(df) +
 #'    geom_point(aes(x = var, y = value)) +
 #'    scale_x_discrete(label = label_parse)
-#'
 #'
 label_parse <- function(labels){
    parse(text = labels)

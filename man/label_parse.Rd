@@ -26,9 +26,10 @@ df <- data.frame(
    value = c(1,2,3,4)
 )
 
+library(ggplot2)
+
 ggplot2(df) +
    geom_point(aes(x = var, y = value)) +
    scale_x_discrete(label = label_parse)
-
 
 }

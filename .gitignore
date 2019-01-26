@@ -31,3 +31,4 @@ vignettes/*.pdf
 /src/stan_files/*.hpp
 /src/stan_files/*.o
 /vignettes/*_cache/
+/vignettes/draft/

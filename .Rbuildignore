@@ -8,4 +8,4 @@
 ^src/stan_files/.*\.o$
 ^src/stan_files/.*\.hpp$
 ^vignettes/.*_cache$
-^vignettes/draft$
+^vignettes/\.drafts$

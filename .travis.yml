@@ -7,9 +7,13 @@ latex: true
 
 # Required by rsamplestudy dependence
 apt_packages:
-   - libgsl0-dev
+  - libgsl0-dev
 
-r_github_packages: lgaborini/rsamplestudy
+r_github_packages: 
+  - lgaborini/rsamplestudy
+
+r_packages:
+  - pkgdown
 
 env:
   global:
@@ -50,10 +54,13 @@ after_failure:
   - cat rstanBF.Rcheck/00*
 
 # Compile pkgdown documentation for the master branch
-before_deploy: Rscript -e 'remotes::install_cran("pkgdown")'
+before_deploy: 
+  # - Rscript -e 'remotes::install_cran("pkgdown")'
+  - R CMD INSTALL .
+
 deploy:
   provider: script
-  script: Rscript -e 'pkgdown::deploy_site_github()'
+  script: Rscript -e 'pkgdown::deploy_site_github(verbose = TRUE)'
   skip_cleanup: true
   on:
     branch: travis-pkgdown

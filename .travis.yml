@@ -14,7 +14,7 @@ r_github_packages: lgaborini/rsamplestudy
 env:
   global:
     - MAKEFLAGS="-j 2"
-  - PKG_TARBALL="rstanBF*tar.gz"
+    - PKG_TARBALL="rstanBF*tar.gz"
 
 matrix:
   include:

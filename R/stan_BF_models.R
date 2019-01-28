@@ -47,7 +47,7 @@ env_stanBF$stanBF_child_class[['DirDirGamma']] <- 'stanBF_turn'
 
 #' Get available models in rstanBF
 #'
-#' Get available models in rstanBF, as short names.
+#' Get available models in rstanBF, as short names or longer form.
 #'
 #' Optionally get more information in a tibble form
 #' @param verbose get more information, in a data.frame form
@@ -78,10 +78,9 @@ available_models <- function(verbose = FALSE){
 
       # Print and return
       cat(glue::glue_data(df_all_models,
-                      'Model: {short_name}\n',
-                      'Long name: {long_name}\n',
-                      'Hyperparameters: {hyperpriors}\n',
-                      '\n'))
+                      'Model: "{short_name}"',
+                      'Long name: "{long_name}"',
+                      'Hyperparameters: {hyperpriors}\n', .sep = '\n'), sep = '\n\n')
 
       invisible(df_all_models)
    }

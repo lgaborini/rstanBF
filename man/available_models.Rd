@@ -13,7 +13,7 @@ available_models(verbose = FALSE)
 character vector of models, or a tibble
 }
 \description{
-Get available models in rstanBF, as short names.
+Get available models in rstanBF, as short names or longer form.
 }
 \details{
 Optionally get more information in a tibble form

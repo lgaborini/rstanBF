@@ -48,8 +48,42 @@ env_stanBF$stanBF_child_class[['DirDirGamma']] <- 'stanBF_turn'
 #' Get available models in rstanBF
 #'
 #' Get available models in rstanBF, as short names.
-#' @return character vector of models
+#'
+#' Optionally get more information in a tibble form
+#' @param verbose get more information, in a data.frame form
+#' @return character vector of models, or a tibble
 #' @export
-available_models <- function(){
-   env_stanBF$stanBF_model_shortnames
+available_models <- function(verbose = FALSE){
+
+   if (!verbose) {
+      env_stanBF$stanBF_model_shortnames
+   } else {
+
+      # Build a data.frame by filling fields
+      df_all_models <- env_stanBF$stanBF_model_names %>%
+         tibble::enframe('short_name', 'long_name')
+
+      df_all_models <- df_all_models %>%
+         left_join(tibble::enframe(env_stanBF$stanBF_child_class, 'short_name', 'S3_class'), by = 'short_name')
+
+      df_all_models <- df_all_models %>%
+         left_join(tibble::enframe(env_stanBF$stanBF_default_hyperpriors, 'short_name', 'hyperpriors'), by = 'short_name')
+
+
+      df_all_models <- df_all_models %>%
+         left_join(tibble::enframe(purrr::map(env_stanBF$stanBF_modules, ~ paste0(., '.stan')), 'short_name', 'source_files'), by = 'short_name')
+
+      # Type conversions
+      df_all_models <- dplyr::mutate_at(df_all_models, dplyr::vars(long_name, S3_class), as.character)
+
+      # Print and return
+      cat(glue::glue_data(df_all_models,
+                      'Model: {short_name}\n',
+                      'Long name: {long_name}\n',
+                      'Hyperparameters: {hyperpriors}\n',
+                      '\n'))
+
+      invisible(df_all_models)
+   }
+
 }

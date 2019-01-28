@@ -4,11 +4,17 @@
 \alias{available_models}
 \title{Get available models in rstanBF}
 \usage{
-available_models()
+available_models(verbose = FALSE)
+}
+\arguments{
+\item{verbose}{get more information, in a data.frame form}
 }
 \value{
-character vector of models
+character vector of models, or a tibble
 }
 \description{
 Get available models in rstanBF, as short names.
+}
+\details{
+Optionally get more information in a tibble form
 }

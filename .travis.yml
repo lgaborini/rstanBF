@@ -14,6 +14,7 @@ r_github_packages: lgaborini/rsamplestudy
 env:
   global:
     - MAKEFLAGS="-j 2"
+  - PKG_TARBALL="rstanBF*tar.gz"
 
 matrix:
   include:
@@ -34,8 +35,8 @@ before_install:
 
 script:
   - |
-    travis_wait 80 R CMD build .
-    travis_wait 149 R CMD check rstanBF*tar.gz
+    travis_wait 42 R CMD build .
+    travis_wait 59 R CMD check $PKG_TARBALL
 
 after_script:
   - tar -ztvf rstanBF_*.tar.gz

@@ -48,10 +48,13 @@ after_success:
 after_failure:
   - cat rstanBF.Rcheck/00*
 
-# Compile pkgdown documentation
+# Compile pkgdown documentation for the master branch
 before_deploy: Rscript -e 'remotes::install_cran("pkgdown")'
 deploy:
   provider: script
   script: Rscript -e 'pkgdown::deploy_site_github()'
   skip_cleanup: true
+  on:
+    branch: master
+
 

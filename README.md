@@ -11,6 +11,11 @@ Status](https://travis-ci.org/lgaborini/rstanBF.svg?branch=master)](https://trav
 [![Codecov test
 coverage](https://codecov.io/gh/lgaborini/rstanBF/branch/master/graph/badge.svg)](https://codecov.io/gh/lgaborini/rstanBF?branch=master)
 
+## Documentation
+
+Documentation for the stable version is available
+[here](https://lgaborini.github.io/rstanBF/).
+
 ## Installation
 
 rstanBF is not yet available on CRAN.  

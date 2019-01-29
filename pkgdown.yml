@@ -1,0 +1,8 @@
+pandoc: '2.2'
+pkgdown: 1.3.0
+pkgdown_sha: ~
+articles:
+  dirichletdirichlet-model: dirichletdirichlet-model.html
+  introduction: introduction.html
+  normalnormal-model: normalnormal-model.html
+

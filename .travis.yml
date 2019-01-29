@@ -35,17 +35,21 @@ before_install:
 
 script:
   - |
+    echo "Running R CMD build in package directory"
     travis_wait 42 R CMD build .
     PKG_TARBALL=$(ls -1t *.tar.gz | head -n 1)
     echo "Detected tarball: $PKG_TARBALL"
+    echo "Running R CMD check on built tarball"
     travis_wait 59 R CMD check rstanBF*tar.gz
 
 after_script:
+  - echo "Script finished. Tarball contents:"
   - tar -ztvf rstanBF_*.tar.gz
   - echo ${NOT_CRAN}
 
 after_success:
   - travis_wait 40 tar -C .. -xf $PKG_TARBALL
+  - echo "Running codecov"
   - Rscript -e 'covr::codecov()'
 
 after_failure:

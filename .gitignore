@@ -32,3 +32,4 @@ vignettes/*.pdf
 /src/stan_files/*.o
 /vignettes/*_cache/
 /vignettes/.drafts/
+/src/stan_files/.objects/*.o

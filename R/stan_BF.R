@@ -362,19 +362,27 @@ plot_posteriors.stanBF_turn <- function(stanBF, variable=NULL, type='boxplots') 
   n.chains <- length(stanBF$stanfit$H1@stan_args)
   n.iter <- stanBF$stanfit$H1@stan_args[[1]]$iter
 
+  # Make plot-friendly columns
+  # convert to plotmath notation
+  hyp_to_plotmath <- list()
+  hyp_to_plotmath[['Hp']] <- 'H[1]'
+  hyp_to_plotmath[['Hd']] <- 'H[2]'
+
+  # Create the Grouping column (boxplot fill, shows which term is evaluated)
   df_samples_plot <- stanBF$df_samples %>%
     group_by(.data$Hypothesis) %>%
     gather('Variable', 'Value', starts_with(paste0(variable, '['))) %>%
-    # mutate(Grouping = paste0(ifelse(Hypothesis == 'Hp', 'H_p', 'H_d'), ', ', tolower(Source))) %>%
-    mutate(Grouping = paste0(.data$Hypothesis, ', ', tolower(.data$Source)))
+    mutate(Grouping = paste0(hyp_to_plotmath[.data$Hypothesis], ':~"', tolower(.data$Source), '"'))
 
   # To suppress CRAN check warnings
   Variable <- Value <- Grouping <- NULL
+
   ggplot(df_samples_plot) +
     geom_boxplot(aes(x = Variable, y = Value, fill = Grouping) ) +
     ggtitle(bquote(paste(.(stanBF$model_name), ' model: posterior samples for ', .(variable))),
             subtitle = bquote(paste(.(n.chains), ' chains, ', .(n.iter), ' Stan iterations')) ) +
-    labs(x = NULL, y = variable) +
+    labs(x = NULL, y = label_parse(variable)) +
     scale_y_continuous(limits = c(0,NA), expand = expand_scale(mult = c(0, .1))) +
-    scale_x_discrete(label = label_parse)
+    scale_x_discrete(label = label_parse) +
+    scale_fill_discrete('Grouping during fit', label = scales::parse_format())
 }

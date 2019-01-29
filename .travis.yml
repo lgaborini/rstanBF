@@ -12,13 +12,10 @@ apt_packages:
 r_github_packages: 
   - lgaborini/rsamplestudy
 
-r_packages:
-  - pkgdown
-
 env:
   global:
     - MAKEFLAGS="-j 2"
-    - PKG_TARBALL="rstanBF*tar.gz"
+    - PKG_TARBALL=
 
 matrix:
   include:
@@ -40,7 +37,8 @@ before_install:
 script:
   - |
     travis_wait 42 R CMD build .
-    travis_wait 59 R CMD check $PKG_TARBALL
+    PKG_TARBALL=$(ls -1t *.tar.gz | head -n 1)
+    travis_wait 59 R CMD check rstanBF*tar.gz
 
 after_script:
   - tar -ztvf rstanBF_*.tar.gz
@@ -55,7 +53,7 @@ after_failure:
 
 # Compile pkgdown documentation for the master branch
 before_deploy: 
-  # - Rscript -e 'remotes::install_cran("pkgdown")'
+  - Rscript -e 'remotes::install_cran("pkgdown")'
   - R CMD INSTALL .
 
 deploy:

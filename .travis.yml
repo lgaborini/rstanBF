@@ -33,11 +33,13 @@ before_install:
   - echo "CXX14 = g++-7 -fPIC -flto=2" >> ~/.R/Makevars
   - echo "CXX14FLAGS = -mtune=native -march=native -Wno-unused-variable -Wno-unused-function -Wno-unused-local-typedefs -Wno-ignored-attributes -Wno-deprecated-declarations -Wno-attributes -O3" >> ~/.R/Makevars
 
+before_script:
+  - export PKG_TARBALL=$(Rscript -e 'pkg <- devtools::as.package("."); cat(paste0(pkg$package,"_",pkg$version,".tar.gz"))')
+
 script:
   - |
     echo "Running R CMD build in package directory"
     travis_wait 42 R CMD build .
-    PKG_TARBALL=$(ls -1t *.tar.gz | head -n 1)
     echo "Detected tarball: $PKG_TARBALL"
     echo "Running R CMD check on built tarball"
     travis_wait 59 R CMD check rstanBF*tar.gz

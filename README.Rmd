@@ -19,6 +19,8 @@ rstanBF computes the Bayes Factor for data in specified two-level hierarchical m
 [![Build Status](https://travis-ci.org/lgaborini/rstanBF.svg?branch=master)](https://travis-ci.org/lgaborini/rstanBF)
 [![Codecov test coverage](https://codecov.io/gh/lgaborini/rstanBF/branch/master/graph/badge.svg)](https://codecov.io/gh/lgaborini/rstanBF?branch=master)
 
+It wraps the package [bridgesampling](https://cran.r-project.org/package=bridgesampling), and provides methods to compute the Bayes Factor for comparing two sets of samples.
+
 ## Documentation
 
 Documentation for the stable version is available [here](https://lgaborini.github.io/rstanBF/).
@@ -31,4 +33,16 @@ You can install the development version from this repository using `devtools` or
 ```{r, eval=FALSE}
 # install.packages('remotes')
 remotes::install_github('lgaborini/rstanBF')
+```
+
+## Implemented models
+
+The implemented models are:
+
+```{r, message=FALSE, echo=FALSE, results='asis'}
+
+suppressPackageStartupMessages(library(rstanBF))
+
+df_models <- available_models(verbose = TRUE, do_print = FALSE)
+cat(paste0("* ", df_models$long_name, '\n'), sep = '')
 ```

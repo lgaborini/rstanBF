@@ -11,6 +11,11 @@ Status](https://travis-ci.org/lgaborini/rstanBF.svg?branch=master)](https://trav
 [![Codecov test
 coverage](https://codecov.io/gh/lgaborini/rstanBF/branch/master/graph/badge.svg)](https://codecov.io/gh/lgaborini/rstanBF?branch=master)
 
+It wraps the package
+[bridgesampling](https://cran.r-project.org/package=bridgesampling), and
+provides methods to compute the Bayes Factor for comparing two sets of
+samples.
+
 ## Documentation
 
 Documentation for the stable version is available
@@ -26,3 +31,12 @@ You can install the development version from this repository using
 # install.packages('remotes')
 remotes::install_github('lgaborini/rstanBF')
 ```
+
+## Implemented models
+
+The implemented models are:
+
+  - Dirichlet-Dirichlet
+  - Dirichlet-FoldedNormal
+  - Dirichlet-DirichletGamma
+  - Normal-Normal

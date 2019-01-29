@@ -4,10 +4,12 @@
 \alias{available_models}
 \title{Get available models in rstanBF}
 \usage{
-available_models(verbose = FALSE)
+available_models(verbose = FALSE, do_print = FALSE)
 }
 \arguments{
 \item{verbose}{get more information, in a data.frame form}
+
+\item{do_print}{if \code{TRUE} and verbose is \code{TRUE}, also pretty print models}
 }
 \value{
 character vector of models, or a tibble

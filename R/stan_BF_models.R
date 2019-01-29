@@ -51,9 +51,10 @@ env_stanBF$stanBF_child_class[['DirDirGamma']] <- 'stanBF_turn'
 #'
 #' Optionally get more information in a tibble form
 #' @param verbose get more information, in a data.frame form
+#' @param do_print if `TRUE` and verbose is `TRUE`, also pretty print models
 #' @return character vector of models, or a tibble
 #' @export
-available_models <- function(verbose = FALSE){
+available_models <- function(verbose = FALSE, do_print = FALSE){
 
    if (!verbose) {
       env_stanBF$stanBF_model_shortnames
@@ -77,12 +78,16 @@ available_models <- function(verbose = FALSE){
       df_all_models <- dplyr::mutate_at(df_all_models, dplyr::vars(long_name, S3_class), as.character)
 
       # Print and return
-      cat(glue::glue_data(df_all_models,
-                      'Model: "{short_name}"',
-                      'Long name: "{long_name}"',
-                      'Hyperparameters: {hyperpriors}\n', .sep = '\n'), sep = '\n\n')
+      if (do_print) {
+         cat(glue::glue_data(df_all_models,
+                             'Model: "{short_name}"',
+                             'Long name: "{long_name}"',
+                             'Hyperparameters: {hyperpriors}\n', .sep = '\n'), sep = '\n\n')
 
-      invisible(df_all_models)
+         invisible(df_all_models)
+      } else {
+         df_all_models
+      }
    }
 
 }

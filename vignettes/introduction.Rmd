@@ -98,6 +98,14 @@ df_models <- available_models(verbose = TRUE)
 df_models
 ```
 
+and also in text form:
+
+```{r}
+available_models(verbose = TRUE, do_print = TRUE)
+```
+
+
+
 ## Hyperparameter elicitation
 
 We choose the Dirichlet-Dirichlet model.   

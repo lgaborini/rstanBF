@@ -179,12 +179,12 @@ Let’s generate some data:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">obj_StanBF_same</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt; stanBF object containing posterior samples from H1, H2.</span></a>
 <a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; Model: Normal-Normal </span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; Obtained BF: 1723781 </span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; Obtained BF: 1733724 </span></a>
 <a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; Ran with 3 chains, 5000 HMC iterations.</span></a>
 <a class="sourceLine" id="cb6-6" data-line-number="6">obj_StanBF_diff</a>
 <a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; stanBF object containing posterior samples from H1, H2.</span></a>
 <a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; Model: Normal-Normal </span></a>
-<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; Obtained BF: 1.028219e-05 </span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; Obtained BF: 1.0192e-05 </span></a>
 <a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt; Ran with 3 chains, 5000 HMC iterations.</span></a></code></pre></div>
 <p>More details on the Stan outputs:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">obj_StanBF_same<span class="op">$</span>stanfit</a>
@@ -195,22 +195,22 @@ Let’s generate some data:</p>
 <a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt;                 mean se_mean     sd    2.5%    25%    50%    75%  97.5%</span></a>
 <a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; mu_ref          1.05    0.00   0.05    0.95   1.02   1.05   1.08   1.15</span></a>
-<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; sigma_ref       0.22    0.00   0.04    0.16   0.19   0.21   0.24   0.30</span></a>
-<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; sim_mu_ref     -1.22    0.92  99.10 -195.99 -68.56  -2.45  66.34 191.63</span></a>
-<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; sim_sigma_ref  79.44    0.54  59.76    3.20  32.13  67.44 114.31 222.86</span></a>
-<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; sim_d_ref      -0.78    1.32 140.62 -279.38 -87.65  -1.52  84.12 280.89</span></a>
-<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt; pred_d_ref      1.05    0.00   0.23    0.61   0.90   1.05   1.19   1.50</span></a>
-<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co">#&gt; lp__          -10.45    0.01   1.03  -13.13 -10.87 -10.14  -9.71  -9.44</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; sigma_ref       0.22    0.00   0.04    0.16   0.19   0.21   0.24   0.31</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; sim_mu_ref      0.06    0.91 100.01 -199.28 -67.42  -1.19  67.71 198.64</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; sim_sigma_ref  79.68    0.56  60.58    3.36  31.64  66.99 115.32 224.85</span></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; sim_d_ref       0.67    1.29 140.73 -276.69 -85.78  -0.61  86.74 284.32</span></a>
+<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt; pred_d_ref      1.05    0.00   0.23    0.60   0.90   1.05   1.20   1.50</span></a>
+<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co">#&gt; lp__          -10.47    0.02   1.06  -13.25 -10.86 -10.14  -9.72  -9.44</span></a>
 <a class="sourceLine" id="cb7-15" data-line-number="15"><span class="co">#&gt;               n_eff Rhat</span></a>
-<a class="sourceLine" id="cb7-16" data-line-number="16"><span class="co">#&gt; mu_ref         7703    1</span></a>
-<a class="sourceLine" id="cb7-17" data-line-number="17"><span class="co">#&gt; sigma_ref      7061    1</span></a>
-<a class="sourceLine" id="cb7-18" data-line-number="18"><span class="co">#&gt; sim_mu_ref    11512    1</span></a>
-<a class="sourceLine" id="cb7-19" data-line-number="19"><span class="co">#&gt; sim_sigma_ref 12375    1</span></a>
-<a class="sourceLine" id="cb7-20" data-line-number="20"><span class="co">#&gt; sim_d_ref     11353    1</span></a>
-<a class="sourceLine" id="cb7-21" data-line-number="21"><span class="co">#&gt; pred_d_ref    11960    1</span></a>
-<a class="sourceLine" id="cb7-22" data-line-number="22"><span class="co">#&gt; lp__           4910    1</span></a>
+<a class="sourceLine" id="cb7-16" data-line-number="16"><span class="co">#&gt; mu_ref         7981    1</span></a>
+<a class="sourceLine" id="cb7-17" data-line-number="17"><span class="co">#&gt; sigma_ref      7142    1</span></a>
+<a class="sourceLine" id="cb7-18" data-line-number="18"><span class="co">#&gt; sim_mu_ref    11950    1</span></a>
+<a class="sourceLine" id="cb7-19" data-line-number="19"><span class="co">#&gt; sim_sigma_ref 11679    1</span></a>
+<a class="sourceLine" id="cb7-20" data-line-number="20"><span class="co">#&gt; sim_d_ref     11824    1</span></a>
+<a class="sourceLine" id="cb7-21" data-line-number="21"><span class="co">#&gt; pred_d_ref    12055    1</span></a>
+<a class="sourceLine" id="cb7-22" data-line-number="22"><span class="co">#&gt; lp__           4643    1</span></a>
 <a class="sourceLine" id="cb7-23" data-line-number="23"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb7-24" data-line-number="24"><span class="co">#&gt; Samples were drawn using NUTS(diag_e) at Tue Jan 29 08:50:27 2019.</span></a>
+<a class="sourceLine" id="cb7-24" data-line-number="24"><span class="co">#&gt; Samples were drawn using NUTS(diag_e) at Tue Jan 29 18:19:23 2019.</span></a>
 <a class="sourceLine" id="cb7-25" data-line-number="25"><span class="co">#&gt; For each parameter, n_eff is a crude measure of effective sample size,</span></a>
 <a class="sourceLine" id="cb7-26" data-line-number="26"><span class="co">#&gt; and Rhat is the potential scale reduction factor on split chains (at </span></a>
 <a class="sourceLine" id="cb7-27" data-line-number="27"><span class="co">#&gt; convergence, Rhat=1).</span></a>
@@ -221,35 +221,35 @@ Let’s generate some data:</p>
 <a class="sourceLine" id="cb7-32" data-line-number="32"><span class="co">#&gt; post-warmup draws per chain=4000, total post-warmup draws=12000.</span></a>
 <a class="sourceLine" id="cb7-33" data-line-number="33"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb7-34" data-line-number="34"><span class="co">#&gt;                   mean se_mean     sd    2.5%    25%    50%    75%  97.5%</span></a>
-<a class="sourceLine" id="cb7-35" data-line-number="35"><span class="co">#&gt; mu_ref            1.06    0.00   0.09    0.87   1.00   1.06   1.11   1.24</span></a>
-<a class="sourceLine" id="cb7-36" data-line-number="36"><span class="co">#&gt; sigma_ref         0.28    0.00   0.08    0.17   0.22   0.26   0.32   0.49</span></a>
-<a class="sourceLine" id="cb7-37" data-line-number="37"><span class="co">#&gt; mu_quest          1.04    0.00   0.07    0.90   1.00   1.04   1.08   1.17</span></a>
-<a class="sourceLine" id="cb7-38" data-line-number="38"><span class="co">#&gt; sigma_quest       0.21    0.00   0.06    0.13   0.17   0.19   0.23   0.35</span></a>
-<a class="sourceLine" id="cb7-39" data-line-number="39"><span class="co">#&gt; sim_mu_ref       -0.73    0.90 100.11 -196.03 -68.93  -0.22  67.35 195.25</span></a>
-<a class="sourceLine" id="cb7-40" data-line-number="40"><span class="co">#&gt; sim_sigma_ref    79.79    0.57  60.49    2.78  31.53  67.17 114.62 225.91</span></a>
-<a class="sourceLine" id="cb7-41" data-line-number="41"><span class="co">#&gt; sim_mu_quest      0.10    0.93 100.50 -195.52 -67.99   0.41  66.97 197.01</span></a>
-<a class="sourceLine" id="cb7-42" data-line-number="42"><span class="co">#&gt; sim_sigma_quest  79.17    0.56  60.05    3.02  31.21  67.12 114.52 222.41</span></a>
-<a class="sourceLine" id="cb7-43" data-line-number="43"><span class="co">#&gt; sim_d_ref        -0.61    1.28 141.70 -286.45 -86.26   0.36  86.02 276.19</span></a>
-<a class="sourceLine" id="cb7-44" data-line-number="44"><span class="co">#&gt; sim_d_quest      -0.29    1.32 140.76 -278.73 -86.09   0.46  86.33 279.00</span></a>
-<a class="sourceLine" id="cb7-45" data-line-number="45"><span class="co">#&gt; pred_d_ref        1.06    0.00   0.31    0.43   0.87   1.06   1.25   1.67</span></a>
-<a class="sourceLine" id="cb7-46" data-line-number="46"><span class="co">#&gt; pred_d_quest      1.04    0.00   0.23    0.58   0.90   1.04   1.18   1.49</span></a>
-<a class="sourceLine" id="cb7-47" data-line-number="47"><span class="co">#&gt; lp__            -24.55    0.02   1.59  -28.56 -25.31 -24.20 -23.38 -22.59</span></a>
+<a class="sourceLine" id="cb7-35" data-line-number="35"><span class="co">#&gt; mu_ref            1.06    0.00   0.09    0.88   1.00   1.06   1.11   1.24</span></a>
+<a class="sourceLine" id="cb7-36" data-line-number="36"><span class="co">#&gt; sigma_ref         0.28    0.00   0.08    0.17   0.22   0.26   0.31   0.47</span></a>
+<a class="sourceLine" id="cb7-37" data-line-number="37"><span class="co">#&gt; mu_quest          1.04    0.00   0.07    0.91   1.00   1.04   1.08   1.18</span></a>
+<a class="sourceLine" id="cb7-38" data-line-number="38"><span class="co">#&gt; sigma_quest       0.21    0.00   0.06    0.13   0.16   0.19   0.23   0.36</span></a>
+<a class="sourceLine" id="cb7-39" data-line-number="39"><span class="co">#&gt; sim_mu_ref        1.26    0.91 100.00 -194.53 -66.39   1.47  68.02 193.23</span></a>
+<a class="sourceLine" id="cb7-40" data-line-number="40"><span class="co">#&gt; sim_sigma_ref    79.81    0.55  60.44    3.14  32.21  67.01 114.61 224.73</span></a>
+<a class="sourceLine" id="cb7-41" data-line-number="41"><span class="co">#&gt; sim_mu_quest      1.73    0.92 100.05 -191.88 -65.67   1.18  69.17 195.88</span></a>
+<a class="sourceLine" id="cb7-42" data-line-number="42"><span class="co">#&gt; sim_sigma_quest  79.51    0.55  60.54    2.82  31.18  66.78 114.33 223.35</span></a>
+<a class="sourceLine" id="cb7-43" data-line-number="43"><span class="co">#&gt; sim_d_ref         1.45    1.29 142.38 -284.24 -83.91   2.56  87.33 284.81</span></a>
+<a class="sourceLine" id="cb7-44" data-line-number="44"><span class="co">#&gt; sim_d_quest       1.36    1.29 140.58 -277.61 -84.74  -0.92  88.23 284.23</span></a>
+<a class="sourceLine" id="cb7-45" data-line-number="45"><span class="co">#&gt; pred_d_ref        1.06    0.00   0.30    0.47   0.87   1.06   1.24   1.65</span></a>
+<a class="sourceLine" id="cb7-46" data-line-number="46"><span class="co">#&gt; pred_d_quest      1.04    0.00   0.23    0.59   0.90   1.04   1.18   1.48</span></a>
+<a class="sourceLine" id="cb7-47" data-line-number="47"><span class="co">#&gt; lp__            -24.48    0.02   1.53  -28.35 -25.21 -24.14 -23.37 -22.59</span></a>
 <a class="sourceLine" id="cb7-48" data-line-number="48"><span class="co">#&gt;                 n_eff Rhat</span></a>
-<a class="sourceLine" id="cb7-49" data-line-number="49"><span class="co">#&gt; mu_ref           7430    1</span></a>
-<a class="sourceLine" id="cb7-50" data-line-number="50"><span class="co">#&gt; sigma_ref        6348    1</span></a>
-<a class="sourceLine" id="cb7-51" data-line-number="51"><span class="co">#&gt; mu_quest         8656    1</span></a>
-<a class="sourceLine" id="cb7-52" data-line-number="52"><span class="co">#&gt; sigma_quest      7061    1</span></a>
-<a class="sourceLine" id="cb7-53" data-line-number="53"><span class="co">#&gt; sim_mu_ref      12411    1</span></a>
-<a class="sourceLine" id="cb7-54" data-line-number="54"><span class="co">#&gt; sim_sigma_ref   11270    1</span></a>
-<a class="sourceLine" id="cb7-55" data-line-number="55"><span class="co">#&gt; sim_mu_quest    11768    1</span></a>
-<a class="sourceLine" id="cb7-56" data-line-number="56"><span class="co">#&gt; sim_sigma_quest 11463    1</span></a>
-<a class="sourceLine" id="cb7-57" data-line-number="57"><span class="co">#&gt; sim_d_ref       12239    1</span></a>
-<a class="sourceLine" id="cb7-58" data-line-number="58"><span class="co">#&gt; sim_d_quest     11333    1</span></a>
-<a class="sourceLine" id="cb7-59" data-line-number="59"><span class="co">#&gt; pred_d_ref      11436    1</span></a>
-<a class="sourceLine" id="cb7-60" data-line-number="60"><span class="co">#&gt; pred_d_quest    11860    1</span></a>
-<a class="sourceLine" id="cb7-61" data-line-number="61"><span class="co">#&gt; lp__             4349    1</span></a>
+<a class="sourceLine" id="cb7-49" data-line-number="49"><span class="co">#&gt; mu_ref           9152    1</span></a>
+<a class="sourceLine" id="cb7-50" data-line-number="50"><span class="co">#&gt; sigma_ref        7868    1</span></a>
+<a class="sourceLine" id="cb7-51" data-line-number="51"><span class="co">#&gt; mu_quest         7179    1</span></a>
+<a class="sourceLine" id="cb7-52" data-line-number="52"><span class="co">#&gt; sigma_quest      7048    1</span></a>
+<a class="sourceLine" id="cb7-53" data-line-number="53"><span class="co">#&gt; sim_mu_ref      12034    1</span></a>
+<a class="sourceLine" id="cb7-54" data-line-number="54"><span class="co">#&gt; sim_sigma_ref   12096    1</span></a>
+<a class="sourceLine" id="cb7-55" data-line-number="55"><span class="co">#&gt; sim_mu_quest    11823    1</span></a>
+<a class="sourceLine" id="cb7-56" data-line-number="56"><span class="co">#&gt; sim_sigma_quest 12086    1</span></a>
+<a class="sourceLine" id="cb7-57" data-line-number="57"><span class="co">#&gt; sim_d_ref       12193    1</span></a>
+<a class="sourceLine" id="cb7-58" data-line-number="58"><span class="co">#&gt; sim_d_quest     11952    1</span></a>
+<a class="sourceLine" id="cb7-59" data-line-number="59"><span class="co">#&gt; pred_d_ref      11313    1</span></a>
+<a class="sourceLine" id="cb7-60" data-line-number="60"><span class="co">#&gt; pred_d_quest    11339    1</span></a>
+<a class="sourceLine" id="cb7-61" data-line-number="61"><span class="co">#&gt; lp__             4502    1</span></a>
 <a class="sourceLine" id="cb7-62" data-line-number="62"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb7-63" data-line-number="63"><span class="co">#&gt; Samples were drawn using NUTS(diag_e) at Tue Jan 29 08:50:28 2019.</span></a>
+<a class="sourceLine" id="cb7-63" data-line-number="63"><span class="co">#&gt; Samples were drawn using NUTS(diag_e) at Tue Jan 29 18:19:24 2019.</span></a>
 <a class="sourceLine" id="cb7-64" data-line-number="64"><span class="co">#&gt; For each parameter, n_eff is a crude measure of effective sample size,</span></a>
 <a class="sourceLine" id="cb7-65" data-line-number="65"><span class="co">#&gt; and Rhat is the potential scale reduction factor on split chains (at </span></a>
 <a class="sourceLine" id="cb7-66" data-line-number="66"><span class="co">#&gt; convergence, Rhat=1).</span></a>
@@ -261,23 +261,23 @@ Let’s generate some data:</p>
 <a class="sourceLine" id="cb7-72" data-line-number="72"><span class="co">#&gt; post-warmup draws per chain=4000, total post-warmup draws=12000.</span></a>
 <a class="sourceLine" id="cb7-73" data-line-number="73"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb7-74" data-line-number="74"><span class="co">#&gt;                 mean se_mean     sd    2.5%    25%    50%    75%  97.5%</span></a>
-<a class="sourceLine" id="cb7-75" data-line-number="75"><span class="co">#&gt; mu_ref          2.09    0.00   0.29    1.52   1.90   2.09   2.28   2.66</span></a>
-<a class="sourceLine" id="cb7-76" data-line-number="76"><span class="co">#&gt; sigma_ref       1.25    0.00   0.22    0.91   1.09   1.21   1.37   1.76</span></a>
-<a class="sourceLine" id="cb7-77" data-line-number="77"><span class="co">#&gt; sim_mu_ref     -0.48    0.92 100.77 -197.66 -69.65  -0.85  68.37 195.58</span></a>
-<a class="sourceLine" id="cb7-78" data-line-number="78"><span class="co">#&gt; sim_sigma_ref  78.68    0.54  59.31    2.97  31.01  66.69 114.31 218.61</span></a>
-<a class="sourceLine" id="cb7-79" data-line-number="79"><span class="co">#&gt; sim_d_ref      -0.47    1.29 139.82 -281.55 -87.47  -0.96  87.65 276.38</span></a>
-<a class="sourceLine" id="cb7-80" data-line-number="80"><span class="co">#&gt; pred_d_ref      2.08    0.01   1.32   -0.53   1.24   2.09   2.94   4.67</span></a>
-<a class="sourceLine" id="cb7-81" data-line-number="81"><span class="co">#&gt; lp__          -43.51    0.02   1.07  -46.44 -43.91 -43.18 -42.76 -42.48</span></a>
+<a class="sourceLine" id="cb7-75" data-line-number="75"><span class="co">#&gt; mu_ref          2.09    0.00   0.28    1.54   1.91   2.10   2.28   2.64</span></a>
+<a class="sourceLine" id="cb7-76" data-line-number="76"><span class="co">#&gt; sigma_ref       1.25    0.00   0.23    0.90   1.09   1.22   1.38   1.78</span></a>
+<a class="sourceLine" id="cb7-77" data-line-number="77"><span class="co">#&gt; sim_mu_ref      0.14    0.91  99.26 -196.86 -66.38   0.73  66.82 196.57</span></a>
+<a class="sourceLine" id="cb7-78" data-line-number="78"><span class="co">#&gt; sim_sigma_ref  79.33    0.55  60.19    3.09  31.61  66.62 113.99 224.08</span></a>
+<a class="sourceLine" id="cb7-79" data-line-number="79"><span class="co">#&gt; sim_d_ref       0.71    1.27 139.00 -274.74 -85.29   2.30  84.56 275.07</span></a>
+<a class="sourceLine" id="cb7-80" data-line-number="80"><span class="co">#&gt; pred_d_ref      2.11    0.01   1.31   -0.49   1.26   2.10   2.96   4.70</span></a>
+<a class="sourceLine" id="cb7-81" data-line-number="81"><span class="co">#&gt; lp__          -43.51    0.02   1.04  -46.34 -43.91 -43.20 -42.77 -42.48</span></a>
 <a class="sourceLine" id="cb7-82" data-line-number="82"><span class="co">#&gt;               n_eff Rhat</span></a>
-<a class="sourceLine" id="cb7-83" data-line-number="83"><span class="co">#&gt; mu_ref         8405    1</span></a>
-<a class="sourceLine" id="cb7-84" data-line-number="84"><span class="co">#&gt; sigma_ref      7648    1</span></a>
-<a class="sourceLine" id="cb7-85" data-line-number="85"><span class="co">#&gt; sim_mu_ref    11952    1</span></a>
-<a class="sourceLine" id="cb7-86" data-line-number="86"><span class="co">#&gt; sim_sigma_ref 11879    1</span></a>
-<a class="sourceLine" id="cb7-87" data-line-number="87"><span class="co">#&gt; sim_d_ref     11736    1</span></a>
-<a class="sourceLine" id="cb7-88" data-line-number="88"><span class="co">#&gt; pred_d_ref    11254    1</span></a>
-<a class="sourceLine" id="cb7-89" data-line-number="89"><span class="co">#&gt; lp__           4891    1</span></a>
+<a class="sourceLine" id="cb7-83" data-line-number="83"><span class="co">#&gt; mu_ref         6663    1</span></a>
+<a class="sourceLine" id="cb7-84" data-line-number="84"><span class="co">#&gt; sigma_ref      6700    1</span></a>
+<a class="sourceLine" id="cb7-85" data-line-number="85"><span class="co">#&gt; sim_mu_ref    11881    1</span></a>
+<a class="sourceLine" id="cb7-86" data-line-number="86"><span class="co">#&gt; sim_sigma_ref 11770    1</span></a>
+<a class="sourceLine" id="cb7-87" data-line-number="87"><span class="co">#&gt; sim_d_ref     11919    1</span></a>
+<a class="sourceLine" id="cb7-88" data-line-number="88"><span class="co">#&gt; pred_d_ref    11005    1</span></a>
+<a class="sourceLine" id="cb7-89" data-line-number="89"><span class="co">#&gt; lp__           4794    1</span></a>
 <a class="sourceLine" id="cb7-90" data-line-number="90"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb7-91" data-line-number="91"><span class="co">#&gt; Samples were drawn using NUTS(diag_e) at Tue Jan 29 08:50:34 2019.</span></a>
+<a class="sourceLine" id="cb7-91" data-line-number="91"><span class="co">#&gt; Samples were drawn using NUTS(diag_e) at Tue Jan 29 18:19:31 2019.</span></a>
 <a class="sourceLine" id="cb7-92" data-line-number="92"><span class="co">#&gt; For each parameter, n_eff is a crude measure of effective sample size,</span></a>
 <a class="sourceLine" id="cb7-93" data-line-number="93"><span class="co">#&gt; and Rhat is the potential scale reduction factor on split chains (at </span></a>
 <a class="sourceLine" id="cb7-94" data-line-number="94"><span class="co">#&gt; convergence, Rhat=1).</span></a>
@@ -288,35 +288,35 @@ Let’s generate some data:</p>
 <a class="sourceLine" id="cb7-99" data-line-number="99"><span class="co">#&gt; post-warmup draws per chain=4000, total post-warmup draws=12000.</span></a>
 <a class="sourceLine" id="cb7-100" data-line-number="100"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb7-101" data-line-number="101"><span class="co">#&gt;                   mean se_mean     sd    2.5%    25%    50%    75%  97.5%</span></a>
-<a class="sourceLine" id="cb7-102" data-line-number="102"><span class="co">#&gt; mu_ref            1.01    0.00   0.07    0.87   0.97   1.01   1.05   1.14</span></a>
+<a class="sourceLine" id="cb7-102" data-line-number="102"><span class="co">#&gt; mu_ref            1.01    0.00   0.07    0.88   0.97   1.01   1.05   1.14</span></a>
 <a class="sourceLine" id="cb7-103" data-line-number="103"><span class="co">#&gt; sigma_ref         0.20    0.00   0.06    0.12   0.16   0.19   0.23   0.35</span></a>
-<a class="sourceLine" id="cb7-104" data-line-number="104"><span class="co">#&gt; mu_quest          3.17    0.00   0.18    2.81   3.06   3.17   3.28   3.53</span></a>
-<a class="sourceLine" id="cb7-105" data-line-number="105"><span class="co">#&gt; sigma_quest       0.56    0.00   0.17    0.34   0.45   0.53   0.64   0.97</span></a>
-<a class="sourceLine" id="cb7-106" data-line-number="106"><span class="co">#&gt; sim_mu_ref       -0.30    0.92 100.06 -195.47 -66.27  -0.93  67.60 193.86</span></a>
-<a class="sourceLine" id="cb7-107" data-line-number="107"><span class="co">#&gt; sim_sigma_ref    79.26    0.58  59.92    3.26  31.60  67.29 114.12 222.94</span></a>
-<a class="sourceLine" id="cb7-108" data-line-number="108"><span class="co">#&gt; sim_mu_quest     -0.02    0.90 100.26 -194.87 -67.72  -0.70  67.64 199.42</span></a>
-<a class="sourceLine" id="cb7-109" data-line-number="109"><span class="co">#&gt; sim_sigma_quest  79.62    0.55  60.15    3.22  31.91  67.18 114.40 225.10</span></a>
-<a class="sourceLine" id="cb7-110" data-line-number="110"><span class="co">#&gt; sim_d_ref        -0.78    1.28 139.36 -277.56 -85.65  -1.07  83.33 274.85</span></a>
-<a class="sourceLine" id="cb7-111" data-line-number="111"><span class="co">#&gt; sim_d_quest      -0.43    1.26 139.23 -281.07 -85.22  -0.13  85.91 273.64</span></a>
-<a class="sourceLine" id="cb7-112" data-line-number="112"><span class="co">#&gt; pred_d_ref        1.01    0.00   0.22    0.57   0.88   1.01   1.15   1.46</span></a>
-<a class="sourceLine" id="cb7-113" data-line-number="113"><span class="co">#&gt; pred_d_quest      3.17    0.01   0.62    1.95   2.79   3.17   3.56   4.42</span></a>
-<a class="sourceLine" id="cb7-114" data-line-number="114"><span class="co">#&gt; lp__            -30.70    0.03   1.65  -34.81 -31.46 -30.31 -29.52 -28.72</span></a>
+<a class="sourceLine" id="cb7-104" data-line-number="104"><span class="co">#&gt; mu_quest          3.17    0.00   0.19    2.80   3.06   3.17   3.28   3.54</span></a>
+<a class="sourceLine" id="cb7-105" data-line-number="105"><span class="co">#&gt; sigma_quest       0.56    0.00   0.16    0.34   0.45   0.53   0.64   0.97</span></a>
+<a class="sourceLine" id="cb7-106" data-line-number="106"><span class="co">#&gt; sim_mu_ref        0.81    0.92  99.60 -195.10 -66.48  -0.47  68.75 196.93</span></a>
+<a class="sourceLine" id="cb7-107" data-line-number="107"><span class="co">#&gt; sim_sigma_ref    79.96    0.56  60.36    3.00  31.60  67.74 115.45 222.76</span></a>
+<a class="sourceLine" id="cb7-108" data-line-number="108"><span class="co">#&gt; sim_mu_quest      0.06    0.91 100.72 -197.76 -67.81  -0.30  67.16 198.19</span></a>
+<a class="sourceLine" id="cb7-109" data-line-number="109"><span class="co">#&gt; sim_sigma_quest  78.76    0.54  59.70    2.94  31.33  66.08 113.83 223.54</span></a>
+<a class="sourceLine" id="cb7-110" data-line-number="110"><span class="co">#&gt; sim_d_ref         0.27    1.30 141.90 -283.28 -86.05   1.53  86.81 288.95</span></a>
+<a class="sourceLine" id="cb7-111" data-line-number="111"><span class="co">#&gt; sim_d_quest      -1.82    1.28 140.33 -283.24 -88.09  -0.57  84.02 275.81</span></a>
+<a class="sourceLine" id="cb7-112" data-line-number="112"><span class="co">#&gt; pred_d_ref        1.01    0.00   0.23    0.56   0.88   1.01   1.14   1.46</span></a>
+<a class="sourceLine" id="cb7-113" data-line-number="113"><span class="co">#&gt; pred_d_quest      3.17    0.01   0.61    1.91   2.80   3.17   3.54   4.39</span></a>
+<a class="sourceLine" id="cb7-114" data-line-number="114"><span class="co">#&gt; lp__            -30.65    0.02   1.57  -34.59 -31.41 -30.29 -29.51 -28.73</span></a>
 <a class="sourceLine" id="cb7-115" data-line-number="115"><span class="co">#&gt;                 n_eff Rhat</span></a>
-<a class="sourceLine" id="cb7-116" data-line-number="116"><span class="co">#&gt; mu_ref           4339    1</span></a>
-<a class="sourceLine" id="cb7-117" data-line-number="117"><span class="co">#&gt; sigma_ref        4184    1</span></a>
-<a class="sourceLine" id="cb7-118" data-line-number="118"><span class="co">#&gt; mu_quest         7849    1</span></a>
-<a class="sourceLine" id="cb7-119" data-line-number="119"><span class="co">#&gt; sigma_quest      6824    1</span></a>
-<a class="sourceLine" id="cb7-120" data-line-number="120"><span class="co">#&gt; sim_mu_ref      11879    1</span></a>
-<a class="sourceLine" id="cb7-121" data-line-number="121"><span class="co">#&gt; sim_sigma_ref   10818    1</span></a>
-<a class="sourceLine" id="cb7-122" data-line-number="122"><span class="co">#&gt; sim_mu_quest    12368    1</span></a>
-<a class="sourceLine" id="cb7-123" data-line-number="123"><span class="co">#&gt; sim_sigma_quest 11880    1</span></a>
-<a class="sourceLine" id="cb7-124" data-line-number="124"><span class="co">#&gt; sim_d_ref       11933    1</span></a>
-<a class="sourceLine" id="cb7-125" data-line-number="125"><span class="co">#&gt; sim_d_quest     12273    1</span></a>
-<a class="sourceLine" id="cb7-126" data-line-number="126"><span class="co">#&gt; pred_d_ref      10146    1</span></a>
-<a class="sourceLine" id="cb7-127" data-line-number="127"><span class="co">#&gt; pred_d_quest    12044    1</span></a>
-<a class="sourceLine" id="cb7-128" data-line-number="128"><span class="co">#&gt; lp__             3498    1</span></a>
+<a class="sourceLine" id="cb7-116" data-line-number="116"><span class="co">#&gt; mu_ref           8251    1</span></a>
+<a class="sourceLine" id="cb7-117" data-line-number="117"><span class="co">#&gt; sigma_ref        7308    1</span></a>
+<a class="sourceLine" id="cb7-118" data-line-number="118"><span class="co">#&gt; mu_quest         7855    1</span></a>
+<a class="sourceLine" id="cb7-119" data-line-number="119"><span class="co">#&gt; sigma_quest      7818    1</span></a>
+<a class="sourceLine" id="cb7-120" data-line-number="120"><span class="co">#&gt; sim_mu_ref      11812    1</span></a>
+<a class="sourceLine" id="cb7-121" data-line-number="121"><span class="co">#&gt; sim_sigma_ref   11665    1</span></a>
+<a class="sourceLine" id="cb7-122" data-line-number="122"><span class="co">#&gt; sim_mu_quest    12276    1</span></a>
+<a class="sourceLine" id="cb7-123" data-line-number="123"><span class="co">#&gt; sim_sigma_quest 12022    1</span></a>
+<a class="sourceLine" id="cb7-124" data-line-number="124"><span class="co">#&gt; sim_d_ref       11906    1</span></a>
+<a class="sourceLine" id="cb7-125" data-line-number="125"><span class="co">#&gt; sim_d_quest     12050    1</span></a>
+<a class="sourceLine" id="cb7-126" data-line-number="126"><span class="co">#&gt; pred_d_ref      11162    1</span></a>
+<a class="sourceLine" id="cb7-127" data-line-number="127"><span class="co">#&gt; pred_d_quest    11652    1</span></a>
+<a class="sourceLine" id="cb7-128" data-line-number="128"><span class="co">#&gt; lp__             4579    1</span></a>
 <a class="sourceLine" id="cb7-129" data-line-number="129"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb7-130" data-line-number="130"><span class="co">#&gt; Samples were drawn using NUTS(diag_e) at Tue Jan 29 08:50:35 2019.</span></a>
+<a class="sourceLine" id="cb7-130" data-line-number="130"><span class="co">#&gt; Samples were drawn using NUTS(diag_e) at Tue Jan 29 18:19:32 2019.</span></a>
 <a class="sourceLine" id="cb7-131" data-line-number="131"><span class="co">#&gt; For each parameter, n_eff is a crude measure of effective sample size,</span></a>
 <a class="sourceLine" id="cb7-132" data-line-number="132"><span class="co">#&gt; and Rhat is the potential scale reduction factor on split chains (at </span></a>
 <a class="sourceLine" id="cb7-133" data-line-number="133"><span class="co">#&gt; convergence, Rhat=1).</span></a></code></pre></div>
@@ -396,7 +396,7 @@ It represents the background knowledge of our data.</p>
 <a class="sourceLine" id="cb13-7" data-line-number="7">draws_prior_sub &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/t">t</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/matrix">as.matrix</a></span>(draws_prior[<span class="dv">1</span><span class="op">:</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(data_ref)]))</a>
 <a class="sourceLine" id="cb13-8" data-line-number="8">bayesplot<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/bayesplot/topics/PPC-distributions">ppc_dens_overlay</a></span>(data_ref, draws_prior_sub) <span class="op">+</span></a>
 <a class="sourceLine" id="cb13-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span>(<span class="dt">limits =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>))</a>
-<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co">#&gt; Warning: Removed 190 rows containing non-finite values (stat_density).</span></a></code></pre></div>
+<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co">#&gt; Warning: Removed 184 rows containing non-finite values (stat_density).</span></a></code></pre></div>
 <p><img src="normalnormal-model_files/figure-html/prior-check-1.png" width="672"></p>
 <p>The posterior predictive distribution, instead, should be a good approximation of the observed data.</p>
 <p>If it does not occur, it means that the model is not capable of predicting from the correct distribution.<br>

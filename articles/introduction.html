@@ -91,6 +91,7 @@
 
     
     
+
 <p>This vignette introduces the package.</p>
 <div id="data-generation" class="section level2">
 <h2 class="hasAnchor">
@@ -128,31 +129,31 @@ Note that this has nothing to do with the models implemented in this package.</p
 <a class="sourceLine" id="cb1-27" data-line-number="27"><span class="co">#&gt; # A tibble: 10 x 6</span></a>
 <a class="sourceLine" id="cb1-28" data-line-number="28"><span class="co">#&gt;    source `theta[1]` `theta[2]` `theta[3]` `theta[4]` `theta[5]`</span></a>
 <a class="sourceLine" id="cb1-29" data-line-number="29"><span class="co">#&gt;     &lt;int&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb1-30" data-line-number="30"><span class="co">#&gt;  1      1     0.0713     0.195      0.297       0.246      0.191</span></a>
-<a class="sourceLine" id="cb1-31" data-line-number="31"><span class="co">#&gt;  2      2     0.0898     0.247      0.103       0.257      0.303</span></a>
-<a class="sourceLine" id="cb1-32" data-line-number="32"><span class="co">#&gt;  3      3     0.141      0.312      0.162       0.243      0.143</span></a>
-<a class="sourceLine" id="cb1-33" data-line-number="33"><span class="co">#&gt;  4      4     0.209      0.116      0.281       0.199      0.194</span></a>
-<a class="sourceLine" id="cb1-34" data-line-number="34"><span class="co">#&gt;  5      5     0.186      0.158      0.234       0.201      0.221</span></a>
-<a class="sourceLine" id="cb1-35" data-line-number="35"><span class="co">#&gt;  6      6     0.301      0.0958     0.0982      0.165      0.339</span></a>
-<a class="sourceLine" id="cb1-36" data-line-number="36"><span class="co">#&gt;  7      7     0.296      0.117      0.122       0.210      0.256</span></a>
-<a class="sourceLine" id="cb1-37" data-line-number="37"><span class="co">#&gt;  8      8     0.161      0.363      0.151       0.142      0.182</span></a>
-<a class="sourceLine" id="cb1-38" data-line-number="38"><span class="co">#&gt;  9      9     0.424      0.112      0.185       0.101      0.178</span></a>
-<a class="sourceLine" id="cb1-39" data-line-number="39"><span class="co">#&gt; 10     10     0.0776     0.158      0.118       0.200      0.447</span></a>
+<a class="sourceLine" id="cb1-30" data-line-number="30"><span class="co">#&gt;  1      1     0.265      0.262      0.0858     0.0836      0.304</span></a>
+<a class="sourceLine" id="cb1-31" data-line-number="31"><span class="co">#&gt;  2      2     0.0917     0.0679     0.493      0.145       0.202</span></a>
+<a class="sourceLine" id="cb1-32" data-line-number="32"><span class="co">#&gt;  3      3     0.132      0.108      0.207      0.250       0.303</span></a>
+<a class="sourceLine" id="cb1-33" data-line-number="33"><span class="co">#&gt;  4      4     0.206      0.0706     0.326      0.146       0.251</span></a>
+<a class="sourceLine" id="cb1-34" data-line-number="34"><span class="co">#&gt;  5      5     0.167      0.216      0.174      0.241       0.203</span></a>
+<a class="sourceLine" id="cb1-35" data-line-number="35"><span class="co">#&gt;  6      6     0.150      0.0830     0.267      0.368       0.132</span></a>
+<a class="sourceLine" id="cb1-36" data-line-number="36"><span class="co">#&gt;  7      7     0.153      0.210      0.232      0.259       0.145</span></a>
+<a class="sourceLine" id="cb1-37" data-line-number="37"><span class="co">#&gt;  8      8     0.254      0.408      0.0915     0.105       0.141</span></a>
+<a class="sourceLine" id="cb1-38" data-line-number="38"><span class="co">#&gt;  9      9     0.162      0.127      0.264      0.281       0.165</span></a>
+<a class="sourceLine" id="cb1-39" data-line-number="39"><span class="co">#&gt; 10     10     0.138      0.163      0.135      0.360       0.204</span></a>
 <a class="sourceLine" id="cb1-40" data-line-number="40"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb1-41" data-line-number="41"><span class="co">#&gt; $df_pop</span></a>
 <a class="sourceLine" id="cb1-42" data-line-number="42"><span class="co">#&gt; # A tibble: 1,000 x 6</span></a>
-<a class="sourceLine" id="cb1-43" data-line-number="43"><span class="co">#&gt;    source      `x[1]`     `x[2]`   `x[3]`     `x[4]`  `x[5]`</span></a>
-<a class="sourceLine" id="cb1-44" data-line-number="44"><span class="co">#&gt;     &lt;int&gt;       &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb1-45" data-line-number="45"><span class="co">#&gt;  1      1 0.000000814 0.000480   0.0776   0.772      0.150  </span></a>
-<a class="sourceLine" id="cb1-46" data-line-number="46"><span class="co">#&gt;  2      1 0.000449    0.820      0.178    0.00000159 0.00149</span></a>
-<a class="sourceLine" id="cb1-47" data-line-number="47"><span class="co">#&gt;  3      1 0.839       0.0475     0.00745  0.0455     0.0603 </span></a>
-<a class="sourceLine" id="cb1-48" data-line-number="48"><span class="co">#&gt;  4      1 0.487       0.218      0.135    0.00403    0.156  </span></a>
-<a class="sourceLine" id="cb1-49" data-line-number="49"><span class="co">#&gt;  5      1 0.0273      0.00853    0.288    0.00997    0.666  </span></a>
-<a class="sourceLine" id="cb1-50" data-line-number="50"><span class="co">#&gt;  6      1 0.000177    0.00374    0.000413 0.000991   0.995  </span></a>
-<a class="sourceLine" id="cb1-51" data-line-number="51"><span class="co">#&gt;  7      1 0.0724      0.00719    0.139    0.00121    0.781  </span></a>
-<a class="sourceLine" id="cb1-52" data-line-number="52"><span class="co">#&gt;  8      1 0.000000138 0.0218     0.616    0.293      0.0684 </span></a>
-<a class="sourceLine" id="cb1-53" data-line-number="53"><span class="co">#&gt;  9      1 0.210       0.00000220 0.118    0.321      0.351  </span></a>
-<a class="sourceLine" id="cb1-54" data-line-number="54"><span class="co">#&gt; 10      1 0.00298     0.00553    0.944    0.0375     0.00981</span></a>
+<a class="sourceLine" id="cb1-43" data-line-number="43"><span class="co">#&gt;    source   `x[1]`  `x[2]`   `x[3]`   `x[4]`   `x[5]`</span></a>
+<a class="sourceLine" id="cb1-44" data-line-number="44"><span class="co">#&gt;     &lt;int&gt;    &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb1-45" data-line-number="45"><span class="co">#&gt;  1      1 0.0370   0.0218  1.49e-13 8.42e- 1 0.0989  </span></a>
+<a class="sourceLine" id="cb1-46" data-line-number="46"><span class="co">#&gt;  2      1 0.222    0.696   1.19e-19 8.19e- 2 0.000660</span></a>
+<a class="sourceLine" id="cb1-47" data-line-number="47"><span class="co">#&gt;  3      1 0.438    0.560   4.60e- 7 1.45e- 3 0.000135</span></a>
+<a class="sourceLine" id="cb1-48" data-line-number="48"><span class="co">#&gt;  4      1 0.115    0.448   2.90e- 1 7.50e- 3 0.140   </span></a>
+<a class="sourceLine" id="cb1-49" data-line-number="49"><span class="co">#&gt;  5      1 0.0103   0.782   6.18e- 3 1.61e-19 0.201   </span></a>
+<a class="sourceLine" id="cb1-50" data-line-number="50"><span class="co">#&gt;  6      1 0.165    0.00843 1.28e- 3 4.18e-15 0.826   </span></a>
+<a class="sourceLine" id="cb1-51" data-line-number="51"><span class="co">#&gt;  7      1 0.00394  0.0151  9.57e- 1 8.30e- 4 0.0231  </span></a>
+<a class="sourceLine" id="cb1-52" data-line-number="52"><span class="co">#&gt;  8      1 0.802    0.00848 3.85e-10 9.67e- 6 0.190   </span></a>
+<a class="sourceLine" id="cb1-53" data-line-number="53"><span class="co">#&gt;  9      1 0.181    0.699   4.23e- 2 1.27e- 4 0.0778  </span></a>
+<a class="sourceLine" id="cb1-54" data-line-number="54"><span class="co">#&gt; 10      1 0.000146 0.987   2.12e- 4 3.34e-11 0.0128  </span></a>
 <a class="sourceLine" id="cb1-55" data-line-number="55"><span class="co">#&gt; # … with 990 more rows</span></a>
 <a class="sourceLine" id="cb1-56" data-line-number="56"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb1-57" data-line-number="57"><span class="co">#&gt; $names_var</span></a>
@@ -188,41 +189,68 @@ Note that this has nothing to do with the models implemented in this package.</p
 <p>We see that each list contains the full set of observations, the set of indexes to reference items, and the set of indexes to the questioned items:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/str">str</a></span>(list_data_diff)</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt; List of 3</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt;  $ mtx      : num [1:1000, 1:5] 8.14e-07 4.49e-04 8.39e-01 4.87e-01 2.73e-02 ...</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt;  $ mtx      : num [1:1000, 1:5] 0.037 0.2216 0.4384 0.1153 0.0103 ...</span></a>
 <a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt;   ..- attr(*, "dimnames")=List of 2</span></a>
 <a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt;   .. ..$ : NULL</span></a>
 <a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt;   .. ..$ : chr [1:5] "x[1]" "x[2]" "x[3]" "x[4]" ...</span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt;  $ idx.ref  : int [1:10] 902 906 919 935 940 944 949 953 973 976</span></a>
-<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt;  $ idx.quest: int [1:10] 22 35 116 163 190 441 543 784 829 891</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt;  $ idx.ref  : int [1:10] 713 723 729 733 739 756 757 758 775 799</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt;  $ idx.quest: int [1:10] 49 52 64 100 219 295 384 481 683 978</span></a></code></pre></div>
 <p>From now on, we are ready to use the <code>rstanBF</code> package.</p>
 </div>
 </div>
 <div id="data-model" class="section level2">
 <h2 class="hasAnchor">
 <a href="#data-model" class="anchor"></a>Data model</h2>
-<p>The package supports several models:</p>
+<p>The package supports several models, identified by their short names:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="../reference/available_models.html">available_models</a></span>()</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; [1] "DirDir"      "DirFNorm"    "DirDirGamma" "NormNorm"</span></a></code></pre></div>
+<p>More details are also available in data frame form:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">df_models &lt;-<span class="st"> </span><span class="kw"><a href="../reference/available_models.html">available_models</a></span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">df_models</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; # A tibble: 4 x 5</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt;   short_name  long_name                S3_class    hyperpriors source_files</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt;                    &lt;chr&gt;       &lt;list&gt;      &lt;list&gt;      </span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; 1 DirDir      Dirichlet-Dirichlet      stanBF_turn &lt;chr [1]&gt;   &lt;chr [2]&gt;   </span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; 2 DirFNorm    Dirichlet-FoldedNormal   stanBF_turn &lt;chr [2]&gt;   &lt;chr [2]&gt;   </span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; 3 DirDirGamma Dirichlet-DirichletGamma stanBF_turn &lt;chr [3]&gt;   &lt;chr [2]&gt;   </span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; 4 NormNorm    Normal-Normal            NULL        &lt;chr [4]&gt;   &lt;chr [2]&gt;</span></a></code></pre></div>
+<p>and also in text form:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="../reference/available_models.html">available_models</a></span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>, <span class="dt">do_print =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; Model: "DirDir"</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt; Long name: "Dirichlet-Dirichlet"</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt; Hyperparameters: alpha</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; Model: "DirFNorm"</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; Long name: "Dirichlet-FoldedNormal"</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; Hyperparameters: c("mu", "sigma")</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; Model: "DirDirGamma"</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; Long name: "Dirichlet-DirichletGamma"</span></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; Hyperparameters: c("alpha", "alpha_0", "beta_0")</span></a>
+<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co">#&gt; Model: "NormNorm"</span></a>
+<a class="sourceLine" id="cb7-15" data-line-number="15"><span class="co">#&gt; Long name: "Normal-Normal"</span></a>
+<a class="sourceLine" id="cb7-16" data-line-number="16"><span class="co">#&gt; Hyperparameters: c("mu_mu0", "mu_sigma0", "sigma_mu0", "sigma_sigma0")</span></a></code></pre></div>
 </div>
 <div id="hyperparameter-elicitation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#hyperparameter-elicitation" class="anchor"></a>Hyperparameter elicitation</h2>
 <p>We choose the Dirichlet-Dirichlet model.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">model &lt;-<span class="st"> 'DirDir'</span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">model &lt;-<span class="st"> 'DirDir'</span></a></code></pre></div>
 <p>The only hyperparameter which must be provided is <span class="math inline">\(\alpha\)</span>, the Dirichlet parameter at the hyperprior level.</p>
 <p>It is known since the data has been generated: let’s use it, for now.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">list_hyperpriors &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">alpha =</span> list_pop<span class="op">$</span>alpha)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">list_hyperpriors &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">alpha =</span> list_pop<span class="op">$</span>alpha)</a></code></pre></div>
 <div id="using-functions" class="section level3">
 <h3 class="hasAnchor">
 <a href="#using-functions" class="anchor"></a>Using functions</h3>
 <p>If one wants to elicit a value for the hyperparameter(s) required by the model, the package supplies the function <code>stanBF_elicit_hyperpriors</code>.<br>
 See the documentation for details:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="../reference/stanBF_elicit_hyperpriors.html">stanBF_elicit_hyperpriors</a></span>(list_samples_same<span class="op">$</span>df_background, model, <span class="dt">mode_hyperparameter =</span> <span class="st">'ML'</span>, <span class="dt">mode_ML =</span> <span class="st">'naive'</span>)</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt; $alpha</span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt; [1] 7.046874 6.649418 6.107352 6.328793 7.785612</span></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="kw"><a href="../reference/stanBF_elicit_hyperpriors.html">stanBF_elicit_hyperpriors</a></span>(list_samples_same<span class="op">$</span>df_background, model, <span class="dt">mode_hyperparameter =</span> <span class="st">'ML'</span>, <span class="dt">mode_ML =</span> <span class="st">'ML'</span>)</a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; $alpha</span></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; [1] 6.793649 6.689121 6.322536 6.740116 7.819061</span></a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="../reference/stanBF_elicit_hyperpriors.html">stanBF_elicit_hyperpriors</a></span>(list_samples_same<span class="op">$</span>df_background, model, <span class="dt">mode_hyperparameter =</span> <span class="st">'ML'</span>, <span class="dt">mode_ML =</span> <span class="st">'naive'</span>)</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt; $alpha</span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co">#&gt; [1] 3.698975 4.090869 5.185362 4.738075 4.479528</span></a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="kw"><a href="../reference/stanBF_elicit_hyperpriors.html">stanBF_elicit_hyperpriors</a></span>(list_samples_same<span class="op">$</span>df_background, model, <span class="dt">mode_hyperparameter =</span> <span class="st">'ML'</span>, <span class="dt">mode_ML =</span> <span class="st">'ML'</span>)</a>
+<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt; $alpha</span></a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt; [1] 5.425624 5.593108 6.865328 6.507833 6.465677</span></a></code></pre></div>
 <p>Compare the estimate with the generating value:</p>
 <p><span class="math inline">\(\alpha = \left( 5,5,5,5,5 \right)\)</span></p>
 </div>
@@ -231,43 +259,43 @@ See the documentation for details:</p>
 <h2 class="hasAnchor">
 <a href="#sampling" class="anchor"></a>Sampling</h2>
 <p>We need to set up the HMC parameters, first:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">n.iter &lt;-<span class="st"> </span><span class="dv">2000</span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">n.burnin &lt;-<span class="st"> </span><span class="dv">200</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co"># n.iter &lt;- 10000</span></a>
-<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co"># n.burnin &lt;- 1000</span></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6">n.chains &lt;-<span class="st"> </span><span class="dv">2</span> <span class="co"># parallel::detectCores()</span></a>
-<a class="sourceLine" id="cb9-7" data-line-number="7">n.cores &lt;-<span class="st"> </span><span class="dv">2</span> <span class="co"># parallel::detectCores()</span></a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">n.iter &lt;-<span class="st"> </span><span class="dv">2000</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">n.burnin &lt;-<span class="st"> </span><span class="dv">200</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co"># n.iter &lt;- 10000</span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="co"># n.burnin &lt;- 1000</span></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6">n.chains &lt;-<span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb11-7" data-line-number="7">n.cores &lt;-<span class="st"> </span><span class="dv">2</span></a></code></pre></div>
 <p>Now we are ready! Let’s sample:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">stanBF_obj_same &lt;-<span class="st"> </span>rstanBF<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstanBF/topics/compute_BF_Stan">compute_BF_Stan</a></span>(list_data_same, model, list_hyperpriors, <span class="dt">data_other =</span> <span class="ot">NULL</span>, n.iter, n.burnin, n.chains, n.cores, <span class="dt">silent =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2">stanBF_obj_diff &lt;-<span class="st"> </span>rstanBF<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstanBF/topics/compute_BF_Stan">compute_BF_Stan</a></span>(list_data_diff, model, list_hyperpriors, <span class="dt">data_other =</span> <span class="ot">NULL</span>, n.iter, n.burnin, n.chains, n.cores, <span class="dt">silent =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">stanBF_obj_same</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="co">#&gt; stanBF object containing posterior samples from H1, H2.</span></a>
-<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co">#&gt; Model: Dirichlet-Dirichlet </span></a>
-<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="co">#&gt; Obtained BF: 16.76021 </span></a>
-<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="co">#&gt; Ran with 2 chains, 2000 HMC iterations.</span></a>
-<a class="sourceLine" id="cb11-6" data-line-number="6">stanBF_obj_diff</a>
-<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="co">#&gt; stanBF object containing posterior samples from H1, H2.</span></a>
-<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="co">#&gt; Model: Dirichlet-Dirichlet </span></a>
-<a class="sourceLine" id="cb11-9" data-line-number="9"><span class="co">#&gt; Obtained BF: 0.9349564 </span></a>
-<a class="sourceLine" id="cb11-10" data-line-number="10"><span class="co">#&gt; Ran with 2 chains, 2000 HMC iterations.</span></a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">stanBF_obj_same &lt;-<span class="st"> </span>rstanBF<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstanBF/topics/compute_BF_Stan">compute_BF_Stan</a></span>(list_data_same, model, list_hyperpriors, <span class="dt">data_other =</span> <span class="ot">NULL</span>, n.iter, n.burnin, n.chains, n.cores, <span class="dt">silent =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">stanBF_obj_diff &lt;-<span class="st"> </span>rstanBF<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstanBF/topics/compute_BF_Stan">compute_BF_Stan</a></span>(list_data_diff, model, list_hyperpriors, <span class="dt">data_other =</span> <span class="ot">NULL</span>, n.iter, n.burnin, n.chains, n.cores, <span class="dt">silent =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">stanBF_obj_same</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co">#&gt; stanBF object containing posterior samples from H1, H2.</span></a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co">#&gt; Model: Dirichlet-Dirichlet </span></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="co">#&gt; Obtained BF: 20.12459 </span></a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt; Ran with 2 chains, 2000 HMC iterations.</span></a>
+<a class="sourceLine" id="cb13-6" data-line-number="6">stanBF_obj_diff</a>
+<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt; stanBF object containing posterior samples from H1, H2.</span></a>
+<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt; Model: Dirichlet-Dirichlet </span></a>
+<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="co">#&gt; Obtained BF: 0.1267064 </span></a>
+<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co">#&gt; Ran with 2 chains, 2000 HMC iterations.</span></a></code></pre></div>
 </div>
 <div id="bayes-factor" class="section level2">
 <h2 class="hasAnchor">
 <a href="#bayes-factor" class="anchor"></a>Bayes Factor</h2>
 <p>The objects contain the Bayes Factors:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">stanBF_obj_same<span class="op">$</span>BF</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="co">#&gt; [1] 16.76021</span></a>
-<a class="sourceLine" id="cb12-3" data-line-number="3">stanBF_obj_diff<span class="op">$</span>BF</a>
-<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#&gt; [1] 0.9349564</span></a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">stanBF_obj_same<span class="op">$</span>BF</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="co">#&gt; [1] 20.12459</span></a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">stanBF_obj_diff<span class="op">$</span>BF</a>
+<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="co">#&gt; [1] 0.1267064</span></a></code></pre></div>
 </div>
 <div id="stan-objects" class="section level2">
 <h2 class="hasAnchor">
 <a href="#stan-objects" class="anchor"></a>Stan objects</h2>
 <p>rstanBF objects contain <code>stanfit</code> objects (one under <span class="math inline">\(H_1\)</span>, one under <span class="math inline">\(H_2\)</span>), which are actually the outputs of Stan sampling procedure.</p>
 <p>They are available under the <code>stanfit</code> property:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">stanBF_obj_same<span class="op">$</span>stanfit<span class="op">$</span>H1</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2">stanBF_obj_same<span class="op">$</span>stanfit<span class="op">$</span>H2</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">stanBF_obj_same<span class="op">$</span>stanfit<span class="op">$</span>H1</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">stanBF_obj_same<span class="op">$</span>stanfit<span class="op">$</span>H2</a></code></pre></div>
 <p>One can either further process them using standard tools (<code>rstan</code> post-processing functions, <code>coda</code>, etc.), or use the supplied functions in the package.</p>
 <p>These functions usually do different things depending on the model (e.g. often only the likelihood).</p>
 </div>
@@ -280,38 +308,38 @@ For now, only <code>stanBF_turn</code> models are completely specified.</p>
 <h3 class="hasAnchor">
 <a href="#posteriors" class="anchor"></a>Posteriors</h3>
 <p>Returned objects often implement a <code>samples</code> method to extract samples from the interesting posteriors:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(rstanBF<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstanBF/topics/samples">samples</a></span>(stanBF_obj_same))</a>
-<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="co">#&gt; # A tibble: 6 x 13</span></a>
-<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="co">#&gt;   Iteration Hypothesis Source `theta[1]` `theta[2]` `theta[3]` `theta[4]`</span></a>
-<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="co">#&gt;       &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="co">#&gt; 1         1 Hp         Both       0.0725      0.160      0.165      0.186</span></a>
-<a class="sourceLine" id="cb14-6" data-line-number="6"><span class="co">#&gt; 2         2 Hp         Both       0.0637      0.213      0.209      0.202</span></a>
-<a class="sourceLine" id="cb14-7" data-line-number="7"><span class="co">#&gt; 3         3 Hp         Both       0.121       0.147      0.183      0.164</span></a>
-<a class="sourceLine" id="cb14-8" data-line-number="8"><span class="co">#&gt; 4         4 Hp         Both       0.0743      0.209      0.191      0.160</span></a>
-<a class="sourceLine" id="cb14-9" data-line-number="9"><span class="co">#&gt; 5         5 Hp         Both       0.113       0.203      0.222      0.141</span></a>
-<a class="sourceLine" id="cb14-10" data-line-number="10"><span class="co">#&gt; 6         6 Hp         Both       0.0850      0.179      0.173      0.145</span></a>
-<a class="sourceLine" id="cb14-11" data-line-number="11"><span class="co">#&gt; # … with 6 more variables: `theta[5]` &lt;dbl&gt;, `rho[1]` &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb14-12" data-line-number="12"><span class="co">#&gt; #   `rho[2]` &lt;dbl&gt;, `rho[3]` &lt;dbl&gt;, `rho[4]` &lt;dbl&gt;, `rho[5]` &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb14-13" data-line-number="13"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(rstanBF<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstanBF/topics/samples">samples</a></span>(stanBF_obj_diff))</a>
-<a class="sourceLine" id="cb14-14" data-line-number="14"><span class="co">#&gt; # A tibble: 6 x 13</span></a>
-<a class="sourceLine" id="cb14-15" data-line-number="15"><span class="co">#&gt;   Iteration Hypothesis Source `theta[1]` `theta[2]` `theta[3]` `theta[4]`</span></a>
-<a class="sourceLine" id="cb14-16" data-line-number="16"><span class="co">#&gt;       &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb14-17" data-line-number="17"><span class="co">#&gt; 1         1 Hp         Both       0.100       0.220      0.178      0.196</span></a>
-<a class="sourceLine" id="cb14-18" data-line-number="18"><span class="co">#&gt; 2         2 Hp         Both       0.0903      0.281      0.149      0.257</span></a>
-<a class="sourceLine" id="cb14-19" data-line-number="19"><span class="co">#&gt; 3         3 Hp         Both       0.155       0.208      0.143      0.253</span></a>
-<a class="sourceLine" id="cb14-20" data-line-number="20"><span class="co">#&gt; 4         4 Hp         Both       0.134       0.141      0.171      0.223</span></a>
-<a class="sourceLine" id="cb14-21" data-line-number="21"><span class="co">#&gt; 5         5 Hp         Both       0.146       0.153      0.219      0.228</span></a>
-<a class="sourceLine" id="cb14-22" data-line-number="22"><span class="co">#&gt; 6         6 Hp         Both       0.148       0.248      0.152      0.225</span></a>
-<a class="sourceLine" id="cb14-23" data-line-number="23"><span class="co">#&gt; # … with 6 more variables: `theta[5]` &lt;dbl&gt;, `rho[1]` &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb14-24" data-line-number="24"><span class="co">#&gt; #   `rho[2]` &lt;dbl&gt;, `rho[3]` &lt;dbl&gt;, `rho[4]` &lt;dbl&gt;, `rho[5]` &lt;dbl&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(rstanBF<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstanBF/topics/samples">samples</a></span>(stanBF_obj_same))</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="co">#&gt; # A tibble: 6 x 13</span></a>
+<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="co">#&gt;   Iteration Hypothesis Source `theta[1]` `theta[2]` `theta[3]` `theta[4]`</span></a>
+<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="co">#&gt;       &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="co">#&gt; 1         1 Hp         Both        0.256      0.348      0.112     0.108 </span></a>
+<a class="sourceLine" id="cb16-6" data-line-number="6"><span class="co">#&gt; 2         2 Hp         Both        0.226      0.361      0.117     0.118 </span></a>
+<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="co">#&gt; 3         3 Hp         Both        0.251      0.369      0.141     0.112 </span></a>
+<a class="sourceLine" id="cb16-8" data-line-number="8"><span class="co">#&gt; 4         4 Hp         Both        0.213      0.364      0.153     0.100 </span></a>
+<a class="sourceLine" id="cb16-9" data-line-number="9"><span class="co">#&gt; 5         5 Hp         Both        0.276      0.316      0.133     0.115 </span></a>
+<a class="sourceLine" id="cb16-10" data-line-number="10"><span class="co">#&gt; 6         6 Hp         Both        0.213      0.458      0.110     0.0967</span></a>
+<a class="sourceLine" id="cb16-11" data-line-number="11"><span class="co">#&gt; # … with 6 more variables: `theta[5]` &lt;dbl&gt;, `rho[1]` &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb16-12" data-line-number="12"><span class="co">#&gt; #   `rho[2]` &lt;dbl&gt;, `rho[3]` &lt;dbl&gt;, `rho[4]` &lt;dbl&gt;, `rho[5]` &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb16-13" data-line-number="13"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(rstanBF<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstanBF/topics/samples">samples</a></span>(stanBF_obj_diff))</a>
+<a class="sourceLine" id="cb16-14" data-line-number="14"><span class="co">#&gt; # A tibble: 6 x 13</span></a>
+<a class="sourceLine" id="cb16-15" data-line-number="15"><span class="co">#&gt;   Iteration Hypothesis Source `theta[1]` `theta[2]` `theta[3]` `theta[4]`</span></a>
+<a class="sourceLine" id="cb16-16" data-line-number="16"><span class="co">#&gt;       &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb16-17" data-line-number="17"><span class="co">#&gt; 1         1 Hp         Both        0.239      0.258      0.165     0.0910</span></a>
+<a class="sourceLine" id="cb16-18" data-line-number="18"><span class="co">#&gt; 2         2 Hp         Both        0.176      0.313      0.197     0.0798</span></a>
+<a class="sourceLine" id="cb16-19" data-line-number="19"><span class="co">#&gt; 3         3 Hp         Both        0.182      0.351      0.170     0.133 </span></a>
+<a class="sourceLine" id="cb16-20" data-line-number="20"><span class="co">#&gt; 4         4 Hp         Both        0.205      0.272      0.173     0.119 </span></a>
+<a class="sourceLine" id="cb16-21" data-line-number="21"><span class="co">#&gt; 5         5 Hp         Both        0.260      0.242      0.201     0.107 </span></a>
+<a class="sourceLine" id="cb16-22" data-line-number="22"><span class="co">#&gt; 6         6 Hp         Both        0.193      0.247      0.150     0.115 </span></a>
+<a class="sourceLine" id="cb16-23" data-line-number="23"><span class="co">#&gt; # … with 6 more variables: `theta[5]` &lt;dbl&gt;, `rho[1]` &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb16-24" data-line-number="24"><span class="co">#&gt; #   `rho[2]` &lt;dbl&gt;, `rho[3]` &lt;dbl&gt;, `rho[4]` &lt;dbl&gt;, `rho[5]` &lt;dbl&gt;</span></a></code></pre></div>
 </div>
 <div id="plots" class="section level3">
 <h3 class="hasAnchor">
 <a href="#plots" class="anchor"></a>Plots</h3>
 <p>Returned objects often implement a <code>plot_posteriors</code> method:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">rstanBF<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstanBF/topics/plot_posteriors">plot_posteriors</a></span>(stanBF_obj_same, <span class="st">'theta'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">rstanBF<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstanBF/topics/plot_posteriors">plot_posteriors</a></span>(stanBF_obj_same, <span class="st">'theta'</span>)</a></code></pre></div>
 <p><img src="introduction_files/figure-html/HMC-posteriors-plot-1.png" width="672"></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">rstanBF<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstanBF/topics/plot_posteriors">plot_posteriors</a></span>(stanBF_obj_diff, <span class="st">'theta'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">rstanBF<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstanBF/topics/plot_posteriors">plot_posteriors</a></span>(stanBF_obj_diff, <span class="st">'theta'</span>)</a></code></pre></div>
 <p><img src="introduction_files/figure-html/HMC-posteriors-plot-2.png" width="672"></p>
 </div>
 <div id="prior-and-posterior-predictive-distributions" class="section level3">
@@ -319,145 +347,145 @@ For now, only <code>stanBF_turn</code> models are completely specified.</p>
 <a href="#prior-and-posterior-predictive-distributions" class="anchor"></a>Prior and posterior predictive distributions</h3>
 <p>Models often implement draws from the prior and posterior predictive distributions.</p>
 <p>Prior predictive: the names of the variables in the Stan source start with <code>sim_</code>.<br>
-Posterior predictive: the names of the variables in the Stan source start with ‘pred_’.</p>
+Posterior predictive: the names of the variables in the Stan source start with <code>pred_</code>.</p>
 <p>One can use the <code>prior_pred</code> and <code>posterior_pred</code> methods to extract and format them:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">df_prior_pred_same &lt;-<span class="st"> </span><span class="kw"><a href="../reference/prior_pred.html">prior_pred</a></span>(stanBF_obj_same)</a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(df_prior_pred_same, <span class="dv">20</span>)</a>
-<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="co">#&gt; # A tibble: 20 x 7</span></a>
-<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="co">#&gt;         `x[1]`    `x[2]`   `x[3]`   `x[4]`   `x[5]` Hypothesis Source</span></a>
-<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="co">#&gt;          &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt; </span></a>
-<a class="sourceLine" id="cb17-6" data-line-number="6"><span class="co">#&gt;  1 0.343       0.407     1.69e- 1 9.31e- 4 8.04e- 2 Hp         Both  </span></a>
-<a class="sourceLine" id="cb17-7" data-line-number="7"><span class="co">#&gt;  2 0.906       0.00182   1.19e- 5 1.28e- 2 7.91e- 2 Hp         Both  </span></a>
-<a class="sourceLine" id="cb17-8" data-line-number="8"><span class="co">#&gt;  3 0.171       0.644     1.55e- 1 2.94e- 2 2.86e- 4 Hp         Both  </span></a>
-<a class="sourceLine" id="cb17-9" data-line-number="9"><span class="co">#&gt;  4 0.152       0.00193   1.24e- 6 9.39e- 9 8.46e- 1 Hp         Both  </span></a>
-<a class="sourceLine" id="cb17-10" data-line-number="10"><span class="co">#&gt;  5 0.0375      0.0367    9.98e- 2 8.26e- 1 2.27e- 8 Hp         Both  </span></a>
-<a class="sourceLine" id="cb17-11" data-line-number="11"><span class="co">#&gt;  6 0.000180    0.263     4.94e- 1 2.43e- 1 1.94e- 4 Hp         Both  </span></a>
-<a class="sourceLine" id="cb17-12" data-line-number="12"><span class="co">#&gt;  7 0.000685    0.0882    1.75e-10 6.35e- 1 2.76e- 1 Hp         Both  </span></a>
-<a class="sourceLine" id="cb17-13" data-line-number="13"><span class="co">#&gt;  8 0.00389     0.0000374 6.94e- 1 2.98e- 1 3.62e- 3 Hp         Both  </span></a>
-<a class="sourceLine" id="cb17-14" data-line-number="14"><span class="co">#&gt;  9 0.00000634  0.261     1.62e- 1 5.78e- 1 1.36e-22 Hp         Both  </span></a>
-<a class="sourceLine" id="cb17-15" data-line-number="15"><span class="co">#&gt; 10 0.214       0.0775    1.88e- 4 8.24e- 5 7.08e- 1 Hp         Both  </span></a>
-<a class="sourceLine" id="cb17-16" data-line-number="16"><span class="co">#&gt; 11 0.0157      0.0000618 1.37e- 1 8.47e- 1 3.04e-11 Hp         Both  </span></a>
-<a class="sourceLine" id="cb17-17" data-line-number="17"><span class="co">#&gt; 12 0.115       0.885     1.23e- 4 4.17e- 6 1.86e- 6 Hp         Both  </span></a>
-<a class="sourceLine" id="cb17-18" data-line-number="18"><span class="co">#&gt; 13 0.000000176 0.0345    6.66e- 1 3.25e- 2 2.67e- 1 Hp         Both  </span></a>
-<a class="sourceLine" id="cb17-19" data-line-number="19"><span class="co">#&gt; 14 0.483       0.00647   1.17e- 4 2.02e- 2 4.91e- 1 Hp         Both  </span></a>
-<a class="sourceLine" id="cb17-20" data-line-number="20"><span class="co">#&gt; 15 0.117       0.760     1.23e- 1 1.02e- 7 3.15e- 6 Hp         Both  </span></a>
-<a class="sourceLine" id="cb17-21" data-line-number="21"><span class="co">#&gt; 16 0.0390      0.0131    7.40e- 1 1.30e- 2 1.95e- 1 Hp         Both  </span></a>
-<a class="sourceLine" id="cb17-22" data-line-number="22"><span class="co">#&gt; 17 0.000000848 0.0272    4.40e- 1 1.36e-11 5.33e- 1 Hp         Both  </span></a>
-<a class="sourceLine" id="cb17-23" data-line-number="23"><span class="co">#&gt; 18 0.00000831  0.481     1.11e- 2 9.95e- 2 4.08e- 1 Hp         Both  </span></a>
-<a class="sourceLine" id="cb17-24" data-line-number="24"><span class="co">#&gt; 19 0.000171    0.924     4.07e- 7 5.25e- 8 7.56e- 2 Hp         Both  </span></a>
-<a class="sourceLine" id="cb17-25" data-line-number="25"><span class="co">#&gt; 20 0.000000344 0.0264    2.61e- 2 7.87e- 1 1.60e- 1 Hp         Both</span></a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">df_prior_pred_same &lt;-<span class="st"> </span><span class="kw"><a href="../reference/prior_pred.html">prior_pred</a></span>(stanBF_obj_same)</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(df_prior_pred_same, <span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb19-3" data-line-number="3"><span class="co">#&gt; # A tibble: 20 x 7</span></a>
+<a class="sourceLine" id="cb19-4" data-line-number="4"><span class="co">#&gt;          `x[1]`     `x[2]`   `x[3]`   `x[4]`     `x[5]` Hypothesis Source</span></a>
+<a class="sourceLine" id="cb19-5" data-line-number="5"><span class="co">#&gt;           &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt; </span></a>
+<a class="sourceLine" id="cb19-6" data-line-number="6"><span class="co">#&gt;  1 0.923        0.000745   3.72e- 2 3.85e- 2 0.00000523 Hp         Both  </span></a>
+<a class="sourceLine" id="cb19-7" data-line-number="7"><span class="co">#&gt;  2 0.00379      0.241      5.97e- 1 9.22e- 3 0.149      Hp         Both  </span></a>
+<a class="sourceLine" id="cb19-8" data-line-number="8"><span class="co">#&gt;  3 0.0112       0.0251     9.60e- 1 1.75e- 3 0.00177    Hp         Both  </span></a>
+<a class="sourceLine" id="cb19-9" data-line-number="9"><span class="co">#&gt;  4 0.0677       0.0479     8.11e- 1 6.81e- 2 0.00490    Hp         Both  </span></a>
+<a class="sourceLine" id="cb19-10" data-line-number="10"><span class="co">#&gt;  5 0.333        0.366      9.61e- 7 2.54e- 3 0.299      Hp         Both  </span></a>
+<a class="sourceLine" id="cb19-11" data-line-number="11"><span class="co">#&gt;  6 0.0000348    0.177      4.24e- 1 3.13e- 1 0.0861     Hp         Both  </span></a>
+<a class="sourceLine" id="cb19-12" data-line-number="12"><span class="co">#&gt;  7 0.794        0.0675     2.23e- 4 1.38e- 1 0.000134   Hp         Both  </span></a>
+<a class="sourceLine" id="cb19-13" data-line-number="13"><span class="co">#&gt;  8 0.00187      0.000129   9.62e- 1 8.48e- 3 0.0280     Hp         Both  </span></a>
+<a class="sourceLine" id="cb19-14" data-line-number="14"><span class="co">#&gt;  9 0.00405      0.522      5.39e- 2 4.20e- 1 0.00000998 Hp         Both  </span></a>
+<a class="sourceLine" id="cb19-15" data-line-number="15"><span class="co">#&gt; 10 0.806        0.151      2.44e- 4 1.03e- 2 0.0323     Hp         Both  </span></a>
+<a class="sourceLine" id="cb19-16" data-line-number="16"><span class="co">#&gt; 11 0.0406       0.000297   2.00e-14 1.55e- 4 0.959      Hp         Both  </span></a>
+<a class="sourceLine" id="cb19-17" data-line-number="17"><span class="co">#&gt; 12 0.349        0.00161    8.61e- 3 4.45e- 1 0.196      Hp         Both  </span></a>
+<a class="sourceLine" id="cb19-18" data-line-number="18"><span class="co">#&gt; 13 0.0583       0.294      6.20e- 1 1.67e- 2 0.0106     Hp         Both  </span></a>
+<a class="sourceLine" id="cb19-19" data-line-number="19"><span class="co">#&gt; 14 0.0281       0.00000182 1.35e- 2 2.86e- 2 0.930      Hp         Both  </span></a>
+<a class="sourceLine" id="cb19-20" data-line-number="20"><span class="co">#&gt; 15 0.227        0.0000243  3.61e- 2 3.76e- 1 0.361      Hp         Both  </span></a>
+<a class="sourceLine" id="cb19-21" data-line-number="21"><span class="co">#&gt; 16 0.0000000433 0.640      3.05e- 1 4.89e- 2 0.00574    Hp         Both  </span></a>
+<a class="sourceLine" id="cb19-22" data-line-number="22"><span class="co">#&gt; 17 0.00000944   0.000389   4.86e- 2 3.56e- 3 0.947      Hp         Both  </span></a>
+<a class="sourceLine" id="cb19-23" data-line-number="23"><span class="co">#&gt; 18 0.189        0.000288   4.81e- 1 5.08e- 6 0.329      Hp         Both  </span></a>
+<a class="sourceLine" id="cb19-24" data-line-number="24"><span class="co">#&gt; 19 0.106        0.000373   3.41e- 7 8.91e- 1 0.00177    Hp         Both  </span></a>
+<a class="sourceLine" id="cb19-25" data-line-number="25"><span class="co">#&gt; 20 0.338        0.192      1.55e- 3 4.92e-14 0.468      Hp         Both</span></a></code></pre></div>
 <p>This is interpreted as an example of a dataset, generated according to the model, before having observed any data.</p>
 <p>They can be used to assess if the specified hyperparameters are too restrictive or too wide.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">df_posterior_pred_same &lt;-<span class="st"> </span><span class="kw"><a href="../reference/posterior_pred.html">posterior_pred</a></span>(stanBF_obj_same)</a>
-<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(df_posterior_pred_same, <span class="dv">20</span>)</a>
-<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="co">#&gt; # A tibble: 20 x 7</span></a>
-<a class="sourceLine" id="cb18-4" data-line-number="4"><span class="co">#&gt;      `x[1]`        `x[2]`        `x[3]`   `x[4]`  `x[5]` Hypothesis Source</span></a>
-<a class="sourceLine" id="cb18-5" data-line-number="5"><span class="co">#&gt;       &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt; </span></a>
-<a class="sourceLine" id="cb18-6" data-line-number="6"><span class="co">#&gt;  1 4.06e-13 0.000756      0.450         7.19e- 2 0.478   Hp         Both  </span></a>
-<a class="sourceLine" id="cb18-7" data-line-number="7"><span class="co">#&gt;  2 2.49e- 4 0.641         0.165         4.34e- 3 0.189   Hp         Both  </span></a>
-<a class="sourceLine" id="cb18-8" data-line-number="8"><span class="co">#&gt;  3 3.77e- 1 0.0000960     0.000793      6.69e- 3 0.616   Hp         Both  </span></a>
-<a class="sourceLine" id="cb18-9" data-line-number="9"><span class="co">#&gt;  4 1.76e- 5 0.659         0.000552      2.16e- 7 0.340   Hp         Both  </span></a>
-<a class="sourceLine" id="cb18-10" data-line-number="10"><span class="co">#&gt;  5 1.53e- 9 0.00885       0.00140       1.44e- 1 0.846   Hp         Both  </span></a>
-<a class="sourceLine" id="cb18-11" data-line-number="11"><span class="co">#&gt;  6 1.50e- 3 0.273         0.0102        1.35e-17 0.715   Hp         Both  </span></a>
-<a class="sourceLine" id="cb18-12" data-line-number="12"><span class="co">#&gt;  7 4.49e- 1 0.00877       0.234         1.16e- 1 0.192   Hp         Both  </span></a>
-<a class="sourceLine" id="cb18-13" data-line-number="13"><span class="co">#&gt;  8 2.15e- 3 0.833         0.0731        8.60e- 2 0.00618 Hp         Both  </span></a>
-<a class="sourceLine" id="cb18-14" data-line-number="14"><span class="co">#&gt;  9 7.94e- 6 0.155         0.0000146     3.46e- 2 0.811   Hp         Both  </span></a>
-<a class="sourceLine" id="cb18-15" data-line-number="15"><span class="co">#&gt; 10 9.06e- 9 0.00329       0.671         8.54e- 3 0.317   Hp         Both  </span></a>
-<a class="sourceLine" id="cb18-16" data-line-number="16"><span class="co">#&gt; 11 3.94e- 4 0.0168        0.0000221     6.71e- 5 0.983   Hp         Both  </span></a>
-<a class="sourceLine" id="cb18-17" data-line-number="17"><span class="co">#&gt; 12 6.82e- 2 0.0813        0.0623        2.44e- 1 0.544   Hp         Both  </span></a>
-<a class="sourceLine" id="cb18-18" data-line-number="18"><span class="co">#&gt; 13 4.09e- 3 0.00000000993 0.00286       1.34e- 7 0.993   Hp         Both  </span></a>
-<a class="sourceLine" id="cb18-19" data-line-number="19"><span class="co">#&gt; 14 3.66e- 6 0.0213        0.00327       7.04e- 1 0.272   Hp         Both  </span></a>
-<a class="sourceLine" id="cb18-20" data-line-number="20"><span class="co">#&gt; 15 5.79e- 7 0.0276        0.00173       1.82e- 9 0.971   Hp         Both  </span></a>
-<a class="sourceLine" id="cb18-21" data-line-number="21"><span class="co">#&gt; 16 2.35e-10 0.00000256    0.000558      3.44e- 3 0.996   Hp         Both  </span></a>
-<a class="sourceLine" id="cb18-22" data-line-number="22"><span class="co">#&gt; 17 1.04e-21 0.0972        0.00000000583 1.83e- 1 0.720   Hp         Both  </span></a>
-<a class="sourceLine" id="cb18-23" data-line-number="23"><span class="co">#&gt; 18 1.05e- 9 0.0242        0.00303       9.69e- 1 0.00323 Hp         Both  </span></a>
-<a class="sourceLine" id="cb18-24" data-line-number="24"><span class="co">#&gt; 19 4.52e- 3 0.412         0.0000143     1.70e- 2 0.566   Hp         Both  </span></a>
-<a class="sourceLine" id="cb18-25" data-line-number="25"><span class="co">#&gt; 20 1.70e- 9 0.0000862     0.230         2.16e- 3 0.768   Hp         Both</span></a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">df_posterior_pred_same &lt;-<span class="st"> </span><span class="kw"><a href="../reference/posterior_pred.html">posterior_pred</a></span>(stanBF_obj_same)</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(df_posterior_pred_same, <span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb20-3" data-line-number="3"><span class="co">#&gt; # A tibble: 20 x 7</span></a>
+<a class="sourceLine" id="cb20-4" data-line-number="4"><span class="co">#&gt;         `x[1]`    `x[2]`      `x[3]`   `x[4]`   `x[5]` Hypothesis Source</span></a>
+<a class="sourceLine" id="cb20-5" data-line-number="5"><span class="co">#&gt;          &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt; </span></a>
+<a class="sourceLine" id="cb20-6" data-line-number="6"><span class="co">#&gt;  1 0.638       0.326     0.00000753  1.47e- 6 3.61e- 2 Hp         Both  </span></a>
+<a class="sourceLine" id="cb20-7" data-line-number="7"><span class="co">#&gt;  2 0.0141      0.0198    0.891       1.16e- 2 6.30e- 2 Hp         Both  </span></a>
+<a class="sourceLine" id="cb20-8" data-line-number="8"><span class="co">#&gt;  3 0.903       0.00701   0.0208      1.27e- 4 6.95e- 2 Hp         Both  </span></a>
+<a class="sourceLine" id="cb20-9" data-line-number="9"><span class="co">#&gt;  4 0.834       0.131     0.0267      6.42e- 5 8.44e- 3 Hp         Both  </span></a>
+<a class="sourceLine" id="cb20-10" data-line-number="10"><span class="co">#&gt;  5 0.979       0.000154  0.000494    1.05e- 3 1.91e- 2 Hp         Both  </span></a>
+<a class="sourceLine" id="cb20-11" data-line-number="11"><span class="co">#&gt;  6 0.262       0.637     0.000114    2.64e-13 1.02e- 1 Hp         Both  </span></a>
+<a class="sourceLine" id="cb20-12" data-line-number="12"><span class="co">#&gt;  7 0.00994     0.845     0.144       8.54e- 4 3.57e- 6 Hp         Both  </span></a>
+<a class="sourceLine" id="cb20-13" data-line-number="13"><span class="co">#&gt;  8 0.00177     0.926     0.0592      2.70e- 9 1.26e- 2 Hp         Both  </span></a>
+<a class="sourceLine" id="cb20-14" data-line-number="14"><span class="co">#&gt;  9 0.0000173   0.906     0.00000125  9.39e- 2 4.16e- 6 Hp         Both  </span></a>
+<a class="sourceLine" id="cb20-15" data-line-number="15"><span class="co">#&gt; 10 0.0292      0.00266   0.00262     8.82e- 1 8.37e- 2 Hp         Both  </span></a>
+<a class="sourceLine" id="cb20-16" data-line-number="16"><span class="co">#&gt; 11 0.00000800  0.0000642 0.0314      9.57e- 1 1.13e- 2 Hp         Both  </span></a>
+<a class="sourceLine" id="cb20-17" data-line-number="17"><span class="co">#&gt; 12 0.000000433 0.595     0.0153      2.30e- 7 3.90e- 1 Hp         Both  </span></a>
+<a class="sourceLine" id="cb20-18" data-line-number="18"><span class="co">#&gt; 13 0.0295      0.346     0.368       4.33e- 2 2.13e- 1 Hp         Both  </span></a>
+<a class="sourceLine" id="cb20-19" data-line-number="19"><span class="co">#&gt; 14 0.000105    0.469     0.000105    9.61e- 4 5.30e- 1 Hp         Both  </span></a>
+<a class="sourceLine" id="cb20-20" data-line-number="20"><span class="co">#&gt; 15 0.0000101   0.999     0.00000904  4.13e- 8 1.11e- 3 Hp         Both  </span></a>
+<a class="sourceLine" id="cb20-21" data-line-number="21"><span class="co">#&gt; 16 0.0464      0.712     0.0000354   6.03e- 5 2.42e- 1 Hp         Both  </span></a>
+<a class="sourceLine" id="cb20-22" data-line-number="22"><span class="co">#&gt; 17 0.0538      0.684     0.262       1.41e- 4 8.61e-11 Hp         Both  </span></a>
+<a class="sourceLine" id="cb20-23" data-line-number="23"><span class="co">#&gt; 18 0.0555      0.913     0.000000363 3.18e- 2 1.76e-13 Hp         Both  </span></a>
+<a class="sourceLine" id="cb20-24" data-line-number="24"><span class="co">#&gt; 19 0.670       0.0196    0.308       4.97e- 5 2.00e- 3 Hp         Both  </span></a>
+<a class="sourceLine" id="cb20-25" data-line-number="25"><span class="co">#&gt; 20 0.00266     0.792     0.140       6.55e- 2 9.95e-13 Hp         Both</span></a></code></pre></div>
 </div>
 <div id="rstan-functions" class="section level3">
 <h3 class="hasAnchor">
 <a href="#rstan-functions" class="anchor"></a>rstan functions</h3>
 <p><code>stanfit</code> objects implement several plotting functions (see <a href="http://mc-stan.org/rstan/reference/plotting-functions.html">here</a> for a reference).<br>
 For example, traceplots:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"></a>
-<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="co"># A stanfit object</span></a>
-<a class="sourceLine" id="cb19-3" data-line-number="3"><span class="co"># stanBF_obj_same$stanfit$H1</span></a>
-<a class="sourceLine" id="cb19-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb19-5" data-line-number="5"><span class="co"># Plot using all params</span></a>
-<a class="sourceLine" id="cb19-6" data-line-number="6">stanBF_obj_diff<span class="op">$</span>stanfit<span class="op">$</span>H1 <span class="op">%&gt;%</span><span class="st"> </span>rstan<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstan/topics/stan_plot">stan_trace</a></span>()</a>
-<a class="sourceLine" id="cb19-7" data-line-number="7"><span class="co">#&gt; 'pars' not specified. Showing first 10 parameters by default.</span></a></code></pre></div>
-<p><img src="introduction_files/figure-html/unnamed-chunk-7-1.png" width="672"></p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">stanBF_obj_diff<span class="op">$</span>stanfit<span class="op">$</span>H2 <span class="op">%&gt;%</span><span class="st"> </span>rstan<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstan/topics/stan_plot">stan_trace</a></span>()</a>
-<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="co">#&gt; 'pars' not specified. Showing first 10 parameters by default.</span></a></code></pre></div>
-<p><img src="introduction_files/figure-html/unnamed-chunk-7-2.png" width="672"></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="co"># A stanfit object</span></a>
+<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="co"># stanBF_obj_same$stanfit$H1</span></a>
+<a class="sourceLine" id="cb21-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb21-5" data-line-number="5"><span class="co"># Plot using all params</span></a>
+<a class="sourceLine" id="cb21-6" data-line-number="6">stanBF_obj_diff<span class="op">$</span>stanfit<span class="op">$</span>H1 <span class="op">%&gt;%</span><span class="st"> </span>rstan<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstan/topics/stan_plot">stan_trace</a></span>()</a>
+<a class="sourceLine" id="cb21-7" data-line-number="7"><span class="co">#&gt; 'pars' not specified. Showing first 10 parameters by default.</span></a></code></pre></div>
+<p><img src="introduction_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">stanBF_obj_diff<span class="op">$</span>stanfit<span class="op">$</span>H2 <span class="op">%&gt;%</span><span class="st"> </span>rstan<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstan/topics/stan_plot">stan_trace</a></span>()</a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="co">#&gt; 'pars' not specified. Showing first 10 parameters by default.</span></a></code></pre></div>
+<p><img src="introduction_files/figure-html/unnamed-chunk-9-2.png" width="672"></p>
 </div>
 <div id="bayesplot" class="section level3">
 <h3 class="hasAnchor">
 <a href="#bayesplot" class="anchor"></a>bayesplot</h3>
 <p>The popular <a href="http://mc-stan.org/bayesplot">bayesplot</a> package can be used to produce plots to assess convergence of the MCMC chains. It includes an interface to <code>stanfit</code> objects, returned by rstan.</p>
 <p>It is easy to use <code>bayesplot</code> with this package. One must first extract all MCMC samples using the <code>rstan</code> tools:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(bayesplot)</a>
-<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="co">#&gt; This is bayesplot version 1.6.0</span></a>
-<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="co">#&gt; - Online documentation and vignettes at mc-stan.org/bayesplot</span></a>
-<a class="sourceLine" id="cb21-4" data-line-number="4"><span class="co">#&gt; - bayesplot theme set to bayesplot::theme_default()</span></a>
-<a class="sourceLine" id="cb21-5" data-line-number="5"><span class="co">#&gt;    * Does _not_ affect other ggplot2 plots</span></a>
-<a class="sourceLine" id="cb21-6" data-line-number="6"><span class="co">#&gt;    * See ?bayesplot_theme_set for details on theme setting</span></a>
-<a class="sourceLine" id="cb21-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb21-8" data-line-number="8"><span class="co"># A stanfit object</span></a>
-<a class="sourceLine" id="cb21-9" data-line-number="9"><span class="co"># stanBF_obj_same$stanfit$H1</span></a>
-<a class="sourceLine" id="cb21-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb21-11" data-line-number="11"><span class="co"># All variables except the logPosterior</span></a>
-<a class="sourceLine" id="cb21-12" data-line-number="12">all_vars_no_lp &lt;-<span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/setops.html">setdiff</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(stanBF_obj_same<span class="op">$</span>stanfit<span class="op">$</span>H2), <span class="st">'lp__'</span>)</a>
-<a class="sourceLine" id="cb21-13" data-line-number="13">all_vars_no_lp</a>
-<a class="sourceLine" id="cb21-14" data-line-number="14"><span class="co">#&gt;  [1] "theta_ref[1]"       "theta_ref[2]"       "theta_ref[3]"      </span></a>
-<a class="sourceLine" id="cb21-15" data-line-number="15"><span class="co">#&gt;  [4] "theta_ref[4]"       "theta_ref[5]"       "theta_quest[1]"    </span></a>
-<a class="sourceLine" id="cb21-16" data-line-number="16"><span class="co">#&gt;  [7] "theta_quest[2]"     "theta_quest[3]"     "theta_quest[4]"    </span></a>
-<a class="sourceLine" id="cb21-17" data-line-number="17"><span class="co">#&gt; [10] "theta_quest[5]"     "sim_d_ref[1]"       "sim_d_ref[2]"      </span></a>
-<a class="sourceLine" id="cb21-18" data-line-number="18"><span class="co">#&gt; [13] "sim_d_ref[3]"       "sim_d_ref[4]"       "sim_d_ref[5]"      </span></a>
-<a class="sourceLine" id="cb21-19" data-line-number="19"><span class="co">#&gt; [16] "sim_d_quest[1]"     "sim_d_quest[2]"     "sim_d_quest[3]"    </span></a>
-<a class="sourceLine" id="cb21-20" data-line-number="20"><span class="co">#&gt; [19] "sim_d_quest[4]"     "sim_d_quest[5]"     "sim_theta_ref[1]"  </span></a>
-<a class="sourceLine" id="cb21-21" data-line-number="21"><span class="co">#&gt; [22] "sim_theta_ref[2]"   "sim_theta_ref[3]"   "sim_theta_ref[4]"  </span></a>
-<a class="sourceLine" id="cb21-22" data-line-number="22"><span class="co">#&gt; [25] "sim_theta_ref[5]"   "sim_theta_quest[1]" "sim_theta_quest[2]"</span></a>
-<a class="sourceLine" id="cb21-23" data-line-number="23"><span class="co">#&gt; [28] "sim_theta_quest[3]" "sim_theta_quest[4]" "sim_theta_quest[5]"</span></a>
-<a class="sourceLine" id="cb21-24" data-line-number="24"><span class="co">#&gt; [31] "pred_d_ref[1]"      "pred_d_ref[2]"      "pred_d_ref[3]"     </span></a>
-<a class="sourceLine" id="cb21-25" data-line-number="25"><span class="co">#&gt; [34] "pred_d_ref[4]"      "pred_d_ref[5]"      "pred_d_quest[1]"   </span></a>
-<a class="sourceLine" id="cb21-26" data-line-number="26"><span class="co">#&gt; [37] "pred_d_quest[2]"    "pred_d_quest[3]"    "pred_d_quest[4]"   </span></a>
-<a class="sourceLine" id="cb21-27" data-line-number="27"><span class="co">#&gt; [40] "pred_d_quest[5]"</span></a>
-<a class="sourceLine" id="cb21-28" data-line-number="28"></a>
-<a class="sourceLine" id="cb21-29" data-line-number="29">outputs_H1 &lt;-<span class="st"> </span>stanBF_obj_same<span class="op">$</span>stanfit<span class="op">$</span>H1 <span class="op">%&gt;%</span><span class="st"> </span>rstan<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstan/topics/As.mcmc.list">As.mcmc.list</a></span>()</a>
-<a class="sourceLine" id="cb21-30" data-line-number="30">outputs_H2 &lt;-<span class="st"> </span>stanBF_obj_same<span class="op">$</span>stanfit<span class="op">$</span>H2 <span class="op">%&gt;%</span><span class="st"> </span>rstan<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstan/topics/As.mcmc.list">As.mcmc.list</a></span>()</a>
-<a class="sourceLine" id="cb21-31" data-line-number="31"></a>
-<a class="sourceLine" id="cb21-32" data-line-number="32"><span class="co"># Equivalent:</span></a>
-<a class="sourceLine" id="cb21-33" data-line-number="33"><span class="co"># outputs_H1 &lt;- stanBF_obj_same$stanfit$H1 %&gt;% rstan::extract(pars = all_vars_no_lp)</span></a>
-<a class="sourceLine" id="cb21-34" data-line-number="34"><span class="co"># outputs_H2 &lt;- stanBF_obj_same$stanfit$H2 %&gt;% rstan::extract(pars = all_vars_no_lp)</span></a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(bayesplot)</a>
+<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="co">#&gt; This is bayesplot version 1.6.0</span></a>
+<a class="sourceLine" id="cb23-3" data-line-number="3"><span class="co">#&gt; - Online documentation and vignettes at mc-stan.org/bayesplot</span></a>
+<a class="sourceLine" id="cb23-4" data-line-number="4"><span class="co">#&gt; - bayesplot theme set to bayesplot::theme_default()</span></a>
+<a class="sourceLine" id="cb23-5" data-line-number="5"><span class="co">#&gt;    * Does _not_ affect other ggplot2 plots</span></a>
+<a class="sourceLine" id="cb23-6" data-line-number="6"><span class="co">#&gt;    * See ?bayesplot_theme_set for details on theme setting</span></a>
+<a class="sourceLine" id="cb23-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb23-8" data-line-number="8"><span class="co"># A stanfit object</span></a>
+<a class="sourceLine" id="cb23-9" data-line-number="9"><span class="co"># stanBF_obj_same$stanfit$H1</span></a>
+<a class="sourceLine" id="cb23-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb23-11" data-line-number="11"><span class="co"># All variables except the logPosterior</span></a>
+<a class="sourceLine" id="cb23-12" data-line-number="12">all_vars_no_lp &lt;-<span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/setops.html">setdiff</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(stanBF_obj_same<span class="op">$</span>stanfit<span class="op">$</span>H2), <span class="st">'lp__'</span>)</a>
+<a class="sourceLine" id="cb23-13" data-line-number="13">all_vars_no_lp</a>
+<a class="sourceLine" id="cb23-14" data-line-number="14"><span class="co">#&gt;  [1] "theta_ref[1]"       "theta_ref[2]"       "theta_ref[3]"      </span></a>
+<a class="sourceLine" id="cb23-15" data-line-number="15"><span class="co">#&gt;  [4] "theta_ref[4]"       "theta_ref[5]"       "theta_quest[1]"    </span></a>
+<a class="sourceLine" id="cb23-16" data-line-number="16"><span class="co">#&gt;  [7] "theta_quest[2]"     "theta_quest[3]"     "theta_quest[4]"    </span></a>
+<a class="sourceLine" id="cb23-17" data-line-number="17"><span class="co">#&gt; [10] "theta_quest[5]"     "sim_d_ref[1]"       "sim_d_ref[2]"      </span></a>
+<a class="sourceLine" id="cb23-18" data-line-number="18"><span class="co">#&gt; [13] "sim_d_ref[3]"       "sim_d_ref[4]"       "sim_d_ref[5]"      </span></a>
+<a class="sourceLine" id="cb23-19" data-line-number="19"><span class="co">#&gt; [16] "sim_d_quest[1]"     "sim_d_quest[2]"     "sim_d_quest[3]"    </span></a>
+<a class="sourceLine" id="cb23-20" data-line-number="20"><span class="co">#&gt; [19] "sim_d_quest[4]"     "sim_d_quest[5]"     "sim_theta_ref[1]"  </span></a>
+<a class="sourceLine" id="cb23-21" data-line-number="21"><span class="co">#&gt; [22] "sim_theta_ref[2]"   "sim_theta_ref[3]"   "sim_theta_ref[4]"  </span></a>
+<a class="sourceLine" id="cb23-22" data-line-number="22"><span class="co">#&gt; [25] "sim_theta_ref[5]"   "sim_theta_quest[1]" "sim_theta_quest[2]"</span></a>
+<a class="sourceLine" id="cb23-23" data-line-number="23"><span class="co">#&gt; [28] "sim_theta_quest[3]" "sim_theta_quest[4]" "sim_theta_quest[5]"</span></a>
+<a class="sourceLine" id="cb23-24" data-line-number="24"><span class="co">#&gt; [31] "pred_d_ref[1]"      "pred_d_ref[2]"      "pred_d_ref[3]"     </span></a>
+<a class="sourceLine" id="cb23-25" data-line-number="25"><span class="co">#&gt; [34] "pred_d_ref[4]"      "pred_d_ref[5]"      "pred_d_quest[1]"   </span></a>
+<a class="sourceLine" id="cb23-26" data-line-number="26"><span class="co">#&gt; [37] "pred_d_quest[2]"    "pred_d_quest[3]"    "pred_d_quest[4]"   </span></a>
+<a class="sourceLine" id="cb23-27" data-line-number="27"><span class="co">#&gt; [40] "pred_d_quest[5]"</span></a>
+<a class="sourceLine" id="cb23-28" data-line-number="28"></a>
+<a class="sourceLine" id="cb23-29" data-line-number="29">outputs_H1 &lt;-<span class="st"> </span>stanBF_obj_same<span class="op">$</span>stanfit<span class="op">$</span>H1 <span class="op">%&gt;%</span><span class="st"> </span>rstan<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstan/topics/As.mcmc.list">As.mcmc.list</a></span>()</a>
+<a class="sourceLine" id="cb23-30" data-line-number="30">outputs_H2 &lt;-<span class="st"> </span>stanBF_obj_same<span class="op">$</span>stanfit<span class="op">$</span>H2 <span class="op">%&gt;%</span><span class="st"> </span>rstan<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstan/topics/As.mcmc.list">As.mcmc.list</a></span>()</a>
+<a class="sourceLine" id="cb23-31" data-line-number="31"></a>
+<a class="sourceLine" id="cb23-32" data-line-number="32"><span class="co"># Equivalent:</span></a>
+<a class="sourceLine" id="cb23-33" data-line-number="33"><span class="co"># outputs_H1 &lt;- stanBF_obj_same$stanfit$H1 %&gt;% rstan::extract(pars = all_vars_no_lp)</span></a>
+<a class="sourceLine" id="cb23-34" data-line-number="34"><span class="co"># outputs_H2 &lt;- stanBF_obj_same$stanfit$H2 %&gt;% rstan::extract(pars = all_vars_no_lp)</span></a></code></pre></div>
 <p>Then, one can use <code>bayesplot</code> methods. (see the <a href="http://mc-stan.org/bayesplot/reference/MCMC-overview.html">documentation</a>)<br>
 As an example, we can plot the posterior densities across MCMC chains, selecting only the <code>theta_ref</code> parameters:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"></a>
-<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="co"># Density across chains</span></a>
-<a class="sourceLine" id="cb22-3" data-line-number="3"><span class="co"># use a regular expression to subset the interesting variables</span></a>
-<a class="sourceLine" id="cb22-4" data-line-number="4">outputs_H1 <span class="op">%&gt;%</span><span class="st"> </span>bayesplot<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/bayesplot/topics/MCMC-distributions">mcmc_dens_overlay</a></span>(<span class="dt">regex_pars =</span> <span class="st">'^theta_ref'</span>)</a></code></pre></div>
-<p><img src="introduction_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="co"># Density across chains</span></a>
+<a class="sourceLine" id="cb24-3" data-line-number="3"><span class="co"># use a regular expression to subset the interesting variables</span></a>
+<a class="sourceLine" id="cb24-4" data-line-number="4">outputs_H1 <span class="op">%&gt;%</span><span class="st"> </span>bayesplot<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/bayesplot/topics/MCMC-distributions">mcmc_dens_overlay</a></span>(<span class="dt">regex_pars =</span> <span class="st">'^theta_ref'</span>)</a></code></pre></div>
+<p><img src="introduction_files/figure-html/unnamed-chunk-11-1.png" width="672"></p>
 <div id="parameter-value-checks" class="section level4">
 <h4 class="hasAnchor">
 <a href="#parameter-value-checks" class="anchor"></a>Parameter value checks</h4>
 <p><code>bayesplot</code> contains methods to overlay generating values to posterior distributions.</p>
-<p>Lets’ try for <span class="math inline">\(\vec{\theta_i}\)</span> (see the <a href="Dirichlet-Dirichlet%20model,%20and%20tests">Dirichlet-Dirichlet model</a> vignette).</p>
+<p>Let’s try for <span class="math inline">\(\boldsymbol{\theta_i}\)</span> (see the <a href="Dirichlet-Dirichlet%20model,%20and%20tests">Dirichlet-Dirichlet model</a> vignette).</p>
 <p>Using data generated under <span class="math inline">\(H_1\)</span>:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"></a>
-<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="co"># Collect the true values</span></a>
-<a class="sourceLine" id="cb23-3" data-line-number="3">df_source_same &lt;-<span class="st"> </span>list_pop<span class="op">$</span>df_sources <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(source <span class="op">==</span><span class="st"> </span>source_same) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">-</span>source)</a>
-<a class="sourceLine" id="cb23-4" data-line-number="4">df_source_same</a>
-<a class="sourceLine" id="cb23-5" data-line-number="5"><span class="co">#&gt; # A tibble: 1 x 5</span></a>
-<a class="sourceLine" id="cb23-6" data-line-number="6"><span class="co">#&gt;   `theta[1]` `theta[2]` `theta[3]` `theta[4]` `theta[5]`</span></a>
-<a class="sourceLine" id="cb23-7" data-line-number="7"><span class="co">#&gt;        &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb23-8" data-line-number="8"><span class="co">#&gt; 1     0.0776      0.158      0.118      0.200      0.447</span></a>
-<a class="sourceLine" id="cb23-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb23-10" data-line-number="10">true_vals &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/numeric">as.numeric</a></span>(df_source_same)</a>
-<a class="sourceLine" id="cb23-11" data-line-number="11">draws_same &lt;-<span class="st"> </span>stanBF_obj_same<span class="op">$</span>stanfit<span class="op">$</span>H1 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb23-12" data-line-number="12"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/matrix">as.matrix</a></span>(<span class="dt">pars =</span> <span class="st">'theta_ref'</span>)</a>
-<a class="sourceLine" id="cb23-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb23-14" data-line-number="14">bayesplot<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/bayesplot/topics/MCMC-recover">mcmc_recover_intervals</a></span>(draws_same, true_vals)</a></code></pre></div>
-<p><img src="introduction_files/figure-html/unnamed-chunk-10-1.png" width="672"></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="co"># Collect the true values</span></a>
+<a class="sourceLine" id="cb25-3" data-line-number="3">df_source_same &lt;-<span class="st"> </span>list_pop<span class="op">$</span>df_sources <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(source <span class="op">==</span><span class="st"> </span>source_same) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">-</span>source)</a>
+<a class="sourceLine" id="cb25-4" data-line-number="4">df_source_same</a>
+<a class="sourceLine" id="cb25-5" data-line-number="5"><span class="co">#&gt; # A tibble: 1 x 5</span></a>
+<a class="sourceLine" id="cb25-6" data-line-number="6"><span class="co">#&gt;   `theta[1]` `theta[2]` `theta[3]` `theta[4]` `theta[5]`</span></a>
+<a class="sourceLine" id="cb25-7" data-line-number="7"><span class="co">#&gt;        &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb25-8" data-line-number="8"><span class="co">#&gt; 1      0.254      0.408     0.0915      0.105      0.141</span></a>
+<a class="sourceLine" id="cb25-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb25-10" data-line-number="10">true_vals &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/numeric">as.numeric</a></span>(df_source_same)</a>
+<a class="sourceLine" id="cb25-11" data-line-number="11">draws_same &lt;-<span class="st"> </span>stanBF_obj_same<span class="op">$</span>stanfit<span class="op">$</span>H1 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb25-12" data-line-number="12"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/matrix">as.matrix</a></span>(<span class="dt">pars =</span> <span class="st">'theta_ref'</span>)</a>
+<a class="sourceLine" id="cb25-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb25-14" data-line-number="14">bayesplot<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/bayesplot/topics/MCMC-recover">mcmc_recover_intervals</a></span>(draws_same, true_vals)</a></code></pre></div>
+<p><img src="introduction_files/figure-html/unnamed-chunk-12-1.png" width="672"></p>
 </div>
 </div>
 </div>

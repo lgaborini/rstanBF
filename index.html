@@ -91,6 +91,7 @@
 <a href="#rstanbf" class="anchor"></a>rstanBF</h1></div>
 <p>rstanBF computes the Bayes Factor for data in specified two-level hierarchical models.</p>
 <p><a href="https://travis-ci.org/lgaborini/rstanBF"><img src="https://travis-ci.org/lgaborini/rstanBF.svg?branch=master" alt="Build Status"></a> <a href="https://codecov.io/gh/lgaborini/rstanBF?branch=master"><img src="https://codecov.io/gh/lgaborini/rstanBF/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></p>
+<p>It wraps the package <a href="https://cran.r-project.org/package=bridgesampling">bridgesampling</a>, and provides methods to compute the Bayes Factor for comparing two sets of samples.</p>
 <div id="documentation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#documentation" class="anchor"></a>Documentation</h2>
@@ -103,6 +104,17 @@
 You can install the development version from this repository using <code>devtools</code> or <code>remotes</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># install.packages('remotes')</span></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">'lgaborini/rstanBF'</span>)</a></code></pre></div>
+</div>
+<div id="implemented-models" class="section level2">
+<h2 class="hasAnchor">
+<a href="#implemented-models" class="anchor"></a>Implemented models</h2>
+<p>The implemented models are:</p>
+<ul>
+<li>Dirichlet-Dirichlet</li>
+<li>Dirichlet-FoldedNormal</li>
+<li>Dirichlet-DirichletGamma</li>
+<li>Normal-Normal</li>
+</ul>
 </div>
 </div>
   </div>

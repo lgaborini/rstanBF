@@ -8,7 +8,7 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-
+\renewcommand{\vec}[1]{\boldsymbol{#1}}
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -86,9 +86,16 @@ From now on, we are ready to use the `rstanBF` package.
 
 ## Data model
 
-The package supports several models:
+The package supports several models, identified by their short names: 
 ```{r}
 available_models()
+```
+
+More details are also available in data frame form:
+
+```{r}
+df_models <- available_models(verbose = TRUE)
+df_models
 ```
 
 ## Hyperparameter elicitation
@@ -130,8 +137,8 @@ n.burnin <- 200
 # n.iter <- 10000
 # n.burnin <- 1000
 
-n.chains <- 2 # parallel::detectCores()
-n.cores <- 2 # parallel::detectCores()
+n.chains <- 2
+n.cores <- 2
 ```
 
 Now we are ready! Let's sample:
@@ -201,7 +208,7 @@ rstanBF::plot_posteriors(stanBF_obj_diff, 'theta')
 Models often implement draws from the prior and posterior predictive distributions.
 
 Prior predictive: the names of the variables in the Stan source start with `sim_`.   
-Posterior predictive: the names of the variables in the Stan source start with 'pred_'.
+Posterior predictive: the names of the variables in the Stan source start with `pred_`.
 
 One can use the `prior_pred` and `posterior_pred` methods to extract and format them:
 
@@ -276,7 +283,7 @@ outputs_H1 %>% bayesplot::mcmc_dens_overlay(regex_pars = '^theta_ref')
 
 `bayesplot` contains methods to overlay generating values to posterior distributions.
 
-Lets' try for $\vec{\theta_i}$ (see the [Dirichlet-Dirichlet model](Dirichlet-Dirichlet model, and tests) vignette).
+Let's try for $\vec{\theta_i}$ (see the [Dirichlet-Dirichlet model](Dirichlet-Dirichlet model, and tests) vignette).
 
 Using data generated under $H_1$:
 

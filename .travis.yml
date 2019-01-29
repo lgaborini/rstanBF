@@ -37,6 +37,7 @@ script:
   - |
     travis_wait 42 R CMD build .
     PKG_TARBALL=$(ls -1t *.tar.gz | head -n 1)
+    echo "Detected tarball: $PKG_TARBALL"
     travis_wait 59 R CMD check rstanBF*tar.gz
 
 after_script:

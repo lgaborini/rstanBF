@@ -25,7 +25,8 @@ Imports:
     rlang,
     tidyr,
     purrr,
-    glue
+    glue,
+    scales
 LinkingTo: 
     BH (>= 1.69.0-1),
     Rcpp (>= 1.0.0),

@@ -87,8 +87,9 @@ make_tbl_variable_range <- function(x.samples, text, ...) {
    p <- ncol(x.samples)
    col_names <- fun_var_names(p, text = text)
 
+
+   colnames(x.samples) <- col_names
    tbl.out <- tibble::as_tibble(x.samples)
-   colnames(tbl.out) <- col_names
 
    tibble::add_column(tbl.out, ...)
 }

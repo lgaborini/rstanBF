@@ -4,9 +4,18 @@
 \alias{compute_BF_Stan}
 \title{Sample and compute BF for various models using Stan}
 \usage{
-compute_BF_Stan(data, model, hyperpriors, n.iter = 1000,
-  n.burnin = 200, n.chains = 1, n.cores = 1, data_other = NULL,
-  silent = FALSE, ...)
+compute_BF_Stan(
+  data,
+  model,
+  hyperpriors,
+  n.iter = 1000,
+  n.burnin = 200,
+  n.chains = 1,
+  n.cores = 1,
+  data_other = NULL,
+  silent = FALSE,
+  ...
+)
 }
 \arguments{
 \item{data}{a list containing \code{mtx}, \code{idx.ref}, \code{idx.quest}}

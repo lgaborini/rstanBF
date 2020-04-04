@@ -4,8 +4,11 @@
 \alias{fun_estimate_Dirichlet_hyperparameter}
 \title{Compute Dirichlet hyperparameters, using 'MLE' or 'naive' estimators}
 \usage{
-fun_estimate_Dirichlet_hyperparameter(df_background, method,
-  col_source = "source")
+fun_estimate_Dirichlet_hyperparameter(
+  df_background,
+  method,
+  col_source = "source"
+)
 }
 \arguments{
 \item{df_background}{dataframe with background data}

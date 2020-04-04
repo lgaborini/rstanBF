@@ -18,14 +18,6 @@
 \item{var_name}{the base name for output variable columns (default: \code{'x'})}
 
 \item{...}{additional parameters}
-
-\item{stanBF}{a \code{stanBF_turn} object}
-
-\item{stanBF}{a \code{stanBF_turn} object}
-
-\item{var_name}{the base name for output variable columns (default: \code{'x'})}
-
-\item{...}{additional parameters}
 }
 \value{
 a tibble containing prior predictions across hypotheses and sources

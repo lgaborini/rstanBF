@@ -4,8 +4,7 @@
 \alias{plot_posteriors.stanBF_turn}
 \title{Make boxplots for turn-point posteriors}
 \usage{
-\method{plot_posteriors}{stanBF_turn}(stanBF, variable = NULL,
-  type = "boxplots")
+\method{plot_posteriors}{stanBF_turn}(stanBF, variable = NULL, type = "boxplots")
 }
 \arguments{
 \item{stanBF}{a supported \code{stanBF} object}

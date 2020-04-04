@@ -1,6 +1,10 @@
+# rstanBF 0.1.2
+
+* Update to new `dplyr` and `tidyr`.
+
 # rstanBF 0.1.1
 
-* `available_models` now accepts `verbose=TRUE`, to print details and return a tibble
+* `available_models` now accepts `verbose=TRUE`, to print details and return a tibble.
 
 # rstanBF 0.1.0
 

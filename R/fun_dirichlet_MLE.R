@@ -84,9 +84,11 @@ fun_estimate_Dirichlet_from_samples <- function(df, col_source = 'source', ...) 
 
    assertthat::assert_that(length(col_source) == 1)
 
-   df %>% group_by_at(.vars = col_source) %>% nest() %>%
-      mutate(param = map(.data$data, fun_estimate_Dirichlet_from_single_source, ...)) %>%
-      select(-.data$data) %>%
-      unnest() %>%
-      ungroup()
+   df %>%
+      dplyr::group_by_at(.vars = col_source) %>%
+      tidyr::nest() %>%
+      dplyr::mutate(param = purrr::map(.data$data, fun_estimate_Dirichlet_from_single_source, ...)) %>%
+      dplyr::select(-.data$data) %>%
+      tidyr::unnest(cols = c(param)) %>%
+      dplyr::ungroup()
 }

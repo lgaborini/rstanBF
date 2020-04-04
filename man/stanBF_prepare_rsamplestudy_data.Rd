@@ -4,8 +4,7 @@
 \alias{stanBF_prepare_rsamplestudy_data}
 \title{Convert the output of rsamplestudy to rstanBF data parameter}
 \usage{
-stanBF_prepare_rsamplestudy_data(list_pop, list_samples,
-  col_source = "source")
+stanBF_prepare_rsamplestudy_data(list_pop, list_samples, col_source = "source")
 }
 \arguments{
 \item{list_pop}{the output of a \code{rsamplestudy}-generated population}

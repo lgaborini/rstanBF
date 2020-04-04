@@ -1,6 +1,6 @@
 Package: rstanBF
 Title: rstanBF computes the Bayes Factor for data in specified two-level hierarchical models
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: 
     person(given = "Lorenzo",
            family = "Gaborini",
@@ -37,7 +37,7 @@ Encoding: UTF-8
 LazyData: true
 NeedsCompilation: yes
 SystemRequirements: GNU make
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 Roxygen: list(markdown = TRUE)
 Suggests: 
     knitr,

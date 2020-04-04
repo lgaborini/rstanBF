@@ -4,8 +4,13 @@
 \alias{stanBF_elicit_hyperpriors}
 \title{Elicit hyperpriors to use for Stan BF}
 \usage{
-stanBF_elicit_hyperpriors(df_background, model, mode_hyperparameter,
-  col_source = "source", ...)
+stanBF_elicit_hyperpriors(
+  df_background,
+  model,
+  mode_hyperparameter,
+  col_source = "source",
+  ...
+)
 }
 \arguments{
 \item{df_background}{the dataframe containing background data, with the source column}

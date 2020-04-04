@@ -1,6 +1,5 @@
 context("test-stanBF")
 
-
 # Generate dummy data which should appear to work
 n <- 20
 p <- 5
@@ -60,13 +59,13 @@ test_that('plot_posteriors works', {
 
 
 test_that('samples works', {
-   expect_true(tibble::is_tibble(samples(obj)))
+   expect_is(samples(obj), 'data.frame')
 })
 
 test_that('prior_pred works', {
-   expect_true(tibble::is_tibble(prior_pred(obj)))
+   expect_is(prior_pred(obj), 'data.frame')
 })
 
 test_that('posterior_pred works', {
-   expect_true(tibble::is_tibble(prior_pred(obj)))
+   expect_is(prior_pred(obj), 'data.frame')
 })

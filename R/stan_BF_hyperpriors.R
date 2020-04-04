@@ -110,7 +110,7 @@ fun_estimate_Dirichlet_hyperparameter <- function(df_background, method, col_sou
    df_sources_MLE_hyper[, col_source] <- 1
 
    fun_estimate_Dirichlet_from_samples(df_sources_MLE_hyper, use = method, name_param = 'alpha') %>%
-      dplyr::select(-col_source) %>%
+      dplyr::select(-tidyselect::all_of(col_source)) %>%
       as.numeric()
 }
 

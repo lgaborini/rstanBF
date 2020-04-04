@@ -103,10 +103,17 @@ compute_BF_Stan <- function(data, model, hyperpriors,
   n.H1 <- length(idx.H1)
 
   default_data_H1 <- list(
-    n_ref = n.H1, d_ref = data$mtx[idx.H1, ], p = p)
+    n_ref = n.H1,
+    d_ref = data$mtx[idx.H1, ],
+    p = p
+  )
   default_data_H2 <- list(
-    n_ref = n.ref, d_ref = data$mtx[data$idx.ref, ],
-    n_quest = n.quest, d_quest = data$mtx[data$idx.quest, ], p = p)
+    n_ref = n.ref,
+    d_ref = data$mtx[data$idx.ref, ],
+    n_quest = n.quest,
+    d_quest = data$mtx[data$idx.quest, ],
+    p = p
+  )
 
 
   # Merge and overwrite hyperparameters, if passed
@@ -212,7 +219,8 @@ samples.stanBF_turn <- function(stanBF) {
   df_theta_samples <- dplyr::bind_rows(
     make_tbl_variable_range(theta_H1, text = 'theta', Hypothesis = 'Hp', Source = 'Both'),
     make_tbl_variable_range(theta_ref_H2, text = 'theta', Hypothesis = 'Hd', Source = 'Reference'),
-    make_tbl_variable_range(theta_quest_H2, text = 'theta', Hypothesis = 'Hd', Source = 'Questioned'))
+    make_tbl_variable_range(theta_quest_H2, text = 'theta', Hypothesis = 'Hd', Source = 'Questioned')
+  )
 
   # Normalize theta[* by their sums, creating rho[*
   # Hackish
@@ -289,7 +297,8 @@ prior_pred.stanBF_turn <- function(stanBF, var_name = 'x', ...) {
   df_prior_samples <- dplyr::bind_rows(
     make_tbl_variable_range(sim_d_H1, text = var_name, Hypothesis = 'Hp', Source = 'Both'),
     make_tbl_variable_range(sim_d_ref_H2, text = var_name, Hypothesis = 'Hd', Source = 'Reference'),
-    make_tbl_variable_range(sim_d_quest_H2, text = var_name, Hypothesis = 'Hd', Source = 'Questioned'))
+    make_tbl_variable_range(sim_d_quest_H2, text = var_name, Hypothesis = 'Hd', Source = 'Questioned')
+  )
 
   df_prior_samples
 }
@@ -315,7 +324,8 @@ posterior_pred.stanBF_turn <- function(stanBF, var_name = 'x', ...) {
   df_posterior_samples <- dplyr::bind_rows(
     make_tbl_variable_range(pred_d_H1, text = var_name, Hypothesis = 'Hp', Source = 'Both'),
     make_tbl_variable_range(pred_d_ref_H2, text = var_name, Hypothesis = 'Hd', Source = 'Reference'),
-    make_tbl_variable_range(pred_d_quest_H2, text = var_name, Hypothesis = 'Hd', Source = 'Questioned'))
+    make_tbl_variable_range(pred_d_quest_H2, text = var_name, Hypothesis = 'Hd', Source = 'Questioned')
+  )
 
   df_posterior_samples
 }
@@ -382,7 +392,7 @@ plot_posteriors.stanBF_turn <- function(stanBF, variable=NULL, type='boxplots') 
     ggtitle(bquote(paste(.(stanBF$model_name), ' model: posterior samples for ', .(variable))),
             subtitle = bquote(paste(.(n.chains), ' chains, ', .(n.iter), ' Stan iterations')) ) +
     labs(x = NULL, y = label_parse(variable)) +
-    scale_y_continuous(limits = c(0,NA), expand = expand_scale(mult = c(0, .1))) +
+    scale_y_continuous(limits = c(0,NA), expand = ggplot2::expansion(mult = c(0, .1))) +
     scale_x_discrete(label = label_parse) +
     scale_fill_discrete('Grouping during fit', label = scales::parse_format())
 }

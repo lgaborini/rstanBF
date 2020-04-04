@@ -4,8 +4,12 @@
 \alias{fun_estimate_Dirichlet_from_single_source}
 \title{Estimate Dirichlet parameter from a dataframe using ML or naive estimator}
 \usage{
-fun_estimate_Dirichlet_from_single_source(df, name_param = "theta",
-  use = "ML", ...)
+fun_estimate_Dirichlet_from_single_source(
+  df,
+  name_param = "theta",
+  use = "ML",
+  ...
+)
 }
 \arguments{
 \item{df}{the dataframe, must contain only the samples}

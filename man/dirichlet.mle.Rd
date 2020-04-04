@@ -4,8 +4,15 @@
 \alias{dirichlet.mle}
 \title{Maximum Likelihood Estimation of the Dirichlet Distribution}
 \usage{
-dirichlet.mle(x, weights = NULL, eps = 10^(-5), convcrit = 1e-05,
-  maxit = 1000, oldfac = 0.3, progress = FALSE)
+dirichlet.mle(
+  x,
+  weights = NULL,
+  eps = 10^(-5),
+  convcrit = 1e-05,
+  maxit = 1000,
+  oldfac = 0.3,
+  progress = FALSE
+)
 }
 \arguments{
 \item{x}{x}

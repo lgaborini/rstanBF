@@ -72,7 +72,7 @@ test_that('Multiple sources: source column checks', {
 
 test_that('Multiple sources: source estimates are correct', {
    df_1_single <- fun_estimate_Dirichlet_from_single_source(df_1, use = 'ML')
-   df_1_multiple <- fun_estimate_Dirichlet_from_samples(df, use = 'ML') %>% filter(source == 1) %>% select(-source)
+   df_1_multiple <- fun_estimate_Dirichlet_from_samples(df, use = 'ML') %>% dplyr::filter(source == 1) %>% dplyr::select(-source)
 
    expect_identical(df_1_single, df_1_multiple)
 })

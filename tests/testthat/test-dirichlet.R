@@ -1,5 +1,6 @@
 context("test-dirichlet")
 
+testthat::skip_if_not_installed('rsamplestudy')
 
 # Test that Dirichlet functions work
 n <- 100000

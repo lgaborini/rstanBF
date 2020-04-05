@@ -1,7 +1,6 @@
 context("test-hyperpriors")
 
-library(rsamplestudy)
-
+testthat::skip_if_not_installed('rsamplestudy')
 
 # Generate dummy data which should appear to work
 n <- 20

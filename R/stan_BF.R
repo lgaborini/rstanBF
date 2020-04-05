@@ -61,8 +61,10 @@ compute_BF_Stan <- function(data, model, hyperpriors,
 
   # Validate model names
   assertthat::assert_that(is.character(model))
-  assertthat::assert_that(model %in% implemented_models,
-                          msg = paste0('model "', model, '" has not been implemented, must be one of: ', paste_vec(implemented_models)))
+  assertthat::assert_that(
+    model %in% implemented_models,
+    msg = paste0('model "', model, '" has not been implemented, must be one of: ', paste_vec(implemented_models))
+  )
 
   # Load Stan compiled modules
   module_file <- rstanBF:::env_stanBF$stanBF_modules[[model]]
@@ -174,7 +176,7 @@ compute_BF_Stan <- function(data, model, hyperpriors,
 #' @param x a `stanBF` object
 #' @param verbose print more details
 #' @export
-print.stanBF <- function(x, verbose=FALSE) {
+print.stanBF <- function(x, verbose = FALSE) {
 
   if (verbose) {
     print.default(x)
@@ -189,210 +191,6 @@ print.stanBF <- function(x, verbose=FALSE) {
   }
 }
 
-# Sample extraction methods -------------------------------
-
-#' Extract posterior samples from a stanBF object
-#'
-#' @param stanBF a `stanBF` object
-#' @param ... other arguments
-#' @export
-samples <- function(stanBF, ...) {
-  UseMethod('samples')
-}
-
-#' Extract theta posterior samples for a turn-like object
-#'
-#' `stanBF_turn` objects share the Dirichlet likelihood, with \eqn{\theta} as prior parameter.
-#'
-#' This function extract posterior samples for \eqn{\theta}.
-#' Also returns the normalized version of them (\eqn{\rho}).
-#'
-#' @param stanBF a `stanBF_turn` object
-#' @rdname stanBF_turn
-#' @export
-samples.stanBF_turn <- function(stanBF) {
-
-  theta_H1 <- rstan::extract(stanBF$stanfit$H1)$theta_ref
-  theta_ref_H2 <- rstan::extract(stanBF$stanfit$H2)$theta_ref
-  theta_quest_H2 <- rstan::extract(stanBF$stanfit$H2)$theta_quest
-
-  df_theta_samples <- dplyr::bind_rows(
-    make_tbl_variable_range(theta_H1, text = 'theta', Hypothesis = 'Hp', Source = 'Both'),
-    make_tbl_variable_range(theta_ref_H2, text = 'theta', Hypothesis = 'Hd', Source = 'Reference'),
-    make_tbl_variable_range(theta_quest_H2, text = 'theta', Hypothesis = 'Hd', Source = 'Questioned')
-  )
-
-  # Normalize theta[* by their sums, creating rho[*
-  # Hackish
-
-  # Suppress CRAN checks
-  Iteration <- value <- variable <- value.norm <- variable.norm <- NULL
-
-  tmp <- df_theta_samples %>%
-    tibble::rowid_to_column('Iteration') %>%
-    tidyr::gather('variable', 'value', dplyr::starts_with('theta[')) %>%
-    dplyr::group_by(Iteration) %>% dplyr::arrange(Iteration) %>%
-    dplyr::mutate(value.norm = value / sum(value)) %>%
-    dplyr::mutate(variable.norm = gsub('theta[', 'rho[', variable, fixed = TRUE))
-
-  . <- NULL   # fix CRAN check
-  df_theta_samples <- tmp %>%
-    dplyr::select(-value.norm, -variable.norm) %>%
-    tidyr::spread(data = ., key = variable, value = value) %>%
-    dplyr::inner_join(tmp %>% dplyr::select(Iteration, variable.norm, value.norm) %>% tidyr::spread(data = ., variable.norm, value.norm), by = 'Iteration')
-
-  df_theta_samples %>% dplyr::ungroup()
-}
-
-samples.default <- function(...) {
-  # message('Not implemented.')
-  invisible(NULL)
-}
-
-# Prior and posterior distribution extraction methods ---------------------
-
-#' Extract prior predictive distributions
-#'
-#' Extract prior predictive distributions.
-#' @param stanBF a `stanBF` object
-#' @param ... additional parameters
-#' @export
-prior_pred <- function(stanBF, ...) {
-  UseMethod('prior_pred')
-
-  # all_variables <- purrr::map(obj_StanBF$stanfit, names)
-  # prior_pred_variables <- purrr::map(all_variables, ~ purrr::keep(., ~ stringr::str_detect(., '^sim_')))
-
-  # purrr::map2(obj_StanBF$stanfit, prior_pred_variables, rstan::extract)
-}
-
-#' Extract posterior predictive distributions
-#'
-#' Extract posterior predictive distributions.
-#' @param stanBF a `stanBF` object
-#' @param ... additional parameters
-#' @export
-posterior_pred <- function(stanBF, ...) {
-  UseMethod('posterior_pred')
-}
-
-#' Extract prior predictive distributions for turn-point posteriors
-#'
-#' Extract prior predictive distributions for turn-point posteriors.
-#'
-#' @param stanBF a `stanBF_turn` object
-#' @param var_name the base name for output variable columns (default: `'x'`)
-#' @param ... additional parameters
-#' @return a tibble containing prior predictions across hypotheses and sources
-#' @rdname stanBF_turn
-#' @export
-prior_pred.stanBF_turn <- function(stanBF, var_name = 'x', ...) {
-
-  assertthat::assert_that(assertthat::is.string(var_name), nchar(var_name) > 0)
-
-  sim_d_H1 <- rstan::extract(stanBF$stanfit$H1, pars = 'sim_d_ref')$sim_d_ref
-  sim_d_ref_H2 <- rstan::extract(stanBF$stanfit$H2, pars = 'sim_d_ref')$sim_d_ref
-  sim_d_quest_H2 <- rstan::extract(stanBF$stanfit$H2, pars = 'sim_d_quest')$sim_d_quest
-
-  df_prior_samples <- dplyr::bind_rows(
-    make_tbl_variable_range(sim_d_H1, text = var_name, Hypothesis = 'Hp', Source = 'Both'),
-    make_tbl_variable_range(sim_d_ref_H2, text = var_name, Hypothesis = 'Hd', Source = 'Reference'),
-    make_tbl_variable_range(sim_d_quest_H2, text = var_name, Hypothesis = 'Hd', Source = 'Questioned')
-  )
-
-  df_prior_samples
-}
-
-#' Extract posterior predictive distributions for turn-point posteriors
-#'
-#' Extract posterior predictive distributions for turn-point posteriors.
-#'
-#' @param stanBF a `stanBF_turn` object
-#' @param var_name the base name for output variable columns (default: `'x'`)
-#' @param ... additional parameters
-#' @return a tibble containing posterior predictions across hypotheses and sources
-#' @rdname stanBF_turn
-#' @export
-posterior_pred.stanBF_turn <- function(stanBF, var_name = 'x', ...) {
-
-  assertthat::assert_that(assertthat::is.string(var_name), nchar(var_name) > 0)
-
-  pred_d_H1 <- rstan::extract(stanBF$stanfit$H1, pars = 'pred_d_ref')$pred_d_ref
-  pred_d_ref_H2 <- rstan::extract(stanBF$stanfit$H2, pars = 'pred_d_ref')$pred_d_ref
-  pred_d_quest_H2 <- rstan::extract(stanBF$stanfit$H2, pars = 'pred_d_quest')$pred_d_quest
-
-  df_posterior_samples <- dplyr::bind_rows(
-    make_tbl_variable_range(pred_d_H1, text = var_name, Hypothesis = 'Hp', Source = 'Both'),
-    make_tbl_variable_range(pred_d_ref_H2, text = var_name, Hypothesis = 'Hd', Source = 'Reference'),
-    make_tbl_variable_range(pred_d_quest_H2, text = var_name, Hypothesis = 'Hd', Source = 'Questioned')
-  )
-
-  df_posterior_samples
-}
-
 
 # Diagnostics -------------------------------------------------------------
 
-
-
-# Plotting methods -------------------------------
-
-#' Plot posterior distributions of a stanBF object
-#'
-#' Plot posterior distributions of a stanBF object.
-#'
-#' @param stanBF a `stanBF` object
-#' @param ... other arguments
-#' @export
-plot_posteriors <- function(stanBF, ...) {
-  UseMethod('plot_posteriors')
-}
-
-#' Make boxplots for turn-point posteriors
-#'
-#' Make boxplots for turn-point posteriors.
-#'
-#' @param stanBF a supported `stanBF` object
-#' @param variable `'theta'` or `'rho'` (normalized theta)
-#' @param type type of plot (default: `'boxplots'``)
-#' @export
-#' @return a ggplot plot
-#' @import dplyr tidyr ggplot2
-plot_posteriors.stanBF_turn <- function(stanBF, variable=NULL, type='boxplots') {
-
-  if (type != 'boxplots') stop('plot not implemented.')
-
-  default.variables <- c('rho', 'theta')
-  if (is.null(variable)) {
-    variable <- default.variables[1]
-    message(paste0('Missing plotting variable: using ', variable))
-  }
-  assertthat::assert_that(variable %in% default.variables, msg = paste0('Variable must be in: ', paste0(default.variables, collapse = ', ')))
-
-  n.chains <- length(stanBF$stanfit$H1@stan_args)
-  n.iter <- stanBF$stanfit$H1@stan_args[[1]]$iter
-
-  # Make plot-friendly columns
-  # convert to plotmath notation
-  hyp_to_plotmath <- list()
-  hyp_to_plotmath[['Hp']] <- 'H[1]'
-  hyp_to_plotmath[['Hd']] <- 'H[2]'
-
-  # Create the Grouping column (boxplot fill, shows which term is evaluated)
-  df_samples_plot <- stanBF$df_samples %>%
-    group_by(.data$Hypothesis) %>%
-    gather('Variable', 'Value', starts_with(paste0(variable, '['))) %>%
-    mutate(Grouping = paste0(hyp_to_plotmath[.data$Hypothesis], ':~"', tolower(.data$Source), '"'))
-
-  # To suppress CRAN check warnings
-  Variable <- Value <- Grouping <- NULL
-
-  ggplot(df_samples_plot) +
-    geom_boxplot(aes(x = Variable, y = Value, fill = Grouping) ) +
-    ggtitle(bquote(paste(.(stanBF$model_name), ' model: posterior samples for ', .(variable))),
-            subtitle = bquote(paste(.(n.chains), ' chains, ', .(n.iter), ' Stan iterations')) ) +
-    labs(x = NULL, y = label_parse(variable)) +
-    scale_y_continuous(limits = c(0,NA), expand = ggplot2::expansion(mult = c(0, .1))) +
-    scale_x_discrete(label = label_parse) +
-    scale_fill_discrete('Grouping during fit', label = scales::parse_format())
-}

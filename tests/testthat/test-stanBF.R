@@ -1,5 +1,7 @@
 context("test-stanBF")
 
+testthat::skip_if_not_installed('rsamplestudy')
+
 # Generate dummy data which should appear to work
 n <- 20
 p <- 5

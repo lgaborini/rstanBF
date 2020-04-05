@@ -82,7 +82,7 @@ fun_var_names <- function(p, text = 'x'){
 #' @return a tibble
 make_tbl_variable_range <- function(x.samples, text, ...) {
 
-   assertthat::assert_that(assertthat::is.string(text), nchar(text) > 0)
+   stopifnot(is.character(text) && nchar(text) > 0)
 
    p <- ncol(x.samples)
    col_names <- fun_var_names(p, text = text)

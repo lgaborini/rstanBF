@@ -10,3 +10,4 @@
 ^src/stan_files/\.objects$
 ^vignettes/.*_cache$
 ^vignettes/\.drafts$
+^\.github$

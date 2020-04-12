@@ -49,7 +49,7 @@ test_that('mode_hyperparameter is checked', {
    expect_silent(stanBF_elicit_hyperpriors(df_background, model = 'DirDir', mode_hyperparameter = 'vague'))
 })
 
-stanBF_elicit_hyperpriors(df_background, model = 'DirDir', mode_hyperparameter = 'ML')
+# stanBF_elicit_hyperpriors(df_background, model = 'DirDir', mode_hyperparameter = 'ML')
 
 # Vague tests for background-free models
 models <- c('DirFNorm', 'DirDirGamma', 'NormNorm')

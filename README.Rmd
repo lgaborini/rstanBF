@@ -46,3 +46,4 @@ suppressPackageStartupMessages(library(rstanBF))
 df_models <- available_models(verbose = TRUE, do_print = FALSE)
 cat(paste0("* ", df_models$long_name, '\n'), sep = '')
 ```
+

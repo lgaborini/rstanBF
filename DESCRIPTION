@@ -37,7 +37,7 @@ Encoding: UTF-8
 LazyData: true
 NeedsCompilation: yes
 SystemRequirements: GNU make
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 Roxygen: list(markdown = TRUE)
 Suggests: 
     knitr,
@@ -46,4 +46,5 @@ Suggests:
     rmarkdown,
     covr,
     bayesplot
+Remotes: lgaborini/rsamplestudy
 VignetteBuilder: knitr

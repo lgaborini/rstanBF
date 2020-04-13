@@ -33,10 +33,26 @@ samples.stanBF_turn <- function(stanBF) {
    theta_ref_H2 <- rstan::extract(stanBF$stanfit$H2)$theta_ref
    theta_quest_H2 <- rstan::extract(stanBF$stanfit$H2)$theta_quest
 
+   if (!is.null(theta_H1)) {
+      df_theta_H1 <- make_tbl_variable_range(theta_H1, text = 'theta', Hypothesis = 'Hp', Source = 'Both')
+   } else {
+      df_theta_H1 <- NULL
+   }
+   if (!is.null(theta_ref_H2)) {
+      df_theta_ref_H2 <- make_tbl_variable_range(theta_ref_H2, text = 'theta', Hypothesis = 'Hd', Source = 'Reference')
+   } else {
+      df_theta_ref_H2 <- NULL
+   }
+   if (!is.null(theta_quest_H2)) {
+      df_theta_quest_H2 <- make_tbl_variable_range(theta_quest_H2, text = 'theta', Hypothesis = 'Hd', Source = 'Questioned')
+   } else {
+      df_theta_quest_H2 <- NULL
+   }
+
    df_theta_samples <- dplyr::bind_rows(
-      make_tbl_variable_range(theta_H1, text = 'theta', Hypothesis = 'Hp', Source = 'Both'),
-      make_tbl_variable_range(theta_ref_H2, text = 'theta', Hypothesis = 'Hd', Source = 'Reference'),
-      make_tbl_variable_range(theta_quest_H2, text = 'theta', Hypothesis = 'Hd', Source = 'Questioned')
+      df_theta_H1,
+      df_theta_ref_H2,
+      df_theta_quest_H2
    )
 
    # Normalize theta[* by their sums, creating rho[*
@@ -56,7 +72,12 @@ samples.stanBF_turn <- function(stanBF) {
    df_theta_samples <- tmp %>%
       dplyr::select(-value.norm, -variable.norm) %>%
       tidyr::spread(data = ., key = variable, value = value) %>%
-      dplyr::inner_join(tmp %>% dplyr::select(Iteration, variable.norm, value.norm) %>% tidyr::spread(data = ., variable.norm, value.norm), by = 'Iteration')
+      dplyr::inner_join(
+         tmp %>%
+            dplyr::select(Iteration, variable.norm, value.norm) %>%
+            tidyr::spread(data = ., variable.norm, value.norm),
+         by = 'Iteration'
+      )
 
    df_theta_samples %>% dplyr::ungroup()
 }

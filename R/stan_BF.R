@@ -44,6 +44,10 @@
 #' @param ... list of additional parameters to pass to [rstan::sampling()] method
 #' @return a `stanBF` object
 #' @importFrom utils modifyList
+#' @importFrom rlang abort
+#' @importFrom assertthat assert_that
+#' @importFrom rstan sampling
+#' @importFrom bridgesampling bridge_sampler bf
 #' @export
 #' @md
 compute_BF_Stan <- function(data, model, hyperpriors,
@@ -55,16 +59,18 @@ compute_BF_Stan <- function(data, model, hyperpriors,
   # Will be filled and returned
   stanBF_obj <- list(model_name=NULL, stanmodel=NULL, stanfit=NULL, df_samples=NULL, stanbridge=NULL, BF=NULL)
   class(stanBF_obj) <- 'stanBF'
-  implemented_models <- rstanBF:::env_stanBF$stanBF_model_shortnames
 
   # Parameter validation ------------
 
+
+  implemented_models <- rstanBF:::env_stanBF$stanBF_model_shortnames
+
   # Validate model names
   assertthat::assert_that(is.character(model))
-  assertthat::assert_that(
-    model %in% implemented_models,
-    msg = paste0('model "', model, '" has not been implemented, must be one of: ', paste_vec(implemented_models))
-  )
+  if (!model %in% implemented_models) {
+    msg <- paste0('model "', model, '" has not been implemented, must be one of: ', paste_vec(implemented_models))
+    rlang::abort(msg, 'stanBF_model_not_implemented')
+  }
 
   # Load Stan compiled modules
   module_file <- rstanBF:::env_stanBF$stanBF_modules[[model]]
@@ -79,15 +85,20 @@ compute_BF_Stan <- function(data, model, hyperpriors,
   # Validate data requirements
   required_data <- c('mtx', 'idx.ref', 'idx.quest')
   assertthat::assert_that(is.list(data))
-  assertthat::assert_that(all(required_data %in% names(data)),
-                          msg = paste0('one of data variables is missing, must have all of: "', paste_vec(required_data), '"\n have: "', paste_vec(names(data)), '"')
-  )
+  if (!all(required_data %in% names(data))) {
+    msg <- paste0('one of data variables is missing, must have all of: "', paste_vec(required_data), '"\n have: "', paste_vec(names(data)), '"')
+    rlang::abort(msg, 'stanBF_data_missing_var')
+  }
 
   # Validate hyperprior requirements
   assertthat::assert_that(is.list(hyperpriors))
+
   default_hyperpriors <- rstanBF:::env_stanBF$stanBF_default_hyperpriors[[model]]
-  assertthat::assert_that(all(default_hyperpriors %in% names(hyperpriors)),
-                          msg = paste0('one of the hyperparameters is missing: have: "', paste_vec(names(hyperpriors)), '", required: "', paste_vec(default_hyperpriors), '"'))
+
+  if (!all(default_hyperpriors %in% names(hyperpriors))) {
+    msg <- paste0('one of the hyperparameters is missing: have: "', paste_vec(names(hyperpriors)), '", required: "', paste_vec(default_hyperpriors), '"')
+    rlang::abort(msg, 'stanBF_data_missing_hyperparameter')
+  }
 
   # Process data ---------------------
 
@@ -99,7 +110,10 @@ compute_BF_Stan <- function(data, model, hyperpriors,
   # Reference and questioned indexes should constitute a partition of all available samples
   # assertthat::assert_that(length(setdiff(setdiff(1:n, data$idx.ref), data$idx.quest)) == 0)
 
-  assertthat::assert_that(length(intersect(data$idx.ref, data$idx.quest)) == 0, msg = 'Reference and questioned samples should not be intersecting.');
+  if (length(intersect(data$idx.ref, data$idx.quest)) != 0) {
+    msg <- 'Reference and questioned samples should not be intersecting.'
+    rlang::abort(msg, 'stanBF_intersecting_ref_quest')
+  }
 
   idx.H1 <- union(data$idx.ref, data$idx.quest)
   n.H1 <- length(idx.H1)
@@ -129,13 +143,13 @@ compute_BF_Stan <- function(data, model, hyperpriors,
   }
 
   # Simulation parameters
-  default_iter <- list(iter=n.iter, warmup=n.burnin, chains=n.chains, cores=n.cores)
+  default_iter <- list(iter = n.iter, warmup = n.burnin, chains = n.chains, cores = n.cores)
 
   # Begin computation code -----------------------------------------------------------------
 
   stanmodel_h1 <- stanmodels[[module_file$H1]]
   stanmodel_h2 <- stanmodels[[module_file$H2]]
-  stanBF_obj$stanmodel <- list(H1=stanmodel_h1, H2=stanmodel_h2)
+  stanBF_obj$stanmodel <- list(H1 = stanmodel_h1, H2 = stanmodel_h2)
 
   # Fitting -----------------------------------------------------------------
 
@@ -158,7 +172,14 @@ compute_BF_Stan <- function(data, model, hyperpriors,
     cores = default_iter$cores,
     show_messages = !silent, ...)
 
-  stanBF_obj$stanfit <- list(H1=stanfit_h1, H2=stanfit_h2)
+  stanBF_obj$stanfit <- list(H1 = stanfit_h1, H2 = stanfit_h2)
+
+  if (stanfit_h1@mode == 2L) {
+    rlang::abort('Sampling under H1 failed: Stan generated no samples', 'stanBF_sampling_failure')
+  }
+  if (stanfit_h2@mode == 2L) {
+    rlang::abort('Sampling under H2 failed: Stan generated no samples', 'stanBF_sampling_failure')
+  }
 
   # Sample extraction --------------------------------------------------------
   # Only for Dirichlet likelihoods
@@ -183,6 +204,7 @@ compute_BF_Stan <- function(data, model, hyperpriors,
   BF.stan <- bridgesampling::bf(bridge_h1, bridge_h2)
 
   stanBF_obj$BF <- BF.stan$bf
+
   stanBF_obj
 }
 

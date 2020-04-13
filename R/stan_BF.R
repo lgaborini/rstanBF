@@ -140,15 +140,33 @@ compute_BF_Stan <- function(data, model, hyperpriors,
   # Fitting -----------------------------------------------------------------
 
   # Hypotheses
-  stanfit_h1 <- rstan::sampling(stanmodel_h1, data=data_H1, iter=default_iter$iter, warmup=default_iter$warmup, chains=default_iter$chains, cores=default_iter$cores, show_messages = !silent, ...)
-  stanfit_h2 <- rstan::sampling(stanmodel_h2, data=data_H2, iter=default_iter$iter, warmup=default_iter$warmup, chains=default_iter$chains, cores=default_iter$cores, show_messages = !silent, ...)
+  stanfit_h1 <- rstan::sampling(
+    object = stanmodel_h1,
+    data = data_H1,
+    iter = default_iter$iter,
+    warmup = default_iter$warmup,
+    chains = default_iter$chains,
+    cores = default_iter$cores,
+    show_messages = !silent, ...)
+
+  stanfit_h2 <- rstan::sampling(
+    object = stanmodel_h2,
+    data = data_H2,
+    iter = default_iter$iter,
+    warmup = default_iter$warmup,
+    chains = default_iter$chains,
+    cores = default_iter$cores,
+    show_messages = !silent, ...)
+
   stanBF_obj$stanfit <- list(H1=stanfit_h1, H2=stanfit_h2)
 
   # Sample extraction --------------------------------------------------------
   # Only for Dirichlet likelihoods
 
   df_samples <- samples(stanBF_obj)
-  if (is.null(df_samples)) df_samples <- NA
+  if (is.null(df_samples)) {
+    df_samples <- NA
+  }
   stanBF_obj[['df_samples']] <- df_samples
 
   # Bridge sampling --------------------------------------------------------

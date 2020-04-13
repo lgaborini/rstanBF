@@ -2,7 +2,7 @@ STANHEADERS_SRC = $(shell "$(R_HOME)/bin$(R_ARCH_BIN)/Rscript" -e "cat(' ', sep 
 PKG_CPPFLAGS = -I"../inst/include" -I"$(STANHEADERS_SRC)" -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG
 
 CXX14FLAGS=-O3 -Wno-unused-variable -Wno-unused-function
-CXX14 = $(BINPREF)g++ -m$(WIN) -std=c++1y
+CXX14=$(BINPREF)g++ -m$(WIN) -std=c++1y
 CXX11FLAGS=-O3 -Wno-unused-variable -Wno-unused-function
 
 CXX_STD = CXX14

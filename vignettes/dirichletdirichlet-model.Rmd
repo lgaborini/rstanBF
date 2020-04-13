@@ -162,7 +162,10 @@ We suppose that the within-source ML estimates are samples from the same *hyper-
 We use again the ML estimator:
 
 ```{r}
-df_alpha_ML_ML <- df_sources_est_ML %>% select(-source) %>% rstanBF:::fun_estimate_Dirichlet_from_single_source(use = 'ML')
+df_alpha_ML_ML <- df_sources_est_ML %>% 
+  dplyr::select(-source) %>% 
+  rstanBF:::fun_estimate_Dirichlet_from_single_source(use = 'ML')
+
 df_alpha_ML_ML
 ```
 

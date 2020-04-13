@@ -16,6 +16,10 @@ stanBF_prepare_rsamplestudy_data <- function(list_pop, list_samples, col_source 
 
    mtx_samples <- dplyr::select(list_pop$df_pop, -col_source) %>% as.matrix()
 
-   list_data <- list(mtx = mtx_samples, idx.ref = list_samples$idx_reference, idx.quest = list_samples$idx_questioned)
+   list_data <- list(
+      mtx = mtx_samples,
+      idx.ref = list_samples$idx_reference,
+      idx.quest = list_samples$idx_questioned
+   )
    list_data
 }

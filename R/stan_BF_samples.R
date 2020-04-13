@@ -55,6 +55,11 @@ samples.stanBF_turn <- function(stanBF) {
       df_theta_quest_H2
    )
 
+   if (nrow(df_theta_samples) == 0) {
+      rlang::warn('no samples available from stanfit H1/H2 objects')
+      return(NULL)
+   }
+
    # Normalize theta[* by their sums, creating rho[*
    # Hackish
 

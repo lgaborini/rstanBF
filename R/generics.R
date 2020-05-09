@@ -96,3 +96,32 @@ make_tbl_variable_range <- function(x.samples, text, ...) {
 
    tibble::add_column(tbl.out, ...)
 }
+
+
+
+
+#' Replace names using a pattern.
+#'
+#' Replace names using a pattern.
+#' Calls [stringr::str_replace_all()].
+#'
+#' @param x a named object
+#' @param pattern regex pattern
+#' @param replacement replacement
+#' @param ...
+#' @importFrom stringr str_replace_all
+#' @return x with replaced names.
+#' @seealso [stringr::str_replace_all()]
+#' @examples
+#'
+#' fruits <- c(one = "one apple", two = "two pears", three = "three bananas")
+#' replace_names(fruits, '^([a-z])', 'fruit_\\1')
+#' replace_names(fruits, '^([a-z])', toupper)
+replace_names <- function(x, pattern, replacement, ...) {
+   if (is.null(names(x))) {
+      stop('"x" has no names.')
+   }
+   names(x) <- stringr::str_replace_all(names(x), pattern = pattern, replacement = replacement, ...)
+   x
+}
+

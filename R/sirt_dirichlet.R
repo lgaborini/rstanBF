@@ -7,7 +7,7 @@
 
 
 #' Derivative of digamma function
-#' 
+#'
 #' Derivative of digamma function.
 #' @param x x
 #' @param h dx
@@ -20,9 +20,20 @@ digamma1 <- function(x,h = .001){
 #'
 #' Maximum likelihood estimation of the parameters of the Dirichlet distribution
 #' @param x x
+#' @return A list with following entries
+#'
+#' `alpha` Vector of α parameters
+#' `alpha0` The concentration parameter $α_0=∑_k α_k$
+#' `xsi` Vector of proportions $ξ_k=α_k / α_0$
 #' @keywords internal
-dirichlet.mle <- function( x,  weights=NULL, eps=10^(-5),convcrit=.00001, maxit=1000,
-                           oldfac=.3, progress=FALSE){
+dirichlet.mle <- function(
+   x,
+   weights = NULL,
+   eps = 10^(-5),
+   convcrit = .00001,
+   maxit = 1000,
+   oldfac = .3,
+   progress = FALSE){
 
    #***
    N <- nrow(x)

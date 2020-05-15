@@ -76,17 +76,20 @@ fun_var_names <- function(p, text = 'x'){
 #'
 #' It can be used to convert messy `rstan::extract` output from multidimensional variables, to a more manageable form.
 #'
-#' @param x.samples a matrix, data.frame or text which will be converted and re-named to a tibble
+#' @param x.samples a matrix or data.frame which will be converted and re-named to a tibble
 #' @param text the base name for the new column names
 #' @param ... additional value-name pairs which will be added as new columns ( [tibble::add_column()])
 #' @return a tibble
+#' @importFrom tibble as_tibble add_column
 make_tbl_variable_range <- function(x.samples, text, ...) {
 
-   stopifnot(is.character(text) && nchar(text) > 0)
+   stopifnot(is.character(text) & length(text) == 1 & nchar(text) > 0)
+
+   stopifnot(is.data.frame(x.samples) | is.matrix(x.samples))
+   stopifnot(ncol(x.samples) > 0)
 
    p <- ncol(x.samples)
    col_names <- fun_var_names(p, text = text)
-
 
    colnames(x.samples) <- col_names
    tbl.out <- tibble::as_tibble(x.samples)

@@ -65,6 +65,21 @@ jobs:
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
 
+      - name: Fix Makevars on Windows
+        if: runner.os == 'Windows'
+        run: |
+          dotR <- file.path(Sys.getenv("HOME"), ".R")
+          if (!file.exists(dotR)) dir.create(dotR)
+          M <- file.path(dotR, "Makevars.win")
+          if (!file.exists(M)) file.create(M)
+          cat("\nCXX14FLAGS=-O3 -march=corei7 -mtune=corei7",
+            "CXX14 = $(BINPREF)g++ -m$(WIN) -std=c++1y",
+            "CXX11FLAGS=-O3 -march=corei7 -mtune=corei7",
+            'TZ=UTC'
+            file = M, sep = "\n", append = TRUE
+          )
+        shell: Rscript {0}
+
       - name: Check
         env:
           _R_CHECK_CRAN_INCOMING_REMOTE_: false

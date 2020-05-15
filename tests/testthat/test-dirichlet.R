@@ -83,7 +83,7 @@ test_that('Multiple sources: source estimates are correct', {
 # Hyperparameter ----------------------------------------------------------
 
 test_that('Multiple sources: DirDir hyperparameter ML estimation does not fail', {
-   res <- expect_silent(fun_estimate_Dirichlet_hyperparameter(df, method = 'ML', col_source = 'source'))
+   res <- expect_silent(fun_estimate_DirDir_hyperparameter(df, method = 'ML', col_source = 'source'))
    expect_length(res, p)
    expect_is(res, 'numeric')
 })

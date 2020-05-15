@@ -3,7 +3,7 @@
 #' @param df_background the dataframe containing background data, with the source column
 #' @param model the model short name
 #' @param mode_hyperparameter how the parameters are estimated (can be `'ML'` or `'vague'`)
-#' @param col_source name of the source column (default: `'source'`)
+#' @param col_source quoted name of the source column (default: `'source'`)
 #' @param ... arguments to hyperprior estimation methods
 #' @return a list of hyperprior parameters, as many as expected by [compute_BF_Stan()]
 #' @export
@@ -29,9 +29,9 @@ stanBF_elicit_hyperpriors <- function(df_background, model, mode_hyperparameter,
       if (mode_hyperparameter == 'ML') {
          fun_estimate_hyperpriors <- function(df_background, mode_ML = 'ML', ...){
             if (mode_ML == 'naive') {
-               alpha <- fun_estimate_Dirichlet_hyperparameter(df_background, method = 'naive', col_source = col_source, ...)
+               alpha <- fun_estimate_DirDir_hyperparameter(df_background, method = 'naive', col_source = col_source, ...)
             } else {
-               alpha <- fun_estimate_Dirichlet_hyperparameter(df_background, method = 'ML', col_source = col_source, ...)
+               alpha <- fun_estimate_DirDir_hyperparameter(df_background, method = 'ML', col_source = col_source, ...)
             }
 
             list(alpha = alpha)
@@ -89,6 +89,9 @@ stanBF_elicit_hyperpriors <- function(df_background, model, mode_hyperparameter,
 
 
 
+# DirDir model -------------------------------------------------------------
+
+
 
 #' Compute Dirichlet hyperparameters, using 'MLE' or 'naive' estimators
 #'
@@ -101,7 +104,7 @@ stanBF_elicit_hyperpriors <- function(df_background, model, mode_hyperparameter,
 #' @param method `'ML'` or `'naive'` (see [fun_estimate_Dirichlet_from_samples()])
 #' @param col_source name of the source column (default: 'source')
 #' @return a numeric vector for the estimated Dirichlet hyperparameter
-fun_estimate_Dirichlet_hyperparameter <- function(df_background, method, col_source = 'source') {
+fun_estimate_DirDir_hyperparameter <- function(df_background, method, col_source = 'source') {
 
    df_sources_MLE <- fun_estimate_Dirichlet_from_samples(df_background, use = 'ML', col_source = col_source)
 

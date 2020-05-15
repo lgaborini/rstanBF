@@ -80,10 +80,26 @@ test_that('Multiple sources: source estimates are correct', {
 
 
 
-# Hyperparameter ----------------------------------------------------------
+# Hyperparameter for the DirDir model ----------------------------------------------------------
 
 test_that('Multiple sources: DirDir hyperparameter ML estimation does not fail', {
    res <- expect_silent(fun_estimate_DirDir_hyperparameter(df, method = 'ML', col_source = 'source'))
    expect_length(res, p)
    expect_is(res, 'numeric')
+})
+
+
+
+# Hyperparameter for the DirDirGamma model ----------------------------------------------------------
+
+test_that('Multiple sources: DirDirGamma hyperparameter ML estimation does not fail', {
+   res <- expect_silent(fun_estimate_DirDirGamma_hyperparameter(df, col_source = 'source'))
+   expect_is(res, 'list')
+   expect_named(res, c('alpha_0', 'beta_0', 'nu_0'))
+   expect_is(res$alpha_0, 'numeric')
+   expect_length(res$alpha_0, 1)
+   expect_is(res$beta_0, 'numeric')
+   expect_length(res$beta_0, 1)
+   expect_is(res$nu_0, 'numeric')
+   expect_length(res$nu_0, p)
 })

@@ -1,3 +1,7 @@
+# rstanBF 0.1.3 (unreleased)
+
+* Add ML-ish hyperparameter estimation for DirDirGamma model.
+
 # rstanBF 0.1.2
 
 * Update to new `dplyr` and `tidyr`.

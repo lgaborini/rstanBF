@@ -57,8 +57,18 @@ stanBF_elicit_hyperpriors <- function(df_background, model, mode_hyperparameter,
 
    if (model == 'DirDirGamma') {
       if (mode_hyperparameter == 'ML') {
-         stop('Not implemented.')
+
+         fun_estimate_hyperpriors <- function(df_background, ...) {
+            l <- fun_estimate_DirDirGamma_hyperparameter(df_background, col_source = col_source, ...)
+            list(
+               alpha = l$nu_0,
+               alpha_0 = l$alpha_0,
+               beta_0 = l$beta_0
+            )
+         }
+
       } else {
+
          fun_estimate_hyperpriors <- function(df_background,...) {
             alpha <- rep(1, p)
             alpha_0 <- 1
@@ -115,5 +125,71 @@ fun_estimate_DirDir_hyperparameter <- function(df_background, method, col_source
    fun_estimate_Dirichlet_from_samples(df_sources_MLE_hyper, use = method, name_param = 'alpha') %>%
       dplyr::select(-tidyselect::all_of(col_source)) %>%
       as.numeric()
+}
+
+
+
+# DirDirGamma model -------------------------------------------------------
+
+
+#' Compute Dirichlet-DirichletGamma hyperparameters, using 'MLE' estimators
+#'
+#' For the `'DirDirGamma'` model.
+#' It computes an estimate using ML estimates of the parameters in each group.
+#'
+#' Returns a list.
+#'
+#' @param df_background dataframe with background data
+#' @param eps convergence parameters for Dirichlet MLE (see: [dirichlet.mle()])
+#' @param convcrit convergence parameters for Dirichlet MLE (see: [dirichlet.mle()])
+#' @param col_source name of the source column (default: 'source')
+#' @importFrom dplyr group_by_at group_nest mutate vars select
+#' @importFrom tidyselect all_of matches
+#' @importFrom tidyr unnest_wider
+#' @importFrom purrr map map_dbl
+#' @importFrom MASS fitdistr
+#' @return a numeric vector for the estimated Dirichlet hyperparameter
+fun_estimate_DirDirGamma_hyperparameter <- function(df_background, col_source = 'source', eps = 1e-12, convcrit = 1e-8) {
+
+   if (is.null(df_background)) return(NULL)
+   stopifnot(is.data.frame(df_background))
+
+   df_diri_MLE <- df_background %>%
+      dplyr::group_by_at(dplyr::vars(tidyselect::all_of(col_source))) %>%
+      dplyr::group_nest() %>%
+      dplyr::mutate(
+         df_diri = purrr::map(.data$data, rstanBF:::dirichlet.mle, eps = eps, convcrit = convcrit),
+         nu_i = purrr::map(df_diri, 'xsi'),
+         alpha_0 = purrr::map_dbl(df_diri, 'alpha0')
+      ) %>%
+      dplyr::select(-data, -df_diri) %>%
+      tidyr::unnest_wider(nu_i)
+
+   colnames(df_diri_MLE) <- stringr::str_replace_all(colnames(df_diri_MLE), pattern = 'x', replacement = 'nu')
+
+   df_nu_i_MLE <- df_diri_MLE %>%
+      dplyr::select({{col_source}}, tidyselect::matches('nu\\[.*'))
+
+   df_alpha_0_i_MLE <- df_diri_MLE %>%
+      dplyr::select({{col_source}}, alpha_0)
+
+   # Hyperparameters: nu_0
+
+   nu_0_MLE <- df_nu_i_MLE %>%
+      select(-{{col_source}}) %>%
+      rstanBF::fun_estimate_Dirichlet_from_single_source(name_param = 'nu', use = 'ML', eps = eps, convcrit = convcrit)
+
+   # Hyperparameters: alpha_0, beta_0 from alpha_i_0
+
+   gamma_hyp <- MASS::fitdistr(df_alpha_0_i_MLE$alpha_0, "gamma")$estimate
+   alpha_0_ML <- gamma_hyp[['shape']]
+   beta_0_ML <- gamma_hyp[['rate']]
+
+   list(
+      alpha_0 = alpha_0_ML,
+      beta_0 = beta_0_ML,
+      nu_0 = as.numeric(nu_0_MLE)
+   )
+
 }
 

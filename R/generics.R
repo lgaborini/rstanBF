@@ -108,7 +108,7 @@ make_tbl_variable_range <- function(x.samples, text, ...) {
 #' @param x a named object
 #' @param pattern regex pattern
 #' @param replacement replacement
-#' @param ...
+#' @inheritDotParams stringr::str_replace_all
 #' @importFrom stringr str_replace_all
 #' @return x with replaced names.
 #' @seealso [stringr::str_replace_all()]

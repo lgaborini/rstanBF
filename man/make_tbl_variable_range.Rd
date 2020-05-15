@@ -7,7 +7,7 @@
 make_tbl_variable_range(x.samples, text, ...)
 }
 \arguments{
-\item{x.samples}{a matrix, data.frame or text which will be converted and re-named to a tibble}
+\item{x.samples}{a matrix or data.frame which will be converted and re-named to a tibble}
 
 \item{text}{the base name for the new column names}
 

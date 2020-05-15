@@ -17,6 +17,13 @@ dirichlet.mle(
 \arguments{
 \item{x}{x}
 }
+\value{
+A list with following entries
+
+\code{alpha} Vector of α parameters
+\code{alpha0} The concentration parameter $α_0=∑_k α_k$
+\code{xsi} Vector of proportions $ξ_k=α_k / α_0$
+}
 \description{
 Maximum likelihood estimation of the parameters of the Dirichlet distribution
 }

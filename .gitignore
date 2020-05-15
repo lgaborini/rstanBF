@@ -36,3 +36,4 @@ vignettes/*.pdf
 /vignettes/*_cache/
 /vignettes/.drafts/
 /src/stan_files/.objects/*.o
+dev/

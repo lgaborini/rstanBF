@@ -1,50 +1,58 @@
 Package: rstanBF
-Title: rstanBF computes the Bayes Factor for data in specified two-level hierarchical models
-Version: 0.1.2
+Title: rstanBF computes the Bayes Factor for data in specified
+    two-level hierarchical models
+Version: 0.1.3
 Authors@R: 
     person(given = "Lorenzo",
            family = "Gaborini",
            role = c("aut", "cre"),
            email = "lorenzo.gaborini@gmail.com")
-Description: rstanBF computes the Bayes Factor for data in specified two-level hierarchical models.   
-    Also contains tools to elicit the hyperpriors, and obtain the posteriors.
+Description: rstanBF computes the Bayes Factor for data in
+    specified two-level hierarchical models.  Also contains tools to
+    elicit the hyperpriors, and obtain the posteriors.
 License: GPL (>=3)
 Depends: 
-    methods,
     R (>= 3.4.0),
+    methods,
     Rcpp (>= 1.0.0)
 Imports: 
-    rstan (>= 2.18.2),
-    rstantools (>= 1.5.1),
-    bridgesampling,
     assertthat,
-    tibble,
+    bridgesampling,
     dplyr,
     ggplot2,
-    magrittr,
-    rlang,
-    tidyr,
-    purrr,
     glue,
-    scales
+    magrittr,
+    MASS,
+    purrr,
+    rlang,
+    rstan (>= 2.18.2),
+    rstantools (>= 1.5.1),
+    scales,
+    stats,
+    stringr,
+    tibble,
+    tidyr,
+    tidyselect,
+    utils
+Suggests: 
+    bayesplot,
+    knitr,
+    rmarkdown,
+    rsamplestudy,
+    testthat
 LinkingTo: 
     BH (>= 1.69.0-1),
     Rcpp (>= 1.0.0),
     RcppEigen (>= 0.3.3.5.0),
     rstan (>= 2.18.2),
     StanHeaders (>= 2.18.0-1)
+VignetteBuilder: 
+    knitr
+Remotes: 
+    lgaborini/rsamplestudy
 Encoding: UTF-8
 LazyData: true
 NeedsCompilation: yes
-SystemRequirements: GNU make
-RoxygenNote: 7.1.0
 Roxygen: list(markdown = TRUE)
-Suggests: 
-    knitr,
-    rsamplestudy,
-    testthat,
-    rmarkdown,
-    covr,
-    bayesplot
-Remotes: lgaborini/rsamplestudy
-VignetteBuilder: knitr
+RoxygenNote: 7.1.0
+SystemRequirements: GNU make

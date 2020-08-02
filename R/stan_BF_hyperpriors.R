@@ -167,6 +167,13 @@ fun_estimate_DirDirGamma_hyperparameter <- function(df_background, col_source = 
 
    colnames(df_diri_MLE) <- stringr::str_replace_all(colnames(df_diri_MLE), pattern = 'x', replacement = 'nu')
 
+   # df_diri_MLE are the estimated Dirichlet parameters, 1 per source
+   #
+   # columns nu[*] contain the normalized parameters
+   # column alpha_0 contain the estimated concentration parameter
+   #
+   # Treat these separately:
+
    df_nu_i_MLE <- df_diri_MLE %>%
       dplyr::select({{col_source}}, tidyselect::matches('nu\\[.*'))
 

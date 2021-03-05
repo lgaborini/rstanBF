@@ -14,7 +14,7 @@ replace_names(x, pattern, replacement, ...)
 \item{replacement}{replacement}
 
 \item{...}{
-  Arguments passed on to \code{\link[stringr:str_replace_all]{stringr::str_replace_all}}
+  Arguments passed on to \code{\link[stringr:str_replace]{stringr::str_replace_all}}
   \describe{
     \item{\code{string}}{Input vector. Either a character vector, or something
 coercible to one.}
@@ -25,7 +25,7 @@ x with replaced names.
 }
 \description{
 Replace names using a pattern.
-Calls \code{\link[stringr:str_replace_all]{stringr::str_replace_all()}}.
+Calls \code{\link[stringr:str_replace]{stringr::str_replace_all()}}.
 }
 \examples{
 
@@ -34,5 +34,5 @@ replace_names(fruits, '^([a-z])', 'fruit_\\\\1')
 replace_names(fruits, '^([a-z])', toupper)
 }
 \seealso{
-\code{\link[stringr:str_replace_all]{stringr::str_replace_all()}}
+\code{\link[stringr:str_replace]{stringr::str_replace_all()}}
 }

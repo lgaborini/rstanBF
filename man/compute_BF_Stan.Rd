@@ -36,7 +36,7 @@ compute_BF_Stan(
 
 \item{silent}{if TRUE, do not print any progress}
 
-\item{...}{list of additional parameters to pass to \code{\link[rstan:sampling]{rstan::sampling()}} method}
+\item{...}{list of additional parameters to pass to \code{\link[rstan:stanmodel-method-sampling]{rstan::sampling()}} method}
 }
 \value{
 a \code{stanBF} object
@@ -65,7 +65,7 @@ Return a \code{stanBF} object with these properties:
 \item \code{stanmodel} (named list of Stan models)
 \item \code{stanfit} (named list of \code{stanfit} objects)
 \item \code{stanbridge} (named list of \code{bridgesampler} objects)
-\item \code{BF} (a double)
+\item \code{BF} (a double: the Bayes Factor)
 }
 
 For Dirichlet likelihoods, the returned object is a \code{stanBF_turn}, inheriting from \code{stanBF}.

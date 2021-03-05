@@ -1,6 +1,7 @@
-# rstanBF 0.1.4 (unreleased)
+# rstanBF 0.1.4
 
 * Updated docs, GitHub actions.
+* Updated DESCRIPTION.
 
 # rstanBF 0.1.3
 

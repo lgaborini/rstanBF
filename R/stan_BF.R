@@ -19,11 +19,12 @@
 #' - \eqn{H_2}: samples in `idx.ref` and `idx.quest` come from different sources
 #'
 #' Return a `stanBF` object with these properties:
+#' 
 #' - `model_name`
 #' - `stanmodel` (named list of Stan models)
 #' - `stanfit` (named list of `stanfit` objects)
 #' - `stanbridge` (named list of `bridgesampler` objects)
-#' - `BF` (a double)
+#' - `BF` (a double: the Bayes Factor)
 #'
 #' For Dirichlet likelihoods, the returned object is a `stanBF_turn`, inheriting from `stanBF`.
 #' These objects contain also:
@@ -201,7 +202,7 @@ compute_BF_Stan <- function(data, model, hyperpriors,
   stanBF_obj$stanbridge <- list(H1=bridge_h1, H2=bridge_h2)
 
   if (!silent) cat('Finished.\n')
-  BF.stan <- bridgesampling::bf(bridge_h1, bridge_h2)
+  BF.stan <- bridgesampling::bf(bridge_h1, bridge_h2, log = FALSE)
 
   stanBF_obj$BF <- BF.stan$bf
 

@@ -75,7 +75,7 @@ jobs:
           cat("\nCXX14FLAGS=-O3 -march=corei7 -mtune=corei7",
             "CXX14 = $(BINPREF)g++ -m$(WIN) -std=c++1y",
             "CXX11FLAGS=-O3 -march=corei7 -mtune=corei7",
-            'TZ=UTC'
+            'TZ=UTC',
             file = M, sep = "\n", append = TRUE
           )
         shell: Rscript {0}

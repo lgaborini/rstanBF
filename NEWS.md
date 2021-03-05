@@ -1,4 +1,8 @@
-# rstanBF 0.1.3 (unreleased)
+# rstanBF 0.1.4 (unreleased)
+
+* Updated docs, GitHub actions.
+
+# rstanBF 0.1.3
 
 * Add ML-ish hyperparameter estimation for DirDirGamma model.
 

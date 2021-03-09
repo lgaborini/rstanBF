@@ -1,6 +1,7 @@
 # rstanBF 0.1.5 (unreleased)
 
 * Using rstantools to build package.
+* Using custom Makevars to decrease Boost warnings during compilation.
 
 # rstanBF 0.1.4
 

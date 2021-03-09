@@ -119,7 +119,7 @@ The only hyperparameter which must be provided is $\alpha$, the Dirichlet parame
 It is known since the data has been generated: let's use it, for now.
 
 ```{r hyperpriors-manual}
-list_hyperpriors <- list(alpha = list_pop$alpha)
+list_hyperpriors <- list(alpha = as.numeric(list_pop$alpha))
 ```
 
 ### Using functions

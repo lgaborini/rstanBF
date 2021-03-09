@@ -37,3 +37,8 @@ vignettes/*.pdf
 /vignettes/.drafts/
 /src/stan_files/.objects/*.o
 dev/
+
+*.cc
+src/RcppExports.cpp
+src/stanExports*.cc
+src/stanExports*.h

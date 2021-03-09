@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • rstanBF</title>
+<title>Replace names using a pattern. — replace_names • rstanBF</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,9 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="Replace names using a pattern. — replace_names" />
+<meta property="og:description" content="Replace names using a pattern.
+Calls stringr::str_replace_all()." />
 
 
 
@@ -66,7 +68,7 @@
   <body data-spy="scroll" data-target="#toc">
     
 
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -125,62 +127,62 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1 data-toc-skip>Changelog <small></small></h1>
-      
+    <h1>Replace names using a pattern.</h1>
+    
+    <div class="hidden name"><code>replace_names.Rd</code></div>
     </div>
 
-    <div id="rstanbf-014" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.4">
-<a href="#rstanbf-014" class="anchor"></a>rstanBF 0.1.4</h1>
-<ul>
-<li>Updated docs, GitHub actions.</li>
-<li>Updated DESCRIPTION.</li>
-</ul>
-</div>
-    <div id="rstanbf-013" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.3">
-<a href="#rstanbf-013" class="anchor"></a>rstanBF 0.1.3</h1>
-<ul>
-<li>Add ML-ish hyperparameter estimation for DirDirGamma model.</li>
-</ul>
-</div>
-    <div id="rstanbf-012" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.2">
-<a href="#rstanbf-012" class="anchor"></a>rstanBF 0.1.2</h1>
-<ul>
-<li>Update to new <code>dplyr</code> and <code>tidyr</code>.</li>
-</ul>
-</div>
-    <div id="rstanbf-011" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.1">
-<a href="#rstanbf-011" class="anchor"></a>rstanBF 0.1.1</h1>
-<ul>
-<li>
-<code>available_models</code> now accepts <code>verbose=TRUE</code>, to print details and return a tibble.</li>
-</ul>
-</div>
-    <div id="rstanbf-010" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.0">
-<a href="#rstanbf-010" class="anchor"></a>rstanBF 0.1.0</h1>
-<ul>
-<li>Working with most models. To be tested on real code.</li>
-</ul>
-</div>
-    <div id="rstanbf-0009000" class="section level1">
-<h1 class="page-header" data-toc-text="0.0.0.9000">
-<a href="#rstanbf-0009000" class="anchor"></a>rstanBF 0.0.0.9000</h1>
-<ul>
-<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
-</ul>
-</div>
-  </div>
+    <div class="ref-description">
+    <p>Replace names using a pattern.
+Calls <code><a href='https://stringr.tidyverse.org/reference/str_replace.html'>stringr::str_replace_all()</a></code>.</p>
+    </div>
 
+    <pre class="usage"><span class='fu'>replace_names</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>pattern</span>, <span class='va'>replacement</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>a named object</p></td>
+    </tr>
+    <tr>
+      <th>pattern</th>
+      <td><p>regex pattern</p></td>
+    </tr>
+    <tr>
+      <th>replacement</th>
+      <td><p>replacement</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Arguments passed on to <code><a href='https://stringr.tidyverse.org/reference/str_replace.html'>stringr::str_replace_all</a></code></p><dl>
+    <dt><code>string</code></dt><dd><p>Input vector. Either a character vector, or something
+coercible to one.</p></dd>
+  
+</dl></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>x with replaced names.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='https://stringr.tidyverse.org/reference/str_replace.html'>stringr::str_replace_all()</a></code></p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='va'>fruits</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>one <span class='op'>=</span> <span class='st'>"one apple"</span>, two <span class='op'>=</span> <span class='st'>"two pears"</span>, three <span class='op'>=</span> <span class='st'>"three bananas"</span><span class='op'>)</span>
+<span class='fu'>replace_names</span><span class='op'>(</span><span class='va'>fruits</span>, <span class='st'>'^([a-z])'</span>, <span class='st'>'fruit_\\1'</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in replace_names(fruits, "^([a-z])", "fruit_\\1"): could not find function "replace_names"</span></div><div class='input'><span class='fu'>replace_names</span><span class='op'>(</span><span class='va'>fruits</span>, <span class='st'>'^([a-z])'</span>, <span class='va'>toupper</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in replace_names(fruits, "^([a-z])", toupper): could not find function "replace_names"</span></div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
-
 </div>
 
 

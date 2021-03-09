@@ -1,7 +1,7 @@
 Package: rstanBF
 Title: rstanBF computes the Bayes Factor for data in specified
     two-level hierarchical models
-Version: 0.1.4
+Version: 0.1.5
 Authors@R: 
     person(given = "Lorenzo",
            family = "Gaborini",

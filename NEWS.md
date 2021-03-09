@@ -1,3 +1,7 @@
+# rstanBF 0.1.5 (unreleased)
+
+* Using rstantools to build package.
+
 # rstanBF 0.1.4
 
 * Updated docs, GitHub actions.

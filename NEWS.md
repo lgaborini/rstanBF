@@ -2,6 +2,7 @@
 
 * Updated docs, GitHub actions.
 * Updated DESCRIPTION.
+* Fix hyperparameter in Introduction vignette.
 
 # rstanBF 0.1.3
 
